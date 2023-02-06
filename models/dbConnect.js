@@ -25,12 +25,13 @@ async function dbConnect() {
     const opts = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      bufferCommands: false,
+      bufferCommands: false
       // bufferMaxEntries: 0,
       // useFindAndModify: true,
       // useCreateIndex: true
     };
 
+    mongoose.set('strictQuery', true);
     cached.promise = mongoose.connect(mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0, opts).then((mongoose) => {
       return mongoose;
     });
