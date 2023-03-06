@@ -19,7 +19,7 @@ services:
         environment:
                 - PORT=3080
                 - mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0=mongodb://mongodb:27017
-                - OPENAI_KEY=
+                - OPENAI_KEY=""
                 - CHATGPT_TOKEN=""
                 - BING_TOKEN=""
         ports:
