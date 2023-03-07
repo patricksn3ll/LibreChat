@@ -18,7 +18,7 @@ services:
         restart: always
         environment:
                 - PORT=3080
-                - mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0=mongodb://mongodb:27017
+                - mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0=mongodb://mongodb:27017/chatgpt-clone
                 - OPENAI_KEY=""
                 - CHATGPT_TOKEN=""
                 - BING_TOKEN=""
