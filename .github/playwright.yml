@@ -13,7 +13,7 @@ jobs:
       BINGAI_TOKEN: ${{ secrets.BINGAI_TOKEN }}
       CHATGPT_TOKEN: ${{ secrets.CHATGPT_TOKEN }}
       mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0: ${{ secrets.mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 }}
-      OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
