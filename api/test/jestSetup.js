@@ -5,3 +5,4 @@ process.env.mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb
 process.env.BAN_VIOLATIONS = 'true';
 process.env.BAN_DURATION = '7200000';
 process.env.BAN_INTERVAL = '20';
+process.env.CI = 'true';
