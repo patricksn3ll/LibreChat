@@ -1,4 +1,4 @@
-const KeyvMongo = require('@keyv/mongo');
+const { KeyvMongo } = require('@keyv/mongo');
 const { logger } = require('~/config');
 
 const { mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 } = process.env ?? {};
