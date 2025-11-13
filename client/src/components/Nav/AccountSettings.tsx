@@ -8,7 +8,9 @@ import FilesView from '~/components/Chat/Input/Files/FilesView';
 import { useAuthContext } from '~/hooks/AuthContext';
 import { useLocalize } from '~/hooks';
 import Settings from './Settings';
+import  SubscriptionDialog from '~/components/Subscription/SubscriptionDialog'
 import store from '~/store';
+import { useGetFileConfig } from '~/data-provider/Files/queries';
 
 function AccountSettings() {
   const localize = useLocalize();
@@ -19,6 +21,19 @@ function AccountSettings() {
   });
   const [showSettings, setShowSettings] = useState(false);
   const [showFiles, setShowFiles] = useRecoilState(store.showFiles);
+  const [showSubscriptionDialog, setShowSubscriptionDialog] = useState(false);
+
+  const fileAttachRequiresSubscription = startupConfig?.fileAttachRequiresSubscription;
+  const hasSubscription = user?.subscriptionStatus === 'active';
+
+  const handleClick = () => {
+    if (fileAttachRequiresSubscription && !hasSubscription) {
+      setShowSubscriptionDialog(true);
+      return;
+    }
+
+    setShowFiles(true); 
+  };
 
   return (
     <Select.SelectProvider>
@@ -60,10 +75,10 @@ function AccountSettings() {
             <DropdownMenuSeparator />
           </>
         )}
-        {startupConfig?.hideUserFiles !== true && (
+        {(startupConfig?.hideUserFiles !== true) && (
         <Select.SelectItem
           value=""
-          onClick={() => setShowFiles(true)}
+          onClick={() => handleClick()}
           className="select-item text-sm"
         >
           <FileText className="icon-md" aria-hidden="true" />
@@ -99,8 +114,31 @@ function AccountSettings() {
           {localize('com_nav_log_out')}
         </Select.SelectItem>
       </Select.SelectPopover>
+      {/* {showSubscriptionDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white dark:bg-surface-primary rounded-lg p-6 shadow-xl flex flex-col gap-4 min-w-[300px]">
+            <div className="text-lg font-semibold">Subscription Required</div>
+            <div>You need an active subscription to upload files. Please subscribe to unlock this feature.</div>
+            <div className="flex gap-4 justify-end mt-2">
+              <button
+                className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark"
+                onClick={() => setShowSubscriptionDialog(false)}
+              >
+                Close
+              </button>
+              <a
+                href="/account/subscription"
+                className="px-4 py-2 rounded bg-surface-secondary text-text-primary font-medium hover:bg-surface-tertiary border border-primary"
+              >
+                View Plans
+              </a>
+            </div>
+          </div>
+        </div>
+      )}       */}
       {showFiles && <FilesView open={showFiles} onOpenChange={setShowFiles} />}
       {showSettings && <Settings open={showSettings} onOpenChange={setShowSettings} />}
+      {showSubscriptionDialog && <SubscriptionDialog open={showSubscriptionDialog} onOpenChange={setShowSubscriptionDialog} />}
     </Select.SelectProvider>
   );
 }

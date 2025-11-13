@@ -8,6 +8,7 @@ import {
   useCallback,
   createContext,
 } from 'react';
+import axios from 'axios';
 import { debounce } from 'lodash';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
@@ -19,11 +20,14 @@ import {
   useLoginUserMutation,
   useLogoutUserMutation,
   useRefreshTokenMutation,
+  useGetSubscriptionStatus,
 } from '~/data-provider';
 import { TAuthConfig, TUserContext, TAuthContext, TResError } from '~/common';
 import useTimeout from './useTimeout';
 import store from '~/store';
+import { processMessages } from '../../../api/server/services/Threads/manage';
 
+const AppConfigContext = createContext<any>(undefined);
 const AuthContext = createContext<TAuthContext | undefined>(undefined);
 
 const AuthContextProvider = ({
@@ -33,10 +37,18 @@ const AuthContextProvider = ({
   authConfig?: TAuthConfig;
   children: ReactNode;
 }) => {
+  const [appConfig, setAppConfig] = useState<any>(null);
+  // Load appConfig from backend on mount
+  useEffect(() => {
+    axios.get('/api/config')
+      .then((res) => setAppConfig(res.data))
+      .catch(() => setAppConfig(null));
+  }, []);
   const [user, setUser] = useRecoilState(store.user);
   const [token, setToken] = useState<string | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string | undefined>(undefined);
   const logoutRedirectRef = useRef<string | undefined>(undefined);
 
   const { data: userRole = null } = useGetRole(SystemRoles.USER, {
@@ -126,6 +138,11 @@ const AuthContextProvider = ({
   );
 
   const userQuery = useGetUserQuery({ enabled: !!(token ?? '') });
+  const subscriptionStatusQuery = useGetSubscriptionStatus({
+    enabled: !!(token ?? ''),
+    onSuccess: (data) => setSubscriptionStatus(data?.status),
+    onError: () => setSubscriptionStatus(undefined),
+  });
 
   const login = (data: t.TLoginUser) => {
     loginUser.mutate(data);
@@ -146,7 +163,7 @@ const AuthContextProvider = ({
           if (authConfig?.test === true) {
             return;
           }
-          navigate('/login');
+          navigate((appConfig?.homeRoute) ? appConfig.homeRoute : '/login');
         }
       },
       onError: (error) => {
@@ -217,22 +234,29 @@ const AuthContextProvider = ({
         [SystemRoles.ADMIN]: adminRole,
       },
       isAuthenticated,
+      subscriptionStatus,
     }),
-
-    [user, error, isAuthenticated, token, userRole, adminRole],
+    [user, error, isAuthenticated, token, userRole, adminRole, subscriptionStatus],
   );
 
-  return <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>;
+  return (
+    <AppConfigContext.Provider value={appConfig}>
+      <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>
+    </AppConfigContext.Provider>
+  );
 };
+
 
 const useAuthContext = () => {
   const context = useContext(AuthContext);
-
   if (context === undefined) {
-    throw new Error('useAuthContext should be used inside AuthProvider');
+    throw new Error('useAuthContext must be used within an AuthContextProvider');
   }
-
   return context;
 };
 
-export { AuthContextProvider, useAuthContext, AuthContext };
+const useAppConfig = () => {
+  return useContext(AppConfigContext);
+};
+
+export { AuthContextProvider, useAuthContext, AuthContext, useAppConfig };
