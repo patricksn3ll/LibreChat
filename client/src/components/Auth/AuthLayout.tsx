@@ -61,7 +61,7 @@ function AuthLayout({
       <Banner />
       <BlinkAnimation active={isFetching}>
         <div className="mt-6 h-10 w-full bg-cover">
-          <div class="icon-xl icon-logo relative flex h-full overflow-hidden rounded-full" style="width: 100%; height: 100%;"><img src="https://cribmetrics-api.whitedesert-92c5b70c.eastus.azurecontainerapps.io/assets/apple-touch-icon-180x180.png" alt="" class="object-cover" loading="lazy" decoding="async" width="20" height="20" style="width: 100%; height: 100%;">
+          <div class="icon-xl icon-logo relative flex h-full overflow-hidden rounded-full" style="width: 100%; height: 100%;">
             <img
               src="assets/logo.svg"
               className="h-full w-full object-contain icon-logo rounded-full "
