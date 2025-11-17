@@ -2830,3 +2830,7 @@ html {
 .sharepoint-picker-bg{
   background-color: #F5F5F5;
 }
+
+.icon-logo {
+  background-color:var(--surface-primary);
+}
