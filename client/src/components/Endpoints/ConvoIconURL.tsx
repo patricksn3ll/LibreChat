@@ -15,7 +15,7 @@ interface ConvoIconURLProps {
 }
 
 const classMap = {
-  'menu-item': 'relative flex h-full items-center justify-center overflow-hidden rounded-full',
+  'menu-item': 'relative flex h-full items-center justify-center icon-logo overflow-hidden rounded-full',
   message: 'icon-md',
   default: 'icon-xl icon-logo relative flex h-full overflow-hidden rounded-full',
 };
