@@ -64,10 +64,14 @@ const extractMessageContent = (message: TMessage): string => {
           console.warn('typeof think !== string: ', think)
           return think && 'text' in think ? think.text || '' : '';
         }
+
+        console.warn('part has no text or think field: ', part)
         return '';
       })
       .join('');
   }
+
+  console.warn();'message.text: ', message.text)
 
   return message.text || '';
 };
