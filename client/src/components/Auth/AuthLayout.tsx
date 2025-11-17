@@ -61,13 +61,11 @@ function AuthLayout({
       <Banner />
       <BlinkAnimation active={isFetching}>
         <div className="mt-6 h-10 w-full bg-cover">
-          <div class="icon-xl icon-logo relative flex h-full overflow-hidden rounded-full">
             <img
               src="assets/logo.svg"
               className="h-full w-full object-contain icon-logo rounded-full "
               alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? '' })}
             />
-          </div>
         </div>
       </BlinkAnimation>
       <DisplayError />
