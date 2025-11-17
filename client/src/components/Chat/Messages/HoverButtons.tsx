@@ -71,7 +71,7 @@ const extractMessageContent = (message: TMessage): string => {
       .join('');
   }
 
-  console.warn();'message.text: ', message.text)
+  console.warn('message.text: ', message.text);
 
   return message.text || '';
 };
