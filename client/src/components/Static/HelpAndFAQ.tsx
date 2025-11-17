@@ -33,7 +33,7 @@ const HelpAndFAQ = memo(
             <p>Find answers to common questions and get help with using our platform</p>
         </header>
 
-        <div className="flex flex-col h-full max-w-4xl mx-auto p-6 space-y-8">
+        <div className="flex flex-col max-w-4xl mx-auto p-6 space-y-8">
 
             <div className="space-y-4">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -125,15 +125,6 @@ const HelpAndFAQ = memo(
                         Try refreshing the page or checking your internet connection. If the issue persists, contact support.
                     </p>
                 </div>
-            </div>
-
-            <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    Still need help? Contact our support team
-                </p>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
-                    Contact Support
-                </button>
             </div>
         </div>
 

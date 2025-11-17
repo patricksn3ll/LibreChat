@@ -263,11 +263,15 @@ export default function useChatFunctions({
           },
         },
       ];
+
+      console.log('isAssistantsEndpoint:', initialResponse);
     } else if (endpoint != null) {
       initialResponse.model = isAgentsEndpoint(endpoint)
         ? (conversation?.agent_id ?? '')
         : (conversation?.model ?? '');
       initialResponse.text = '';
+
+      console.log('initialResponse:', initialResponse);
 
       if (editedContent && latestMessage?.content) {
         initialResponse.content = cloneDeep(latestMessage.content);
@@ -280,6 +284,8 @@ export default function useChatFunctions({
             contentPart[ContentTypes.TEXT] = part[ContentTypes.TEXT];
           }
         }
+
+        console.log('editedContent && latestMessage?.content:', initialResponse.content);
       } else {
         initialResponse.content = [
           {
@@ -289,6 +295,8 @@ export default function useChatFunctions({
             },
           },
         ];
+
+        console.log('initialResponse.content:', initialResponse.content);
       }
       setShowStopButton(true);
     }
@@ -318,8 +326,6 @@ export default function useChatFunctions({
       ephemeralAgent,
       editedContent,
     };
-
-    console.log('Submission prepared:', submission);
 
     if (isRegenerate) {
       setMessages([...submission.messages, initialResponse]);
