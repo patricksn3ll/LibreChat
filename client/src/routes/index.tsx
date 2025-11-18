@@ -113,7 +113,16 @@ export const router = createBrowserRouter(
       path: 'landing',
       element: <StaticFilesLayout />,
       children: [
-        { path: '', element:  <LandingPageWrapper /> },
+        { 
+          path: '', 
+          element:  <LandingPageWrapper />,
+          children: [
+            {
+              path: 'login',
+              element: <Login />,
+            }
+          ] 
+        },
       ],
       errorElement: <RouteErrorBoundary />,
     },   
