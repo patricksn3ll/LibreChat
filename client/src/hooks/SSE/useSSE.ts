@@ -151,8 +151,9 @@ export default function useSSE(
           textIndex = index;
         }
 
+
         // Remove everything after a <sup>...</sup> that starts with a number and then a .
-        let cleanedText = text.replace(/<sup>\d+\..*?<\/sup>.*$/s, '');
+        let cleanedText = data.text.replace(/<sup>\d+\..*?<\/sup>.*$/s, '');
         data.text = cleanedText;
         console.log('addEventListener message', data);
 
