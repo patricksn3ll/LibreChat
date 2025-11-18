@@ -1,6 +1,4 @@
 import { useMemo, useEffect, memo } from 'react';
-import { getConfigDefaults } from 'librechat-data-provider';
-import { useGetStartupConfig } from '~/data-provider';
 import { useGetStartupConfig } from '~/data-provider';
 import StaticFooter from './StaticFooter'
 import '../../custom-theme.css';
@@ -9,17 +7,11 @@ interface TermsAndServicesProps {
 
 }
 
-const defaultInterface = getConfigDefaults().interface;
-
 const TermsAndServices = memo(
   ({
 
   }: TermsAndServicesProps) => {
     const { data: startupConfig } = useGetStartupConfig();
-    const interfaceConfig = useMemo(
-      () => startupConfig?.interface ?? defaultInterface,
-      [startupConfig],
-    );
 
     useEffect(() => {
 
