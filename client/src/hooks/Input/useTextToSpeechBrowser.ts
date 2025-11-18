@@ -68,6 +68,7 @@ function useTextToSpeechBrowser({
   }, [updateVoices]);
 
   const generateSpeechLocal = (text: string) => {
+    console.log('Generating speech locally for:', text);        
     if (!isSpeechSynthesisSupported) {
       console.warn('Speech synthesis is not supported');
       return;
