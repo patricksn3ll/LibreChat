@@ -51,7 +51,7 @@ const extractMessageContent = (message: TMessage): string => {
           return part;
         }
         if ('text' in part) {
-          console.warn("extractMessageContent 'text' in part: ")
+          console.warn("extractMessageContent 'text' in part: ", part)
           return part.text || '';
         }
         if ('think' in part) {
@@ -64,7 +64,7 @@ const extractMessageContent = (message: TMessage): string => {
           return think && 'text' in think ? think.text || '' : '';
         }
 
-        console.warn('extractMessageContent return empty string')
+        console.warn('extractMessageContent return empty string', part)
         return '';
       })
       .join('');
