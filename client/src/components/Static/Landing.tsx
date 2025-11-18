@@ -1,7 +1,6 @@
-import { useMemo, useEffect, memo } from 'react';
+import React from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useGetStartupConfig } from '~/data-provider';
-import { getConfigDefaults } from 'librechat-data-provider';
 import StaticFooter from './StaticFooter'
 import LoginForm from '../Auth/LoginForm';
 import Login from '../Auth/Login';
@@ -13,33 +12,59 @@ interface LandingProps {
 
 const defaultInterface = getConfigDefaults().interface;
 
-const Landing = memo(
-  ({
-
-  }: LandingProps) => {
-    const navigate = useNavigate();
-    const { data: startupConfig } = useGetStartupConfig();
-
-    console.log('Landing : startupConfig : 1 :', startupConfig);
-
-    const interfaceConfig = useMemo(
-      () => startupConfig?.interface ?? defaultInterface,
-      [startupConfig],
-    );
-
+export default function  Landing() {
+  const [error, setError] = useState<TranslationKeys | null>(null);
+  const [startupConfig, setStartupConfig] = useState<TStartupConfig | null>(null);
+  const {
+    data,
+    isFetching,
+    error: startupConfigError,
+  } = useGetStartupConfig({
+    enabled: isAuthenticated ? startupConfig === null : true,
+  });
+  const localize = useLocalize();
+  const navigate = useNavigate();
+  const location = useLocation();
   const contextValue = {
     startupConfig
-  };    
+  };
 
-  console.log('Landing : startupConfig : 2 :', startupConfig);
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/c/new', { replace: true });
+    }
+    if (data) {
+      setStartupConfig(data);
+    }
+  }, [isAuthenticated, navigate, data]);
+  
 
+  useEffect(() => {
+    document.title = startupConfig?.appTitle || '';
+  }, [startupConfig?.appTitle]);
+
+  useEffect(() => {
+    setError(null);
+    setHeaderText(null);
+  }, [location.pathname]);
+
+  const contextValue = {
+    error,
+    setError,
+    headerText,
+    setHeaderText,
+    startupConfigError,
+    startupConfig,
+    isFetching,
+  };
+    
   return (
     <>
       <div className="wrap">
         <header>
           <div className="logo" aria-label="CribMetrics">
             {/* <div className="mark">CM</div> */}
-          <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover mark">
+          <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover">
               <img
                 src="assets/logo.svg"
                 className="h-full text-center icon-logo rounded-full"
@@ -60,7 +85,7 @@ const Landing = memo(
         <section className="hero">
           <div className="left">
             <div style={{ color: 'var(--accent)', fontWeight: 800, letterSpacing: '.6px' }}>Real Estate Market Insights Made Simple</div>
-            <h1 className="h1">Make faster, smarter housing decisions with AI-driven data</h1>
+            <h1>Make faster, smarter housing decisions with AI-driven data</h1>
             <p className="lead">CribMetrics combines AI valuation, neighborhood signals, and the latest public sales data (monthly refresh) so you can move from curiosity to decision in minutes — whether you're buying, investing, or advising clients.</p>
 
             <div className="cta">
@@ -111,25 +136,25 @@ const Landing = memo(
         </section>
 
         <section id="features" style={{ marginTop: 28 }}>
-          <h3 className="h3" style={{ color: 'var(--accent)' }}>Built for quick decisions</h3>
+          <h3 style={{ color: 'var(--accent)' }}>Built for quick decisions</h3>
           <div className="features">
             <div className="feature">
-              <h4 className="h4">Monthly Updated Market Data</h4>
+              <h4>Monthly Updated Market Data</h4>
               <p className="muted">Get insights you can trust, sourced from Redfin and refreshed every month for accuracy.</p>
             </div>
             <div className="feature">
-              <h4 className="h4">Location Drilldowns</h4>
+              <h4>Location Drilldowns</h4>
               <p className="muted">Zoom from broad trends down to the hyper-local details that actually matter.</p>
             </div>
             <div className="feature">
-              <h4 className="h4">AI-Driven Trend Interpretation</h4>
+              <h4>AI-Driven Trend Interpretation</h4>
               <p className="muted">Your AI analyst highlights price shifts, inventory changes, and meaningful patterns in plain language.</p>
             </div>
           </div>
         </section>
 
         <section>
-          <h3 className="h3" style={{ color: 'var(--accent)' }}>Who CribMetrics Is For</h3>
+          <h3 style={{ color: 'var(--accent)' }}>Who CribMetrics Is For</h3>
           <div className="benefits">
             <div className="benefit"><span>✓</span> <div><strong>Investors</strong><br />Identify undervalued areas early and time your entries with confidence.</div></div>
             <div className="benefit"><span>✓</span> <div><strong>Agents & Brokers</strong><br />Elevate your client conversations with data-backed insights and professional-grade market intelligence.</div></div>
@@ -139,18 +164,18 @@ const Landing = memo(
         </section>
 
         <section id="features" style={{ marginTop: 28 }}>
-          <h3 className="h3" style={{ color: 'var(--accent)' }}>Why People Trust CribMetrics</h3>
+          <h3 style={{ color: 'var(--accent)' }}>Why People Trust CribMetrics</h3>
           <div className="features">
             <div className="feature">
-              <h4 className="h4">Reliable Data</h4>
+              <h4>Reliable Data</h4>
               <p className="muted">Powered by consistently updated Redfin housing data.</p>
             </div>
             <div className="feature">
-              <h4 className="h4">Clear Insights</h4>
+              <h4>Clear Insights</h4>
               <p className="muted">No jargon, no guesswork—just straightforward answers you can use.</p>
             </div>
             <div className="feature">
-              <h4 className="h4">Privacy-First Approach</h4>
+              <h4>Privacy-First Approach</h4>
               <p className="muted">Your data stays yours. No tracking, no selling information.</p>
             </div>
           </div>
@@ -160,10 +185,5 @@ const Landing = memo(
 
       </div>
     </>
-    );
-  },
-);
-
-Landing.displayName = 'Landing';
-
-export default Landing;
+  );
+}

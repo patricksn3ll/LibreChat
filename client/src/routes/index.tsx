@@ -21,7 +21,7 @@ import ShareRoute from './ShareRoute';
 import ChatRoute from './ChatRoute';
 import Search from './Search';
 import Root from './Root';
-import { HelpAndFAQ, PrivacyPolicy, TermsAndServices, Plans, LandingPageWrapper } from '~/components/Static';
+import { HelpAndFAQ, PrivacyPolicy, TermsAndServices, Plans, Landing, LandingPageWrapper } from '~/components/Static';
 import SubscriptionSuccess from '~/components/Subscription/Success';
 import SubscriptionCancel from '~/components/Subscription/Cancel';
 import Subscription from '~/components/Nav/SettingsTabs/Account/Subscription';
@@ -115,7 +115,7 @@ export const router = createBrowserRouter(
       children: [
         { 
           path: '', 
-          element:  <LandingPageWrapper />,
+          element:  <Landing />,
           children: [
             {
               path: '',

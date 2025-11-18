@@ -31,6 +31,7 @@ export default function StaticFilesLayout({ isAuthenticated }: { isAuthenticated
   useEffect(() => {
     if (data) {
       setStartupConfig(data);
+      console.log('startupConfig set in StaticFilesLayout', data);
     }
   }, [isAuthenticated, navigate, data]);
 
