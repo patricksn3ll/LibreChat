@@ -43,41 +43,26 @@ const extractMessageContent = (message: TMessage): string => {
   }
 
   if (Array.isArray(message.content)) {
-    console.warn('extractMessageContent Array.isArray', message.content)
     return message.content
       .map((part) => {
         if (typeof part === 'string') {
-          console.warn("extractMessageContent typeof part === 'string'")
           return part;
         }
         if ('text' in part) {
-          console.warn("extractMessageContent 'text' in part: ", part)
-          
           if (typeof part.text === 'string') {
-            console.warn("extractMessageContent typeof part.text === 'string': ", part.text)
             return part.text;
           }
           if (part.text && typeof part.text === 'object' && typeof part.text.value === 'string') {
-            console.warn("extractMessageContent part.text.value: ", part.text.value)
             return part.text.value;
-          } else {
-            console.warn("extractMessageContent part.text: ", part.text)
-          }
+          }          
           return '';
-
-          //return part.text || '';
         }
         if ('think' in part) {
           if (typeof think === 'string') {
-            console.warn("extractMessageContent typeof think === 'string': ")
             return think;
           }
-
-          console.warn("extractMessageContent return think && 'text' in think ? think.text || '' : '';: ")
           return think && 'text' in think ? think.text || '' : '';
         }
-
-        console.warn('extractMessageContent return empty string', part)
         return '';
       })
       .join('');
