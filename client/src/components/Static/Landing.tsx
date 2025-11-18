@@ -26,9 +26,10 @@ export default function  Landing() {
 
   useEffect(() => {
     if (data) {
+      console.log('Setting startup config in Landing', datafs);
       setStartupConfig(data);
     }
-  }, [isAuthenticated, navigate, data]);
+  }, [isAuthenticated, data]);
   
 
   useEffect(() => {
