@@ -10,10 +10,14 @@ export default function  Landing() {
   const navigate = useNavigate();
   const { data: startupConfig, isLoading } = useGetStartupConfig();
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   if (!startupConfig) {
     return <div>Error loading config.</div>;
   }
-
+  
   const contextValue = {
     startupConfig
   };
@@ -81,10 +85,6 @@ export default function  Landing() {
               </select>
               <button className="btn primary" style={{ width: '100%', marginTop: 10 }}>Join waitlist</button>
             </form> */}
-
-            if (isLoading) {
-              return <p style={{ margin: '8px 0', color: '#9CA3AF' }}>Loading...</p>;
-            }
 
             <Outlet context={contextValue} />            
 
