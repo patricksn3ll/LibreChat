@@ -24,13 +24,17 @@ const Landing = memo(
       [startupConfig],
     );
 
+  const contextValue = {
+    startupConfig
+  };    
+
   return (
     <>
       <div className="wrap">
         <header>
           <div className="logo" aria-label="CribMetrics">
             {/* <div className="mark">CM</div> */}
-          <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover">
+          <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover mark">
               <img
                 src="assets/logo.svg"
                 className="h-full text-center icon-logo rounded-full"
