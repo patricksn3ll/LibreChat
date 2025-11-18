@@ -121,6 +121,9 @@ export default function useSSE(
     sse.addEventListener('message', (e: MessageEvent) => {
       const data = JSON.parse(e.data);
 
+      console.log('useSSE addEventListener: message: data: ');
+      console.log(data);
+
       if (data.final != null) {
         clearDraft(submission.conversation?.conversationId);
         const { plugins } = data;
@@ -138,13 +141,17 @@ export default function useSSE(
         };
 
         createdHandler(data, { ...submission, userMessage } as EventSubmission);
+
+        console.log('data.created != null');
       } else if (data.event != null) {
         stepHandler(data, { ...submission, userMessage } as EventSubmission);
+        console.log('data.event != null');
       } else if (data.sync != null) {
         const runId = v4();
         setActiveRunId(runId);
         /* synchronize messages to Assistants API as well as with real DB ID's */
         syncHandler(data, { ...submission, userMessage } as EventSubmission);
+        console.log('data.sync != null');
       } else if (data.type != null) {
         const { text, index } = data;
         if (text != null && index !== textIndex) {
@@ -152,6 +159,7 @@ export default function useSSE(
         }
 
         contentHandler({ data, submission: submission as EventSubmission });
+        console.log('data.type != null');
       } else {
         const text = data.text ?? data.response;
         const { plugin, plugins } = data;
@@ -165,6 +173,8 @@ export default function useSSE(
         if (data.message != null) {
           messageHandler(text, { ...submission, plugin, plugins, userMessage, initialResponse });
         }
+
+        console.log('else');
       }
     });
 
