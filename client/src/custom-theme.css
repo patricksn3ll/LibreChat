@@ -1,10 +1,10 @@
 :root {
-  --bg: #121212;
-  --paper: #0f1720;
+  --bg: #121212 !important;
+  --paper: #0f1720 !important;
   /* --accent:#FF6B35; */
-  --accent: #1d4ed8;
-  --muted: #D1D5DB;
-  --alt: #F5F5F7;
+  --accent: #1d4ed8 !important;
+  --muted: #D1D5DB !important;
+  --alt: #F5F5F7 !important;
   /* font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; */
 }
 
@@ -14,8 +14,8 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, var(--bg), #0b0b0b);
-  color: var(--muted);
+  background: linear-gradient(180deg, var(--bg), #0b0b0b) !important;
+  color: var(--muted) !important;
   min-height: 100vh;
 }
 
@@ -45,12 +45,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: white !important;
   font-weight: 800;
 }
 
 nav a {
-  color: var(--muted);
+  color: var(--muted) !important;
   text-decoration: none;
   margin-left: 18px;
 }
@@ -70,7 +70,7 @@ nav a {
 
 .h1 {
   font-size: 40px;
-  color: var(--alt);
+  color: var(--alt) ;
   margin: 0;
   line-height: 1.02;
 }
@@ -96,19 +96,19 @@ p.lead {
 }
 
 .primary {
-  background: var(--accent);
-  color: white;
+  background: var(--accent) !important;
+  color: white !important;
   box-shadow: 0 12px 30px rgba(255, 107, 53, 0.14);
 }
 
 .ghost {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--muted);
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: var(--muted)!important;
 }
 
 .panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)) !important;
   padding: 18px;
   border-radius: 12px;
   min-width: 300px;
@@ -130,7 +130,7 @@ p.lead {
 
 .stat .big {
   font-size: 20px;
-  color: var(--alt);
+  color: var(--alt) !important;
   font-weight: 800;
 }
 
@@ -149,12 +149,12 @@ p.lead {
 
 .feature .h4 {
   margin: 6px 0;
-  color: var(--accent);
+  color: var(--accent) !important;
 }
 
 footer {
   margin-top: 48px;
-  color: #8892A6;
+  color: #8892A6 !important;
   font-size: 13px;
 }
 
@@ -163,9 +163,9 @@ select {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: transparent;
-  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  background: transparent !important;
+  color: var(--muted) !important;
 }
 
 @media (max-width: 900px) {
@@ -194,15 +194,15 @@ select {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: var(--paper);
+  background: var(--paper) !important;
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
 }
 
 .benefit span {
-  background: var(--accent);
-  color: #fff;
+  background: var(--accent) !important;
+  color: #fff !important;
   font-weight: 700;
   border-radius: 50%;
   width: 26px;
@@ -215,7 +215,7 @@ select {
 }
 
 .testimonial {
-  background: var(--paper);
+  background: var(--paper) !important;
   border-left: 6px solid var(--muted);
   border-radius: var(--radius);
   padding: 28px;
@@ -228,7 +228,7 @@ select {
 .testimonial strong {
   display: block;
   margin-top: 8px;
-  color: var(--muted);
+  color: var(--muted) !important;
   font-style: normal;
 }
 
@@ -236,12 +236,3 @@ select {
   text-align: center;
   margin-top: 60px;
 }
-
-/* h1, h2, h3, h4, h5, h6 {
-  font-size: 2rem !important;
-  font-weight: 700 !important;
-}
-
-blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
-  margin: 0 !important;
-} */
