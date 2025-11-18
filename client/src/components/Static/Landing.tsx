@@ -27,9 +27,6 @@ export default function  Landing() {
   const location = useLocation();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/c/new', { replace: true });
-    }
     if (data) {
       setStartupConfig(data);
     }
