@@ -52,7 +52,12 @@ const extractMessageContent = (message: TMessage): string => {
         }
         if ('text' in part) {
           console.warn("extractMessageContent 'text' in part: ", part)
-          return part.text || '';
+          
+          if (typeof part.text === 'string') return part.text;
+          if (part.text && typeof part.text === 'object' && typeof part.text.value === 'string') return part.text.value;
+          return '';
+
+          //return part.text || '';
         }
         if ('think' in part) {
           if (typeof think === 'string') {
