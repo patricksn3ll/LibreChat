@@ -120,7 +120,7 @@ export default function  Landing({
           <aside className="panel">
             <strong>Reserve Beta Access</strong>
             <p style={{ margin: '8px 0', color: '#9CA3AF' }}>Fast onboarding for early users — includes 3 area reports during beta.</p>
-            {/* <form id="signup" onSubmit={e => { e.preventDefault(); alert('Thanks! This demo form does not submit'); }}>
+            <form id="signup" onSubmit={e => { e.preventDefault(); alert('Thanks! This demo form does not submit'); }}>
               <input id="email2" type="email" placeholder="your@company.com" required />
               <select aria-label="Use case" style={{ marginTop: 8 }}>
                 <option>Investor</option>
@@ -128,9 +128,9 @@ export default function  Landing({
                 <option>Homebuyer</option>
               </select>
               <button className="btn primary" style={{ width: '100%', marginTop: 10 }}>Join waitlist</button>
-            </form> */}
+            </form> 
 
-            <Outlet context={contextValue} />            
+            {/* <Outlet context={contextValue} />             */}
 
             <div style={{ marginTop: 14 }}>
               <strong style={{ color: 'var(--accent)' }}>What you get</strong>
