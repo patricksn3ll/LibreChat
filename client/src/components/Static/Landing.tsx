@@ -10,8 +10,6 @@ interface LandingProps {
 
 }
 
-const defaultInterface = getConfigDefaults().interface;
-
 export default function  Landing() {
   const [error, setError] = useState<TranslationKeys | null>(null);
   const [startupConfig, setStartupConfig] = useState<TStartupConfig | null>(null);
@@ -98,7 +96,7 @@ export default function  Landing() {
               </div>
               <div className="stat">
                 <div className="big">Usage Based</div>
-                <small>Nomonthly subscriptions!</small>
+                <small>No recurring fees!</small>
               </div>
             </div>
           </div>
