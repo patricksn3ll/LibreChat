@@ -111,7 +111,7 @@ export const router = createBrowserRouter(
     },    
     {
       path: 'landing',
-      element: <StaticFilesLayout />,
+      element: <AuthLayout />,
       children: [
         { 
           path: '', 
