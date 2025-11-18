@@ -19,6 +19,9 @@ const Landing = memo(
   }: LandingProps) => {
     const navigate = useNavigate();
     const { data: startupConfig } = useGetStartupConfig();
+
+    console.log('Landing : startupConfig : 1 :', startupConfig);
+
     const interfaceConfig = useMemo(
       () => startupConfig?.interface ?? defaultInterface,
       [startupConfig],
@@ -27,6 +30,8 @@ const Landing = memo(
   const contextValue = {
     startupConfig
   };    
+
+  console.log('Landing : startupConfig : 2 :', startupConfig);
 
   return (
     <>
