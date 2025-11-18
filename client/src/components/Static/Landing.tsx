@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useGetStartupConfig } from '~/data-provider';
 import StaticFooter from './StaticFooter'
 import LoginForm from '../Auth/LoginForm';
 import Login from '../Auth/Login';
@@ -7,6 +8,7 @@ import '../../custom-theme.css';
 
 export default function  Landing() {
   const navigate = useNavigate();
+  const { data: startupConfig } = useGetStartupConfig();
   return (
     <>
       <div className="wrap">
