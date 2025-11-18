@@ -54,7 +54,12 @@ const extractMessageContent = (message: TMessage): string => {
           console.warn("extractMessageContent 'text' in part: ", part)
           
           if (typeof part.text === 'string') return part.text;
-          if (part.text && typeof part.text === 'object' && typeof part.text.value === 'string') return part.text.value;
+          if (part.text && typeof part.text === 'object' && typeof part.text.value === 'string') {
+            console.warn("extractMessageContent part.text.value: ", part.text.value)
+            return part.text.value;
+          } else {
+            console.warn("extractMessageContent part.text: ", part.text)
+          }
           return '';
 
           //return part.text || '';
