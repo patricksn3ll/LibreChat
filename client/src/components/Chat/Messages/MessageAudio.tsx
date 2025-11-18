@@ -5,12 +5,9 @@ import { BrowserTTS, ExternalTTS } from '~/components/Audio/TTS';
 import { TTSEndpoints } from '~/common';
 import store from '~/store';
 
-function MessageAudio(props: TMessageAudio) {
-  console.log('MessageAudio props:', props);
-  console.log('MessageAudio content:', props.content);
+function MessageAudio(props: TMessageAudio) {  
   const engineTTS = useRecoilValue<string>(store.engineTTS);
-
-  console.log('MessageAudio using TTS engine:', engineTTS);
+  console.log('MessageAudio props:', props);
 
   const TTSComponents = {
     [TTSEndpoints.browser]: BrowserTTS,
