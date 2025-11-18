@@ -17,7 +17,7 @@ export default function  Landing() {
               <img
                 src="assets/logo.svg"
                 className="h-full text-center icon-logo rounded-full"
-                alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? '' })}
+                alt={startupConfig?.appTitle ?? 'Logo'}
               />
           </div>            
             <div>
