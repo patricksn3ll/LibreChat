@@ -5,7 +5,7 @@
   --accent: #1d4ed8 !important;
   --muted: #D1D5DB !important;
   --alt: #F5F5F7 !important;
-  /* font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; */
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
 }
 
 * {
@@ -41,25 +41,25 @@ header {
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #ff8a57, #ff6b35);
+  background: linear-gradient(135deg, #3b82f6, #1e40af) !important;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white !important;
-  font-weight: 800;
+  font-weight: 800 !important;
 }
 
 nav a {
   color: var(--muted) !important;
   text-decoration: none;
-  margin-left: 18px;
+  margin-left: 18px !important;
 }
 
 .hero {
   display: flex;
   gap: 28px;
   align-items: center;
-  margin-top: 36px;
+  margin-top: 36px !important;
   flex-wrap: wrap;
 }
 
