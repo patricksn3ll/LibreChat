@@ -38,12 +38,10 @@ type HoverButtonProps = {
 };
 
 const extractMessageContent = (message: TMessage): string => {
-  console.warn('typeof message.content: ' + typeof message.content)
   if (typeof message.content === 'string') {
     return message.content;
   }
 
-  console.warn('Array.isArray(message.content): ' + Array.isArray(message.content))
   if (Array.isArray(message.content)) {
     return message.content
       .map((part) => {
@@ -52,26 +50,19 @@ const extractMessageContent = (message: TMessage): string => {
           return part;
         }
         if ('text' in part) {
-          console.warn('part.text: ', part.text)          
           return part.text || '';
         }
         if ('think' in part) {
-          const think = part.think;
           if (typeof think === 'string') {
-            console.warn('typeof think === string')
             return think;
           }
-          console.warn('typeof think !== string: ', think)
           return think && 'text' in think ? think.text || '' : '';
         }
 
-        console.warn('part has no text or think field: ', part)
         return '';
       })
       .join('');
   }
-
-  console.warn('message.text: ', message.text);
 
   return message.text || '';
 };
