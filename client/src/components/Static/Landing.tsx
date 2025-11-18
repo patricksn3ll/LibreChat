@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StaticFooter from './StaticFooter'
+import LoginForm from '../Auth/LoginForm';
+import Login from '../Auth/Login';
 import '../../custom-theme.css';
 
 export default function  Landing() {
@@ -52,7 +54,7 @@ export default function  Landing() {
       <aside class="panel">
         <strong>Reserve Beta Access</strong>
         <p style="margin:8px 0;color:#9CA3AF">Fast onboarding for early users — includes 3 area reports during beta.</p>
-        <form id="signup" onsubmit="event.preventDefault(); alert('Thanks! This demo form does not submit');">
+        {/* <form id="signup" onsubmit="event.preventDefault(); alert('Thanks! This demo form does not submit');">
           <input id="email2" type="email" placeholder="your@company.com" required />
           <select aria-label="Use case" style="margin-top:8px">
             <option>Investor</option>
@@ -60,7 +62,9 @@ export default function  Landing() {
             <option>Homebuyer</option>
           </select>
           <button class="btn primary" style="width:100%;margin-top:10px">Join waitlist</button>
-        </form>
+        </form> */}
+
+        <Login />
 
         <div style="margin-top:14px">
           <strong style="color:var(--accent)">What you get</strong>
@@ -73,7 +77,7 @@ export default function  Landing() {
       </aside>
     </section>
 
-    <section id="features" style="margin-top:28px">
+   <section id="features" style="margin-top:28px">
       <h3 style="color:var(--accent)">Built for quick decisions</h3>
       <div class="features">
         <div class="feature">
@@ -92,15 +96,14 @@ export default function  Landing() {
     </section>
 
     <section>
-    <h3 style="color:var(--accent)">Who CribMetrics Is For</h3>
-    <div class="benefits">
-        <div class="benefit"><span>✓</span> <div><strong>Investors</strong><br>Identify undervalued areas early and time your entries with confidence.</div></div>
-        <div class="benefit"><span>✓</span> <div><strong>Agents & Brokers</strong><br>Elevate your client conversations with data-backed insights and professional-grade market intelligence.</div></div>
-        <div class="benefit"><span>✓</span> <div><strong>Homeowners & Buyers</strong><br>Understand your neighborhood’s direction and make smarter buy-sell decisions.</div></div>
-        <div class="benefit"><span>✓</span> <div><strong>Analysts & Data-Driven Pros</strong><br>Get structured, granular market data without building your own pipelines or dealing with inconsistent sources.</div></div>
-    </div>
-    </section>
-
+      <h3 style="color:var(--accent)">Who CribMetrics Is For</h3>
+      <div class="benefits">
+          <div class="benefit"><span>✓</span> <div><strong>Investors</strong><br />Identify undervalued areas early and time your entries with confidence.</div></div>
+          <div class="benefit"><span>✓</span> <div><strong>Agents & Brokers</strong><br />Elevate your client conversations with data-backed insights and professional-grade market intelligence.</div></div>
+          <div class="benefit"><span>✓</span> <div><strong>Homeowners & Buyers</strong><br />Understand your neighborhood's direction and make smarter buy-sell decisions.</div></div>
+          <div class="benefit"><span>✓</span> <div><strong>Analysts & Data-Driven Pros</strong><br />Get structured, granular market data without building your own pipelines or dealing with inconsistent sources.</div></div>
+      </div>
+    </section>        
 
     <section id="features" style="margin-top:28px">
       <h3 style="color:var(--accent)">Why People Trust CribMetrics</h3>
@@ -120,13 +123,13 @@ export default function  Landing() {
       </div>
     </section>
 
-
     <footer>
       <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
         <div><strong style="color:var(--accent)">CribMetrics</strong> — AI Real Estate Analytics</div>
         <div style="color:#8892A6">Data sources: public real estate sales • Privacy • Terms</div>
       </div>
     </footer>
+
   </div>    
     </>
   );
