@@ -68,7 +68,7 @@ nav a {
   min-width: 320px;
 }
 
-h1 {
+.h1 {
   font-size: 40px;
   color: var(--alt);
   margin: 0;
@@ -147,7 +147,7 @@ p.lead {
   background: #0b1220;
 }
 
-.feature h4 {
+.feature .h4 {
   margin: 6px 0;
   color: var(--accent);
 }
@@ -237,11 +237,11 @@ select {
   margin-top: 60px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   font-size: 2rem !important;
   font-weight: 700 !important;
 }
 
 blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
   margin: 0 !important;
-}
+} */
