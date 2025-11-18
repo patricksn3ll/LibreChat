@@ -4,7 +4,7 @@ import  Landing  from './Landing';
 export default function LandingPageWrapper() {
   return (
     <AuthContextProvider>
-      <Landing />
+      <Landing  />
     </AuthContextProvider>
   );
 }

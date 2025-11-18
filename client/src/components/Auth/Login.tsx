@@ -23,6 +23,9 @@ function Login() {
   // Persist the disable flag locally so that once detected, auto-redirect stays disabled.
   const [isAutoRedirectDisabled, setIsAutoRedirectDisabled] = useState(disableAutoRedirect);
 
+  console.log('Login component rendered with disableAutoRedirect:', disableAutoRedirect);
+  console.log('Login component rendered with startupConfig:', startupConfig);
+
   useEffect(() => {
     const oauthError = searchParams?.get('error');
     if (oauthError && oauthError === ErrorTypes.AUTH_FAILED) {
