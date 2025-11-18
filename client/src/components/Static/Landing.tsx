@@ -29,7 +29,7 @@ export default function  Landing() {
           </div>
           <nav>
             <a href="#features">Features</a>
-            <a href="#signup">Join</a>
+            <a href="#signup">Join for FREE</a>
           </nav>
         </header>
 
