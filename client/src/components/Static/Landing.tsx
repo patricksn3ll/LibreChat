@@ -1,54 +1,68 @@
 import React from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useGetStartupConfig } from '~/data-provider';
+import { TStartupConfig } from 'librechat-data-provider';
 import StaticFooter from './StaticFooter'
 import LoginForm from '../Auth/LoginForm';
 import Login from '../Auth/Login';
 import '../../custom-theme.css';
 
-interface LandingProps {
-
-}
-
-export default function  Landing() {
-  const [error, setError] = useState<TranslationKeys | null>(null);
-  const [startupConfig, setStartupConfig] = useState<TStartupConfig | null>(null);
-  const {
-    data,
-    isFetching,
-    error: startupConfigError,
-  } = useGetStartupConfig({
-    enabled: isAuthenticated ? startupConfig === null : true,
-  });
+export default function  Landing({
+  children,
+  header,
+  isFetching,
+  startupConfig,
+  startupConfigError,
+  pathname,
+  error,
+}: {
+  children: React.ReactNode;
+  header: React.ReactNode;
+  isFetching: boolean;
+  startupConfig: TStartupConfig | null | undefined;
+  startupConfigError: unknown | null | undefined;
+  pathname: string;
+  error: TranslationKeys | null;
+}) {
+ 
+  const contextValue  = {
+      children,
+      header,
+      isFetching,
+      startupConfig,
+      startupConfigError,
+      pathname,
+      error,
+  }
   const localize = useLocalize();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (data) {
-      console.log('Setting startup config in Landing', datafs);
-      setStartupConfig(data);
+  const hasStartupConfigError = startupConfigError !== null && startupConfigError !== undefined;
+  const DisplayError = () => {
+    if (hasStartupConfigError) {
+      return (
+        <div className="mx-auto sm:max-w-sm">
+          <ErrorMessage>{localize('com_auth_error_login_server')}</ErrorMessage>
+        </div>
+      );
+    } else if (error === 'com_auth_error_invalid_reset_token') {
+      return (
+        <div className="mx-auto sm:max-w-sm">
+          <ErrorMessage>
+            {localize('com_auth_error_invalid_reset_token')}{' '}
+            <a className="font-semibold text-green-600 hover:underline" href="/forgot-password">
+              {localize('com_auth_click_here')}
+            </a>{' '}
+            {localize('com_auth_to_try_again')}
+          </ErrorMessage>
+        </div>
+      );
+    } else if (error != null && error) {
+      return (
+        <div className="mx-auto sm:max-w-sm">
+          <ErrorMessage>{localize(error)}</ErrorMessage>
+        </div>
+      );
     }
-  }, [isAuthenticated, data]);
-  
-
-  useEffect(() => {
-    document.title = startupConfig?.appTitle || '';
-  }, [startupConfig?.appTitle]);
-
-  useEffect(() => {
-    setError(null);
-    setHeaderText(null);
-  }, [location.pathname]);
-
-  const contextValue = {
-    error,
-    setError,
-    headerText,
-    setHeaderText,
-    startupConfigError,
-    startupConfig,
-    isFetching,
+    return null;
   };
 
   return (
@@ -57,7 +71,7 @@ export default function  Landing() {
         <header>
           <div className="logo" aria-label="CribMetrics">
             {/* <div className="mark">CM</div> */}
-          <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover">
+          <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover mark">
               <img
                 src="assets/logo.svg"
                 className="h-full text-center icon-logo rounded-full"
