@@ -118,7 +118,7 @@ export const router = createBrowserRouter(
           element:  <LandingPageWrapper />,
           children: [
             {
-              path: 'login',
+              path: '',
               element: <Login />,
             }
           ] 
