@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useGetStartupConfig } from '~/data-provider';
 import { TStartupConfig } from 'librechat-data-provider';
+import { TranslationKeys, useLocalize } from '~/hooks';
 import StaticFooter from './StaticFooter'
 import LoginForm from '../Auth/LoginForm';
 import Login from '../Auth/Login';
