@@ -6,21 +6,22 @@ import LoginForm from '../Auth/LoginForm';
 import Login from '../Auth/Login';
 import '../../custom-theme.css';
 
-export default function  Landing() {
-  const navigate = useNavigate();
-  const { data: startupConfig, isLoading } = useGetStartupConfig();
+interface LandingProps {
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+}
 
-  if (!startupConfig) {
-    return <div>Error loading config.</div>;
-  }
-  
-  const contextValue = {
-    startupConfig
-  };
+const defaultInterface = getConfigDefaults().interface;
+
+const Landing = memo(
+  ({
+
+  }: LandingProps) => {
+    const navigate = useNavigate();
+    const { data: startupConfig } = useGetStartupConfig();
+    const interfaceConfig = useMemo(
+      () => startupConfig?.interface ?? defaultInterface,
+      [startupConfig],
+    );
 
   return (
     <>
@@ -149,5 +150,10 @@ export default function  Landing() {
 
       </div>
     </>
-  );
-}
+    );
+  },
+);
+
+Landing.displayName = 'Landing';
+
+export default Landing;
