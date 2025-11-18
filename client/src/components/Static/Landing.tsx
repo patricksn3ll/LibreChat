@@ -25,9 +25,6 @@ export default function  Landing() {
   const localize = useLocalize();
   const navigate = useNavigate();
   const location = useLocation();
-  const contextValue = {
-    startupConfig
-  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -57,7 +54,7 @@ export default function  Landing() {
     startupConfig,
     isFetching,
   };
-    
+
   return (
     <>
       <div className="wrap">
