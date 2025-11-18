@@ -38,11 +38,7 @@ type HoverButtonProps = {
 };
 
 const extractMessageContent = (message: TMessage): string => {
-  console.warn('extractMessageContent typeof message.content: ' + typeof message.content)
   if (typeof message.content === 'string') {
-    if (message.content.includes('object')) {
-      console.warn('extractMessageContent OBJECT IS STRING')
-    }
     return message.content;
   }
 
@@ -51,24 +47,27 @@ const extractMessageContent = (message: TMessage): string => {
     return message.content
       .map((part) => {
         if (typeof part === 'string') {
-          console.warn('part: ', part)
+          console.warn("extractMessageContent typeof part === 'string'")
           return part;
         }
         if ('text' in part) {
+          console.warn("extractMessageContent 'text' in part: ")
           return part.text || '';
         }
         if ('think' in part) {
           if (typeof think === 'string') {
+            console.warn("extractMessageContent typeof think === 'string': ")
             return think;
           }
+
+          console.warn("extractMessageContent return think && 'text' in think ? think.text || '' : '';: ")
           return think && 'text' in think ? think.text || '' : '';
         }
 
+        console.warn('extractMessageContent return empty string')
         return '';
       })
       .join('');
-  } else {
-    console.log('message.content is not array:', message.content)
   }
 
   return message.text || '';
