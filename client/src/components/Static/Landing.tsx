@@ -9,6 +9,11 @@ import '../../custom-theme.css';
 export default function  Landing() {
   const navigate = useNavigate();
   const { data: startupConfig } = useGetStartupConfig();
+
+  const contextValue = {
+    startupConfig
+  };
+
   return (
     <>
       <div className="wrap">
@@ -54,8 +59,8 @@ export default function  Landing() {
                 <small>Data refresh</small>
               </div>
               <div className="stat">
-                <div className="big">APIs</div>
-                <small>Export-ready (beta)</small>
+                <div className="big">Usage Based</div>
+                <small>Nomonthly subscriptions!</small>
               </div>
             </div>
           </div>
@@ -73,7 +78,7 @@ export default function  Landing() {
               <button className="btn primary" style={{ width: '100%', marginTop: 10 }}>Join waitlist</button>
             </form> */}
 
-            <Outlet context={{ startupConfig }} />            
+            <Outlet context={contextValue} />            
 
             <div style={{ marginTop: 14 }}>
               <strong style={{ color: 'var(--accent)' }}>What you get</strong>
