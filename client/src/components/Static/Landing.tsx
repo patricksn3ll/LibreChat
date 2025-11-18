@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useGetStartupConfig } from '~/data-provider';
 import StaticFooter from './StaticFooter'
 import LoginForm from '../Auth/LoginForm';
