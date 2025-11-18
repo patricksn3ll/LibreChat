@@ -1,10 +1,10 @@
-import { AuthProvider } from '~/hooks/AuthContext';
+import { AuthContextProvider } from '~/hooks/AuthContext';
 import { Landing } from './Landing';
 
 export default function LandingPageWrapper() {
   return (
-    <AuthProvider>
+    <AuthContextProvider>
       <Landing />
-    </AuthProvider>
+    </AuthContextProvider>
   );
 }

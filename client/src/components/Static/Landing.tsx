@@ -12,7 +12,14 @@ export default function  Landing() {
       <div className="wrap">
         <header>
           <div className="logo" aria-label="CribMetrics">
-            <div className="mark">CM</div>
+            {/* <div className="mark">CM</div> */}
+          <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover">
+              <img
+                src="assets/logo.svg"
+                className="h-full text-center icon-logo rounded-full"
+                alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? '' })}
+              />
+          </div>            
             <div>
               <div style={{ fontWeight: 800, color: 'var(--alt)' }}>CribMetrics</div>
               <div style={{ fontSize: 12, color: '#9CA3AF' }}>Instant market signals • Zip-to-state</div>
