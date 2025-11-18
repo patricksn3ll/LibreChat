@@ -123,12 +123,7 @@ export default function  Landing() {
           </div>
         </section>
 
-        <footer>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-            <div><strong style={{ color: 'var(--accent)' }}>CribMetrics</strong> — AI Real Estate Analytics</div>
-            <div style={{ color: '#8892A6' }}>Data sources: public real estate sales • Privacy • Terms</div>
-          </div>
-        </footer>
+        <StaticFooter />
 
       </div>
     </>

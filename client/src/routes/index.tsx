@@ -21,13 +21,14 @@ import ShareRoute from './ShareRoute';
 import ChatRoute from './ChatRoute';
 import Search from './Search';
 import Root from './Root';
-import { HelpAndFAQ, PrivacyPolicy, TermsAndServices, Plans, Landing } from '~/components/Static';
+import { HelpAndFAQ, PrivacyPolicy, TermsAndServices, Plans, LandingPageWrapper } from '~/components/Static';
 import SubscriptionSuccess from '~/components/Subscription/Success';
 import SubscriptionCancel from '~/components/Subscription/Cancel';
 import Subscription from '~/components/Nav/SettingsTabs/Account/Subscription';
 import Product from '~/components/Nav/SettingsTabs/Account/Product';
 import ProductSuccess from '~/components/Product/Success'
 import ProducCancel from '~/components/Product/Cancel'
+import LandingPageWrapper from '../components/Static/LandingPageWrapper';
 
 const AuthLayout = () => (
   <AuthContextProvider>
@@ -112,7 +113,7 @@ export const router = createBrowserRouter(
       path: 'landing',
       element: <StaticFilesLayout />,
       children: [
-        { path: '', element:  <Landing /> },
+        { path: '', element:  <LandingPageWrapper /> },
       ],
       errorElement: <RouteErrorBoundary />,
     },   
