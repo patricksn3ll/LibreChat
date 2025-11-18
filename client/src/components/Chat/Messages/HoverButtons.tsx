@@ -38,33 +38,28 @@ type HoverButtonProps = {
 };
 
 const extractMessageContent = (message: TMessage): string => {
-  if (typeof message.content === 'string') {
-    return message.content;
-  }
+  // Helper to recursively extract text from any value
+  const extractText = (val: any): string => {
+    if (!val) return '';
+    if (typeof val === 'string') return val;
+    if (Array.isArray(val)) return val.map(extractText).join(' ');
+    if (typeof val === 'object') {
+      // Try common keys
+      if ('text' in val && typeof val.text === 'string') return val.text;
+      if ('think' in val) {
+        if (typeof val.think === 'string') return val.think;
+        if (val.think && typeof val.think === 'object' && 'text' in val.think && typeof val.think.text === 'string') return val.think.text;
+      }
+      // Fallback: try all string values in the object
+      return Object.values(val).map(extractText).join(' ');
+    }
+    return '';
+  };
 
-  if (Array.isArray(message.content)) {
-    return message.content
-      .map((part) => {
-        if (typeof part === 'string') {
-          console.warn('part: ', part)
-          return part;
-        }
-        if ('text' in part) {
-          return part.text || '';
-        }
-        if ('think' in part) {
-          if (typeof think === 'string') {
-            return think;
-          }
-          return think && 'text' in think ? think.text || '' : '';
-        }
-
-        return '';
-      })
-      .join('');
-  }
-
-  return message.text || '';
+  // Prefer content, fallback to text
+  const contentText = extractText(message.content);
+  if (contentText && contentText.trim().length > 0) return contentText.trim();
+  return extractText(message.text).trim();
 };
 
 const HoverButton = memo(
