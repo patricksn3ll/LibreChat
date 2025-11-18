@@ -73,7 +73,7 @@ export default function  Landing() {
               <button className="btn primary" style={{ width: '100%', marginTop: 10 }}>Join waitlist</button>
             </form> */}
 
-            <Login startupConfig={startupConfig}/>
+            <Outlet context={{ startupConfig }} />            
 
             <div style={{ marginTop: 14 }}>
               <strong style={{ color: 'var(--accent)' }}>What you get</strong>
