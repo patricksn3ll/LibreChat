@@ -8,8 +8,16 @@ import '../../custom-theme.css';
 
 export default function  Landing() {
   const navigate = useNavigate();
-  const { data: startupConfig } = useGetStartupConfig();
+  const { data: startupConfig, isLoading } = useGetStartupConfig();
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!startupConfig) {
+    return <div>Error loading config.</div>;
+  }
+  
   const contextValue = {
     startupConfig
   };
