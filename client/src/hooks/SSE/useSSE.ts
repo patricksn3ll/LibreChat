@@ -121,9 +121,6 @@ export default function useSSE(
     sse.addEventListener('message', (e: MessageEvent) => {
       const data = JSON.parse(e.data);
 
-      console.log('useSSE addEventListener: message: data: ');
-      console.log(data);
-
       if (data.final != null) {
         clearDraft(submission.conversation?.conversationId);
         const { plugins } = data;
@@ -141,25 +138,30 @@ export default function useSSE(
         };
 
         createdHandler(data, { ...submission, userMessage } as EventSubmission);
-
-        console.log('data.created != null');
       } else if (data.event != null) {
         stepHandler(data, { ...submission, userMessage } as EventSubmission);
-        console.log('data.event != null');
       } else if (data.sync != null) {
         const runId = v4();
         setActiveRunId(runId);
         /* synchronize messages to Assistants API as well as with real DB ID's */
         syncHandler(data, { ...submission, userMessage } as EventSubmission);
-        console.log('data.sync != null');
       } else if (data.type != null) {
         const { text, index } = data;
         if (text != null && index !== textIndex) {
           textIndex = index;
         }
 
+        // Remove everything after a <sup>...</sup> that starts with a number and then a .
+        let cleanedText = text.replace(/<sup>\d+\..*?<\/sup>.*$/s, '');
+        data.text = cleanedText;
+        console.log('addEventListener message', data);
+
+        // Replace all occurances of any <sup></sup> tags in the text
+        cleanedText = cleanedText.replace(/<sup>.*?<\/sup>/g, '');
+        data.text = cleanedText;
+        console.log('addEventListener message', data);
+        
         contentHandler({ data, submission: submission as EventSubmission });
-        console.log('data.type != null');
       } else {
         const text = data.text ?? data.response;
         const { plugin, plugins } = data;
@@ -173,8 +175,6 @@ export default function useSSE(
         if (data.message != null) {
           messageHandler(text, { ...submission, plugin, plugins, userMessage, initialResponse });
         }
-
-        console.log('else');
       }
     });
 
