@@ -148,16 +148,16 @@ const AuthContextProvider = ({
             return;
           }
 
-          // If the request url is '/' navigate to '/landing'
-          if (window.location.pathname === '/') {
-            navigate('/landing');
-            return;
-          }
+          // // If the request url is '/' navigate to '/landing'
+          // if (window.location.pathname === '/') {
+          //   navigate('/landing');
+          //   return;
+          // }
 
-          // If the request url is '/landing' stay here
-          if (window.location.pathname === '/landing') {
-            return;
-          }
+          // // If the request url is '/landing' stay here
+          // if (window.location.pathname === '/landing') {
+          //   return;
+          // }
 
           // Otherwise navigate to '/login'
           navigate('/login');
