@@ -129,15 +129,15 @@ function LandingPageWrapper({
           <div className="features">
             <div className="feature">
               <h4 className="h4">Monthly Updated Market Data</h4>
-              <p className="muted">Get insights you can trust, sourced from Redfin and refreshed every month for accuracy.</p>
+              <p className="paper">Get insights you can trust, sourced from Redfin and refreshed every month for accuracy.</p>
             </div>
             <div className="feature">
               <h4 className="h4">Location Drilldowns</h4>
-              <p className="muted">Zoom from broad trends down to the hyper-local details that actually matter.</p>
+              <p className="paper">Zoom from broad trends down to the hyper-local details that actually matter.</p>
             </div>
             <div className="feature">
               <h4 className="h4">AI-Driven Trend Interpretation</h4>
-              <p className="muted">Your AI analyst highlights price shifts, inventory changes, and meaningful patterns in plain language.</p>
+              <p className="paper">Your AI analyst highlights price shifts, inventory changes, and meaningful patterns in plain language.</p>
             </div>
           </div>
         </section>
@@ -157,15 +157,15 @@ function LandingPageWrapper({
           <div className="features">
             <div className="feature">
               <h4 className="h4">Reliable Data</h4>
-              <p className="muted">Powered by consistently updated Redfin housing data.</p>
+              <p className="paper">Powered by consistently updated Redfin housing data.</p>
             </div>
             <div className="feature">
               <h4 className="h4">Clear Insights</h4>
-              <p className="muted">No jargon, no guesswork—just straightforward answers you can use.</p>
+              <p className="paper">No jargon, no guesswork—just straightforward answers you can use.</p>
             </div>
             <div className="feature">
               <h4 className="h4">Privacy-First Approach</h4>
-              <p className="muted">Your data stays yours. No tracking, no selling information.</p>
+              <p className="paper">Your data stays yours. No tracking, no selling information.</p>
             </div>
           </div>
         </section>

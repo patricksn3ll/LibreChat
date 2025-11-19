@@ -203,7 +203,7 @@ p.lead {
 }
 
 .dark .feature {
-  color: var(--alt);
+  color: var(--paper);
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.05)) !important;  
 }
 
@@ -262,8 +262,8 @@ select {
 }
 
 .dark .benefit {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.15)) !important;
-  color: var(--muted);  
+  color: var(--paper);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.05)) !important;  
 }
 
 .benefit span {
