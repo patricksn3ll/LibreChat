@@ -171,7 +171,7 @@ export default function  Landing({
           </div>
         </section>
 
-        <section>
+        <section id="benefit" style={{ marginTop: 28 }}>
           <h3 className="h3" style={{ color: 'var(--accent)' }}>Who CribMetrics Is For</h3>
           <div className="benefits">
             <div className="benefit"><span>✓</span> <div><strong>Investors</strong><br />Identify undervalued areas early and time your entries with confidence.</div></div>
@@ -181,7 +181,7 @@ export default function  Landing({
           </div>
         </section>
 
-        <section id="features" style={{ marginTop: 28 }}>
+        <section id="trust" style={{ marginTop: 28 }}>
           <h3 className="h3" style={{ color: 'var(--accent)' }}>Why People Trust CribMetrics</h3>
           <div className="features">
             <div className="feature">
