@@ -1,6 +1,7 @@
 :root {
   --bg: #cac9e6 !important;
   --paper: #8a929c !important;
+  --paper-rgb: rgb(138, 146, 156) !important;
   /* --accent:#FF6B35; */
   --accent: #1d4ed8 !important;
   --muted: #3e434b !important;
@@ -193,7 +194,7 @@ p.lead {
   padding: 16px;
   border-radius: 10px;
   /* background: #0b1220; */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.10)) !important;
+  background: linear-gradient(180deg, rgba(var(--paper-rgb), 0.20), rgba(var(--paper-rgb), 0.10)) !important;
   /* background: var(--paper); */
 }
 
