@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import StaticFooter from './StaticFooter'
 import { useCreateStripeCheckoutSession } from '../Nav/SettingsTabs/Account/useCreateStripeCheckoutSession';
 import { useCancelSubscription } from '../Nav/SettingsTabs/Account/useCancelSubscription';
-//import '../../custom-theme.css';
+import '../../custom-theme.css';
 
 export default function Plans() {
   const navigate = useNavigate();

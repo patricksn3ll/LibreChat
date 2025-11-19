@@ -4,6 +4,7 @@ import { ErrorMessage } from '~/components/Auth/ErrorMessage';
 import { TranslationKeys, useLocalize } from '~/hooks';
 import { Banner } from '../Banners';
 import StaticFooter  from './StaticFooter';
+import '../../custom-theme.css';
 
 function LandingPageWrapper({
   children,
