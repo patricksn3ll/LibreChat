@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ThemeSelector } from '@librechat/client';
 import { TStartupConfig } from 'librechat-data-provider';
 import { ErrorMessage } from '~/components/Auth/ErrorMessage';
@@ -24,7 +25,6 @@ function LandingPageWrapper({
   error: TranslationKeys | null;
 }) {
   const localize = useLocalize();
-
   const hasStartupConfigError = startupConfigError !== null && startupConfigError !== undefined;
   const DisplayError = () => {
     if (hasStartupConfigError) {
@@ -54,6 +54,16 @@ function LandingPageWrapper({
     }
     return null;
   };
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
 
   return (
     <>
