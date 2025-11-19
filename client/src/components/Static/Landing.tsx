@@ -26,6 +26,16 @@ export default function  Landing({
   error: TranslationKeys | null;
 }) {
  
+  console.log('Rendering Landing with props:', {
+    children,
+    header,
+    isFetching,
+    startupConfig,
+    startupConfigError,
+    pathname,
+    error,
+  });
+
   const contextValue  = {
       children,
       header,
