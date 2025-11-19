@@ -76,6 +76,8 @@ export default function  Landing({
     return null;
   };
 
+  console.log('test')
+
   return (
     <>
       <div className="wrap">
@@ -107,8 +109,8 @@ export default function  Landing({
             <p className="lead">CribMetrics combines AI valuation, neighborhood signals, and the latest public sales data (monthly refresh) so you can move from curiosity to decision in minutes — whether you're buying, investing, or advising clients.</p>
 
             <div className="cta">
-              <button className="btn primary" onClick={() => document.getElementById('email2')?.focus()}>Join for FREE</button>
-              <button className="btn ghost" onClick={() => { location.hash = '#features'; }}>See features</button>
+              <button className="btn-landing primary" onClick={() => document.getElementById('email2')?.focus()}>Join for FREE</button>
+              <button className="btn-landing ghost" onClick={() => { location.hash = '#features'; }}>See features</button>
             </div>
 
             <div className="stat-row">
@@ -137,7 +139,7 @@ export default function  Landing({
                 <option>Agent</option>
                 <option>Homebuyer</option>
               </select>
-              <button className="btn primary" style={{ width: '100%', marginTop: 10 }}>Join waitlist</button>
+              <button className="btn-landing primary" style={{ width: '100%', marginTop: 10 }}>Join waitlist</button>
             </form> 
 
             <Outlet context={contextValue} />            
