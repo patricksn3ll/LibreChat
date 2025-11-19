@@ -156,6 +156,10 @@ p.lead {
   max-width: 380px;
 }
 
+.dark .panel {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.05)) !important;  
+}
+
 .muted {
   color: var(--muted);
 }
@@ -196,6 +200,11 @@ p.lead {
   border-radius: 10px;
   color: var(--alt);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05)) !important;
+}
+
+.dark .feature {
+  color: var(--alt);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.05)) !important;  
 }
 
 .feature .h4 {
@@ -250,6 +259,11 @@ select {
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
+}
+
+.dark .benefit {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.15)) !important;
+  color: var(--muted);  
 }
 
 .benefit span {

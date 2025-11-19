@@ -77,20 +77,13 @@ function LandingPageWrapper({
                 alt={startupConfig?.appTitle ?? 'Logo'}
               />              
             </div>
-          {/* <div className="mt-6 h-10 flex flex-grow items-center justify-center bg-cover mark">
-              <img
-                src="assets/logo.svg"
-                className="h-full text-center rounded-full"
-                alt={startupConfig?.appTitle ?? 'Logo'}
-              />
-          </div>             */}
             <div>
               <div style={{ fontWeight: 800, color: 'var(--alt)' }}>CribMetrics</div>
-              <div style={{ fontSize: 12, color: '#9CA3AF' }}>Instant market signals • Zip-to-state</div>
+              <div style={{ fontSize: 12, color: '#9CA3AF' }}>Instant market signals | Zip-to-state</div>
             </div>
           </div>
           <nav>
-            <a href="#features">Features</a>
+            <a href="#" onClick={() => { location.hash = '#features'; }}>Features</a>
             <a href="/register">Join for FREE</a>
           </nav>
         </header>
@@ -99,7 +92,7 @@ function LandingPageWrapper({
           <div className="left">
             <div style={{ color: 'var(--accent)', fontWeight: 800, letterSpacing: '.6px' }}>Real Estate Market Insights Made Simple</div>
             <h1 className="h1">Make faster, smarter housing decisions with AI-driven data</h1>
-            <p className="lead">CribMetrics combines AI valuation, neighborhood signals, and the latest public sales data (monthly refresh) so you can move from curiosity to decision in minutes — whether you're buying, investing, or advising clients.</p>
+            <p className="lead">CribMetrics combines AI valuation, neighborhood signals, and the latest public sales data (monthly refresh) so you can move from curiosity to decision in minutes — whether you're buying, investing, or advising clients. All buyy chatting with our AI Real Estate Market Analyst.</Analyst></p>
 
             <div className="cta">
               <button className="btn-landing primary" onClick={() => { location.href="/register"}}>Join for FREE</button>
@@ -124,7 +117,7 @@ function LandingPageWrapper({
 
           <aside className="panel">
             <strong style={{ color: 'var(--accent)' }}>Connect Now</strong>
-            <p style={{ margin: '8px 0', color: '#9CA3AF' }}>Login now to continue chatting with your AI Real Estate Market Analyst. .</p>
+            <p style={{ margin: '8px 0', color: '#9CA3AF' }}>Chat with your AI Real Estate Market Analyst. .</p>
 
            {children}          
 
