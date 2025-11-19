@@ -2,7 +2,7 @@ import { useMemo, useEffect, memo } from 'react';
 import { getConfigDefaults } from 'librechat-data-provider';
 import { useGetStartupConfig } from '~/data-provider';
 import StaticFooter from './StaticFooter'
-import '../../custom-theme.css';
+//import '../../custom-theme.css';
 
 
 interface PrivacyPolicyProps {
