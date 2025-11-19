@@ -15,6 +15,7 @@ import { AuthContextProvider } from '~/hooks/AuthContext';
 import RouteErrorBoundary from './RouteErrorBoundary';
 import StartupLayout from './Layouts/Startup';
 import LoginLayout from './Layouts/Login';
+import LandingLayout from './Layouts/LandingLayout';
 import StaticFilesLayout from './Layouts/StaticFiles'
 import dashboardRoutes from './Dashboard';
 import ShareRoute from './ShareRoute';
@@ -115,11 +116,17 @@ export const router = createBrowserRouter(
       children: [
         { 
           path: '', 
-          element:  <Landing />,
+          element:  <LandingLayout />,
           children: [
             {
               path: '',
-              element: <Login />,
+              element: <Landing />,
+              children: [
+                {
+                  path: '',
+                  element: <Login />,
+                }
+              ]               
             }
           ] 
         },
