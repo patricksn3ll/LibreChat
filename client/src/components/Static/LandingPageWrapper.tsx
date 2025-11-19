@@ -54,16 +54,6 @@ function LandingPageWrapper({
     return null;
   };
 
-  console.log('Rendering LandingPageWrapper with props:', { 
-    children,
-    header,
-    isFetching,
-    startupConfig,
-    startupConfigError,
-    pathname,
-    error,
-  });
-
   return (
     <>
       <div className="wrap">
@@ -84,7 +74,7 @@ function LandingPageWrapper({
           </div>
           <nav>
             <a href="#features">Features</a>
-            <a href="#signup">Join for FREE</a>
+            <a href="/register">Join for FREE</a>
           </nav>
         </header>
 
@@ -95,7 +85,7 @@ function LandingPageWrapper({
             <p className="lead">CribMetrics combines AI valuation, neighborhood signals, and the latest public sales data (monthly refresh) so you can move from curiosity to decision in minutes — whether you're buying, investing, or advising clients.</p>
 
             <div className="cta">
-              <button className="btn-landing primary" onClick={() => document.getElementById('email2')?.focus()}>Join for FREE</button>
+              <button className="btn-landing primary" onClick={() => { location.href="/register"}}>Join for FREE</button>
               <button className="btn-landing ghost" onClick={() => { location.hash = '#features'; }}>See features</button>
             </div>
 
@@ -116,28 +106,11 @@ function LandingPageWrapper({
           </div>
 
           <aside className="panel">
-            <strong>Reserve Beta Access</strong>
-            <p style={{ margin: '8px 0', color: '#9CA3AF' }}>Fast onboarding for early users — includes 3 area reports during beta.</p>
-            {/* <form id="signup" onSubmit={e => { e.preventDefault(); alert('Thanks! This demo form does not submit'); }}>
-              <input id="email2" type="email" placeholder="your@company.com" required />
-              <select aria-label="Use case" style={{ marginTop: 8 }}>
-                <option>Investor</option>
-                <option>Agent</option>
-                <option>Homebuyer</option>
-              </select>
-              <button className="btn-landing primary" style={{ width: '100%', marginTop: 10 }}>Join waitlist</button>
-            </form>  */}
+            <strong style={{ color: 'var(--accent)' }}>Connect Now</strong>
+            <p style={{ margin: '8px 0', color: '#9CA3AF' }}>Login now to continue chatting with your AI Real Estate Market Analyst. .</p>
 
            {children}          
 
-            <div style={{ marginTop: 14 }}>
-              <strong style={{ color: 'var(--accent)' }}>What you get</strong>
-              <ul style={{ paddingLeft: 18, color: '#B7C0CC', marginTop: 8 }}>
-                <li>AI valuations with confidence bands</li>
-                <li>Neighborhood health & trend alerts</li>
-                <li>CSV export & scheduled reports</li>
-              </ul>
-            </div>
           </aside>
         </section>
 

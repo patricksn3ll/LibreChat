@@ -56,16 +56,6 @@ function AuthLayout({
     return null;
   };
 
-  console.log('Rendering AuthLayout with props:', { 
-    children,
-    header,
-    isFetching,
-    startupConfig,
-    startupConfigError,
-    pathname,
-    error,
-  });
-
   return (
     <div className="relative flex min-h-screen flex-col bg-white dark:bg-gray-900">
       <Banner />

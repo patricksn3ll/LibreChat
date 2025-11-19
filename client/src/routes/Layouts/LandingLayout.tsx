@@ -21,7 +21,5 @@ export default function LandingLayout() {
     };
   }, [queriesEnabled, setQueriesEnabled]);
 
-  console.log(`LandingWrapper isAuthenticated=${isAuthenticated}`)
-
   return <LandingWrapper isAuthenticated={isAuthenticated} />;
 }
