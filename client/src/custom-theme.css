@@ -10,10 +10,10 @@
 
 .dark :root {
   --bg: #121212 !important;
-  --paper: #0f1720 !important;
+  --paper: #D1D5DB !important;
   /* --accent:#FF6B35; */
   --accent: #1d4ed8 !important;
-  --muted: #D1D5DB !important;
+  --muted: #0f1720 !important;
   --alt: #F5F5F7 !important;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
 }
@@ -146,7 +146,7 @@ p.lead {
 }
 
 .panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.10)) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05)) !important;
   padding: 18px;
   border-radius: 12px;
   min-width: 300px;
@@ -176,6 +176,12 @@ p.lead {
   font-weight: 800;
 }
 
+.stat small {
+  font-size: 20px;
+  color: var(--paper) !important;
+  font-weight: 800;
+}
+
 .features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -187,7 +193,8 @@ p.lead {
   padding: 16px;
   border-radius: 10px;
   /* background: #0b1220; */
-  background: var(--paper);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.10)) !important;
+  /* background: var(--paper); */
 }
 
 .feature .h4 {
