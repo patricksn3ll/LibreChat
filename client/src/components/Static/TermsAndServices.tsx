@@ -21,7 +21,11 @@ const TermsAndServices = memo(
       <>
 
         <header>
-            <h1>TERMS OF SERVICE</h1>
+            <div className="flex flex-col space-y-6 p-6 max-w-4xl mx-auto">
+                <div className="prose dark:prose-invert max-w-none">
+                    <h1>TERMS OF SERVICE</h1>
+                </div>
+            </div>
         </header>
 
         <section>
