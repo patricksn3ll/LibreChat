@@ -126,15 +126,7 @@ export const router = createBrowserRouter(
           ] 
         },
       ],
-    },   
-    {
-      path: 'plans',
-      element: <StaticFilesLayout />,
-      children: [
-        { path: '', element:  <Plans /> },
-      ],
-      errorElement: <RouteErrorBoundary />,
-    },           
+    },       
     {
       element: <AuthLayout />,
       errorElement: <RouteErrorBoundary />,

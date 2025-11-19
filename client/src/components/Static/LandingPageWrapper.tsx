@@ -5,7 +5,7 @@ import { TranslationKeys, useLocalize } from '~/hooks';
 import SocialLoginRender from './SocialLoginRender';
 import { BlinkAnimation } from './BlinkAnimation';
 import { Banner } from '../Banners';
-import Footer from './Footer';
+import StaticFooter  from './StaticFooter ';
 
 function LandingPageWrapper({
   children,
