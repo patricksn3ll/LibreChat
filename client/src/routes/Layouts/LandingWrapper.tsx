@@ -29,11 +29,16 @@ export default function LandingWrapper({ isAuthenticated }: { isAuthenticated?: 
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log('LandingWrapper : isAuthenticated', isAuthenticated)
+  console.log('LandingWrapper : startupConfig', startupConfig)
+
   useEffect(() => {
     if (isAuthenticated) {
+      console.log('LandingWrapper : useEffect : isAuthenticated', isAuthenticated)
       navigate('/c/new', { replace: true });
     }
     if (data) {
+      console.log('LandingWrapper : setStartupConfig', data)
       setStartupConfig(data);
     }
   }, [isAuthenticated, navigate, data]);
@@ -56,6 +61,8 @@ export default function LandingWrapper({ isAuthenticated }: { isAuthenticated?: 
     startupConfig,
     isFetching,
   };
+
+  console.log('LandingWrapper : contextValue', contextValue)
 
   return (
     <LandingPageWrapper
