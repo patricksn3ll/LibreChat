@@ -195,7 +195,7 @@ p.lead {
   padding: 16px;
   border-radius: 10px;
   color: var(--alt);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05)) !important;
+  background: rgba(255, 255, 255, 0.10) !important;
 }
 
 .feature .h4 {
@@ -245,7 +245,7 @@ select {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: linear-gradient(180deg, rgba(var(--paper-rgb), 0.10), rgba(var(--paper-rgb), 0.05)) !important;
+  background: rgba(255, 255, 255, 0.20) !important;
   color: var(--muted);
   border-radius: var(--radius);
   padding: 20px;
