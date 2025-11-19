@@ -21,9 +21,11 @@ const HelpAndFAQ = memo(
       <>
        
         <header>
-            <div className="flex flex-col max-w-4xl mx-auto p-6 space-y-8">
-                <h1>HELP & FAQ</h1>
-                <p>Find answers to common questions and get help with using our platform</p>
+            <div className="flex flex-col space-y-6 p-6 max-w-4xl mx-auto">
+                <div className="prose prose-lg dark:prose-invert max-w-none">
+                    <h1>HELP & FAQ</h1>
+                    <p>Find answers to common questions and get help with using our platform</p>
+                </div>
             </div>
         </header>
 
