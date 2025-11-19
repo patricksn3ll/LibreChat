@@ -178,9 +178,7 @@ p.lead {
 }
 
 .stat small {
-  font-size: 20px;
   color: var(--paper) !important;
-  font-weight: 800;
 }
 
 .features {
@@ -193,9 +191,7 @@ p.lead {
 .feature {
   padding: 16px;
   border-radius: 10px;
-  /* background: #0b1220; */
-  background: linear-gradient(180deg, rgba(var(--paper-rgb), 0.20), rgba(var(--paper-rgb), 0.10)) !important;
-  /* background: var(--paper); */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05)) !important;
 }
 
 .feature .h4 {
