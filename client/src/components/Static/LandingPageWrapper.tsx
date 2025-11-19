@@ -2,10 +2,8 @@ import { ThemeSelector } from '@librechat/client';
 import { TStartupConfig } from 'librechat-data-provider';
 import { ErrorMessage } from '~/components/Auth/ErrorMessage';
 import { TranslationKeys, useLocalize } from '~/hooks';
-import SocialLoginRender from './SocialLoginRender';
-import { BlinkAnimation } from './BlinkAnimation';
 import { Banner } from '../Banners';
-import StaticFooter  from './StaticFooter ';
+import StaticFooter  from './StaticFooter';
 
 function LandingPageWrapper({
   children,

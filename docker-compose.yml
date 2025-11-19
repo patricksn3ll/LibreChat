@@ -9,7 +9,7 @@ services:
     #depends_on:
       #- mongodb
       #- rag_api
-    image: acrcribmetrics.azurecr.io/cribmetrics:b1c49ec
+    image: acrcribmetrics.azurecr.io/cribmetrics:ae0cfd8
     restart: always
     user: "${UID}:${GID}"
     extra_hosts:
