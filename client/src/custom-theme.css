@@ -4,7 +4,7 @@
   /* --accent:#FF6B35; */
   --accent: #1d4ed8 !important;
   --muted: #7c8695 !important;
-  --alt: #4f4f5c !important;
+  --alt: #3c3c45 !important;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
 }
 
@@ -24,14 +24,14 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, var(--muted), var(--alt)) !important;
-  color: var(--muted) !important;
+  background: linear-gradient(180deg, var(--bg), var(--muted)) !important;
+  color: var(--alt) !important;
   min-height: 100vh;
 }
 
 .dark body {
   margin: 0;
-  background: linear-gradient(180deg, var(--bg), var(--paper)) !important;
+  background:linear-gradient(180deg,var(--bg),#0b0b0b) !important;
   color: var(--muted) !important;
   min-height: 100vh;
 }
