@@ -115,23 +115,23 @@ export const router = createBrowserRouter(
       ],
       errorElement: <RouteErrorBoundary />,
     },    
-    {
-      path: 'landing',
-      element: <LandingPageWrapper />,
-      errorElement: <RouteErrorBoundary />,      
-      children: [
-        { 
-          path: 'landing', 
-          element:  <LandingLayout />,
-          children: [
-            {
-              path: 'landing',
-              element: <Login />,             
-            }
-          ] 
-        },
-      ],
-    },   
+    // {
+    //   path: 'landing',
+    //   element: <LandingPageWrapper />,
+    //   errorElement: <RouteErrorBoundary />,      
+    //   children: [
+    //     { 
+    //       path: 'landing', 
+    //       element:  <LandingLayout />,
+    //       children: [
+    //         {
+    //           path: 'landing',
+    //           element: <Login />,             
+    //         }
+    //       ] 
+    //     },
+    //   ],
+    // },   
     {
       path: 'plans',
       element: <StaticFilesLayout />,
@@ -146,7 +146,7 @@ export const router = createBrowserRouter(
       children: [
         {
           path: '/',
-          element: <LoginLayout />,
+          element: <LandingLayout />,
           children: [
             {
               path: 'login',
