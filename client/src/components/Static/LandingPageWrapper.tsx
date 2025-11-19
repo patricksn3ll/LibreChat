@@ -63,7 +63,7 @@ function LandingPageWrapper({
             <div className="mark">
               <img
                 src="assets/favicon-32x32.png"
-                className="h-full text-center rounded-full"
+                className=""
                 alt={startupConfig?.appTitle ?? 'Logo'}
               />              
             </div>
