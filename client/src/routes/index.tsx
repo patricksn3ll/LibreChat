@@ -113,6 +113,7 @@ export const router = createBrowserRouter(
     {
       path: 'landing',
       element: <AuthLayout />,
+      errorElement: <RouteErrorBoundary />,      
       children: [
         { 
           path: '', 
@@ -120,18 +121,11 @@ export const router = createBrowserRouter(
           children: [
             {
               path: '',
-              element: <Landing />,
-              children: [
-                {
-                  path: '',
-                  element: <Login />,
-                }
-              ]               
+              element: <Login />,             
             }
           ] 
         },
       ],
-      errorElement: <RouteErrorBoundary />,
     },   
     {
       path: 'plans',
