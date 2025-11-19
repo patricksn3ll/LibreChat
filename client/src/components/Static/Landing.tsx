@@ -6,7 +6,7 @@ import { TranslationKeys, useLocalize } from '~/hooks';
 import StaticFooter from './StaticFooter'
 import LoginForm from '../Auth/LoginForm';
 import Login from '../Auth/Login';
-//import '../../custom-theme.css';
+import '../../custom-theme.css';
 
 export default function  Landing({
   children,

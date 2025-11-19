@@ -1,11 +1,11 @@
 :root {
-  --bg: #121212 !important;
-  --paper: #0f1720 !important;
+  /* --bg: #121212 !important;
+  --paper: #0f1720 !important; */
   /* --accent:#FF6B35; */
-  --accent: #1d4ed8 !important;
+  /* --accent: #1d4ed8 !important;
   --muted: #D1D5DB !important;
   --alt: #F5F5F7 !important;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important; */
 }
 
 * {

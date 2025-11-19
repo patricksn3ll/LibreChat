@@ -1,6 +1,7 @@
 import { useMemo, useEffect, memo } from 'react';
 import { useGetStartupConfig } from '~/data-provider';
 import Footer from '~/components/Auth/Footer';
+import '../../custom-theme.css';
 
 interface StaticFooterProps {
 
