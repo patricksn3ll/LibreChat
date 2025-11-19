@@ -24,15 +24,15 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, var(--bg), var(--muted)) !important;
-  color: var(--alt) !important;
+  /* background: linear-gradient(180deg, var(--bg), var(--muted)) !important;
+  color: var(--alt) !important; */
   min-height: 100vh;
 }
 
 .dark body {
   margin: 0;
-  background:linear-gradient(180deg,var(--bg),#0b0b0b) !important;
-  color: var(--muted) !important;
+  /* background:linear-gradient(180deg,var(--bg),#0b0b0b) !important;
+  color: var(--muted) !important; */
   min-height: 100vh;
 }
 
@@ -232,14 +232,14 @@ select {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: var(--paper) !important;
+  background: var(--paper);
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
 }
 
 .benefit span {
-  background: var(--accent) !important;
+  background: var(--accent);
   color: #fff !important;
   font-weight: 700;
   border-radius: 50%;
