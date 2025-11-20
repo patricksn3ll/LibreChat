@@ -115,8 +115,8 @@ async function productPurchaseController(req, res) {
       metadata: metadata,
       customer: customerId,
       allow_promotion_codes: true,
-      success_url: successUrl ||  'http://localhost:3080' + '/purchase/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: cancelUrl || 'http://localhost:3080' + '/purchase/canceled',
+      success_url: successUrl ||  'https://www.cribmetrics.com' + '/purchase/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: cancelUrl || 'https://www.cribmetrics.com' + '/purchase/canceled',
     });
     res.json({ url: session.url });
   } catch (err) {
