@@ -106,7 +106,7 @@ const errorMessages = {
       <>
         {message}
         <div className="text-center">
-          <button className="btn-secondary mt-6" onClick={openBalance}>Buy More</button>
+          <button className="btn btn-secondary mt-6" onClick={openBalance}>Buy More</button>
         </div>
         {generations && (
           <>
