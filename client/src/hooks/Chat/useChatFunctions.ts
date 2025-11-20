@@ -263,15 +263,11 @@ export default function useChatFunctions({
           },
         },
       ];
-
-      console.log('isAssistantsEndpoint:', initialResponse);
     } else if (endpoint != null) {
       initialResponse.model = isAgentsEndpoint(endpoint)
         ? (conversation?.agent_id ?? '')
         : (conversation?.model ?? '');
       initialResponse.text = '';
-
-      console.log('initialResponse:', initialResponse);
 
       if (editedContent && latestMessage?.content) {
         initialResponse.content = cloneDeep(latestMessage.content);
@@ -284,8 +280,6 @@ export default function useChatFunctions({
             contentPart[ContentTypes.TEXT] = part[ContentTypes.TEXT];
           }
         }
-
-        console.log('editedContent && latestMessage?.content:', initialResponse.content);
       } else {
         initialResponse.content = [
           {
@@ -295,8 +289,6 @@ export default function useChatFunctions({
             },
           },
         ];
-
-        console.log('initialResponse.content:', initialResponse.content);
       }
       setShowStopButton(true);
     }
@@ -305,7 +297,6 @@ export default function useChatFunctions({
       currentMessages = currentMessages.filter((msg) => msg.messageId !== responseMessageId);
     }
 
-    logger.log('message_state', initialResponse);
     const submission: TSubmission = {
       conversation: {
         ...conversation,
@@ -337,7 +328,6 @@ export default function useChatFunctions({
     }
 
     setSubmission(submission);
-    logger.dir('message_stream', submission, { depth: null });
   };
 
   const regenerate = ({ parentMessageId }) => {

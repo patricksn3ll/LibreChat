@@ -153,7 +153,7 @@ export default function useSSE(
 
         // TODO: Move to correct location
         // Strip out citations - testing
-        if (data.text && data.text.includes('<sup>')) {
+        if (data.text && data.text?.includes('<sup>')) {
           // Remove everything after a <sup>...</sup> that starts with a number and then a .
           let cleanedText = data.text?.replace(/<sup>\d+\..*?<\/sup>.*$/s, '');
           data.text = cleanedText;
