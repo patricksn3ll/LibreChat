@@ -84,7 +84,7 @@ function LandingPageWrapper({
           </div>
           <nav>
             <a href="javascript://" onClick={() => { location.hash = '#features'; }}>Features</a>
-            <a href="/register">Join for FREE</a>
+            <a href="/register">Join</a>
           </nav>
         </header>
 
