@@ -149,7 +149,7 @@ p.lead {
 }
 
 .panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05)) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.05)) !important;
   padding: 18px;
   border-radius: 12px;
   min-width: 300px;
@@ -199,7 +199,7 @@ p.lead {
   padding: 16px;
   border-radius: 10px;
   color: var(--alt);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05)) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.05)) !important;
 }
 
 .dark .feature {
@@ -254,7 +254,7 @@ select {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.15)) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.15)) !important;
   color: var(--muted);
   border-radius: var(--radius);
   padding: 20px;
