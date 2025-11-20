@@ -72,7 +72,7 @@ function LandingPageWrapper({
           <div className="logo" aria-label="CribMetrics">
             <div className="mark">
               <img
-                src="assets/favicon-32x32.png"
+                src="assets/favicon-48x48.png"
                 className=""
                 alt={startupConfig?.appTitle ?? 'Logo'}
               />              
