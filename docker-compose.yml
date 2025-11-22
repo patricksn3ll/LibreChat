@@ -3,13 +3,14 @@
 
 services:
   api:
-    container_name: LibreChat
+    container_name: cribmetrics
     ports:
       - "${PORT}:${PORT}"
-    #depends_on:
+    depends_on:
+      - metrics
       #- mongodb
       #- rag_api
-    image: acrcribmetrics.azurecr.io/cribmetrics:1a2da99
+    image: acrcribmetrics.azurecr.io/cribmetrics:mcptest6
     restart: always
     user: "${UID}:${GID}"
     extra_hosts:
@@ -23,6 +24,43 @@ services:
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
       - ./logs:/app/logs
+
+  metrics:
+    image: ghcr.io/rubentalstra/librechat-prom-exporter:latest
+    container_name: metrics
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0
+      - PORT=8000
+    networks:
+      - monitoring        
+      
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:10.2.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - monitoring
+    environment: # grafana cli admin reset-admin-password
+      - GF_SECURITY_ADMIN_PASSWORD='#Gr4ph4n4!'
+      - GF_SECURITY_ADMIN_USER='info@cribmetrics.com'
+    restart: unless-stopped
+      
   # mongodb:
     # container_name: chat-mongodb
     # image: mongo
@@ -31,38 +69,46 @@ services:
     # volumes:
       # - ./data-node:/data/db
     # command: mongod --noauth
-  meilisearch:
-    container_name: chat-meilisearch
-    image: getmeili/meilisearch:v1.12.3
-    restart: always
-    user: "${UID}:${GID}"
-    environment:
-      - MEILI_HOST=http://meilisearch:7700
-      - MEILI_NO_ANALYTICS=true
-      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
-    volumes:
-      - ./meili_data_v1.12:/meili_data
-  vectordb:
-    container_name: vectordb
-    image: pgvector/pgvector:0.8.0-pg15-trixie
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-    restart: always
-    volumes:
-      - pgdata2:/var/lib/postgresql/data
-  rag_api:
-    container_name: rag_api
-    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
-    environment:
-      - DB_HOST=vectordb
-      - RAG_PORT=${RAG_PORT:-8000}
-    restart: always
-    depends_on:
-      - vectordb
-    env_file:
-      - .env
+
+  # meilisearch:
+  #   container_name: meilisearch
+  #   image: getmeili/meilisearch:v1.16
+  #   restart: always
+  #   user: "${UID}:${GID}"
+  #   environment:
+  #     - MEILI_HOST=http://meilisearch:7700
+  #     - MEILI_NO_ANALYTICS=true
+  #     - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+  #   volumes:
+  #     - ./meili_data_v1.12:/meili_data
+
+#   vectordb:
+#     container_name: vectordb
+#     image: pgvector/pgvector:0.8.0-pg15-trixie
+#     environment:
+#       POSTGRES_DB: mydatabase
+#       POSTGRES_USER: myuser
+#       POSTGRES_PASSWORD: mypassword
+#     restart: always
+#     volumes:
+#       - pgdata2:/var/lib/postgresql/data
+#   rag_api:
+#     container_name: rag_api
+#     image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
+#     environment:
+#       - DB_HOST=vectordb
+#       - RAG_PORT=${RAG_PORT:-8000}
+#     restart: always
+#     depends_on:
+#       - vectordb
+#     env_file:
+#       - .env
+
 
 volumes:
-  pgdata2:
+  grafana-storage:
+#   pgdata2:
+
+networks:
+  monitoring:
+    external: true
