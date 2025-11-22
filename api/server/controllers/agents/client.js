@@ -807,10 +807,6 @@ class AgentClient extends BaseClient {
         toolSet,
       );
 
-      logger.error('[api/server/controllers/agents/client.js #chatCompletion] toolSet:',
-        toolSet
-      );
-
       /**
        * @param {BaseMessage[]} messages
        */
@@ -917,26 +913,14 @@ class AgentClient extends BaseClient {
           this.artifactPromises.push(...attachments);
         }
 
-          logger.error('[api/server/controllers/agents/client.js #chatCompletion] attachments:',
-          attachments
-        );
-
         const balanceConfig = getBalanceConfig(appConfig);
         const transactionsConfig = getTransactionsConfig(appConfig);
-
-        logger.error('[api/server/controllers/agents/client.js #chatCompletion] : appConfig', appConfig)        
-        logger.error('[api/server/controllers/agents/client.js #chatCompletion] : balanceConfig', balanceConfig)
-        logger.error('[api/server/controllers/agents/client.js #chatCompletion] : transactionsConfig', transactionsConfig)
 
         await this.recordCollectedUsage({
           context: 'message',
           balance: balanceConfig,
           transactions: transactionsConfig,
-        });
-
-        logger.error('[api/server/controllers/agents/client.js #chatCompletion] balanceConfig:',
-          balanceConfig
-        );        
+        });      
       } catch (err) {
         logger.error(
           '[api/server/controllers/agents/client.js #chatCompletion] Error recording collected usage',
@@ -991,8 +975,6 @@ class AgentClient extends BaseClient {
     if (this.options.attachments) {
       delete this.options.attachments;
     }
-
-    logger.debug(`[LibreChat/api/server/controllers/agents/client.js #titleConvo] titleConvo ${text}`);
 
     let title = 'New Chat';
     const convo = `||>User:
@@ -1081,8 +1063,6 @@ ${convo}
           await this.sendPayload(instructionsPayload, { modelOptions, useChatCompletion })
         )
 
-        logger.error('[api/server/controllers/agents/client.js #titleConvo] title response:', title)
-
         title = title.replaceAll('"', '');
 
         const completionTokens = this.getTokenCount(title);
@@ -1098,16 +1078,10 @@ ${convo}
 
     if (this.options.titleMethod === 'completion') {
       await titleChatCompletion();
-      logger.debug('[api/server/controllers/agents/client.js #titleConvo] Convo Title: ' + title);
       return title;
     }
 
     try {
-      logger.info(
-        '[api/server/controllers/agents/client.js #titleConvo] before this.initializeLLM',
-        e,
-      );
-
       this.abortController = new AbortController();
       const llm = this.initializeLLM({
         ...modelOptions,
@@ -1115,11 +1089,6 @@ ${convo}
         context: 'title',
         tokenBuffer: 150,
       });
-
-      logger.info(
-        '[api/server/controllers/agents/client.js #titleConvo] after this.initializeLLM',
-        e,
-      );
 
       title = await runTitleChain({ llm, text, convo, signal: this.abortController.signal });
     } catch (e) {
@@ -1135,7 +1104,6 @@ ${convo}
       await titleChatCompletion();
     }
 
-    logger.debug('[api/server/controllers/agents/client.js #titleConvo] Convo Title: ' + title);
     return title;
   }
 
