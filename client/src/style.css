@@ -2528,11 +2528,13 @@ html {
 
 .code-analyze-block pre code,
 .code-analyze-block .overflow-y-auto code {
+  display: none;
   font-size: calc(0.85 * var(--markdown-font-size, var(--font-size-base)));
 }
 
 .code-analyze-block pre,
 .code-analyze-block .overflow-y-auto {
+  display: none;
   font-size: var(--markdown-font-size, var(--font-size-base));
 }
 
