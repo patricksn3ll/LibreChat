@@ -90,7 +90,7 @@ function LandingPageWrapper({
 
         <section className="hero">
           <div className="left">
-            <div style={{ color: 'var(--accent)', fontWeight: 800, letterSpacing: '.6px' }}>Real Estate Market Insights Made Simple</div>
+            <div style={{ color: 'var(--accent)', fontWeight: 800, fontSize: '1.2rem', letterSpacing: '.6px' }}>Real Estate Market Insights Made Simple</div>
             <h1 className="h1">Make faster, smarter housing decisions with AI-driven data</h1>
             <p className="lead">CribMetrics combines AI valuation, neighborhood signals, and the latest public sales data (monthly refresh) so you can move from curiosity to decision in minutes — whether you're buying, investing, or advising clients. All by chatting with our AI Real Estate Market Analyst.</p>
 

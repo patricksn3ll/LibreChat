@@ -33,7 +33,7 @@ const TermsAndServices = memo(
                 <div className="prose dark:prose-invert max-w-none">
 
                     <section>
-                        <p><strong>Effective Date:</strong> December 11, 2024</p>
+                        <p><strong>Effective Date:</strong> November 11, 2025</p>
                         <p>Thank you for choosing our platform. These Terms of Service (“Terms”) govern your use of our website, applications, and related services (“Services”). By accessing or using our Services, you agree to be bound by these Terms. Please read them carefully.</p>
                     </section>
 
