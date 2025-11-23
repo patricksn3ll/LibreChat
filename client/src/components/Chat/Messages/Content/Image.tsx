@@ -79,7 +79,7 @@ const Image = ({
     <div ref={containerRef}>
       <div
         className={cn(
-          'relative mt-1 flex h-auto w-full max-w-lg items-center justify-center overflow-hidden rounded-lg border border-border-light text-text-secondary-alt shadow-md',
+          'relative mt-6 mb-6 flex h-auto w-full max-w-lg items-center justify-center overflow-hidden rounded-lg border border-border-light text-text-secondary-alt shadow-md',
           className,
         )}
       >
