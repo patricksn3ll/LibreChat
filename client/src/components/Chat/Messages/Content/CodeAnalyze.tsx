@@ -31,7 +31,10 @@ export default function CodeAnalyze({
 
   useEffect(() => {
     (!!code.length && (!startupConfig?.hideCodeAnalysisOutput)) ? setHasInput(true) : setHasInput(false);
-  }, [showAnalysisCode]);
+    console.log(`!!code.length ${!!code.length}`);
+    console.log(`!startupConfig?.hideCodeAnalysisOutput ${!startupConfig?.hideCodeAnalysisOutput}`);
+    console.log(`hasInput set to ${hasInput}`);
+  }, [setHasInput, code, startupConfig]);
 
   return (
     <>
