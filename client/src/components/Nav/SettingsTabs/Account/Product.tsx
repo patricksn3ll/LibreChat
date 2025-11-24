@@ -25,11 +25,13 @@ function Product({ open, onOpenChange }: TDialogProps) {
   };
 
   async function onChange(value: string) {
-    console.log('Selected product id:', value);
+    if (selectedProductId === value) {
+      return;
+    }
+  
     // Get the price for the selected product id
     const price = PRODUCTS.find(product => product.id === value)?.price;
-    console.log(`handlePurchaseClick(value, price) : handlePurchaseClick(${value}, ${price})`)
-    //await handlePurchaseClick(value, price);
+    await handlePurchaseClick(value, price);
   }
 
   async function handlePurchaseClick(priceId, amount) {
