@@ -175,13 +175,18 @@ function Subscription({ open, onOpenChange }: TDialogProps) {
                 </div>
               </div>
             ))}
+
+            <div className="mt-6 flex gap-4">
+              <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-8"/>
+            </div>   
+
             <button
               className="md:col-span-2 px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
               onClick={() => navigateToChat()}
             >
               Chat for Free
             </button>            
-          </div>
+          </div>       
         </div>        
         // <div>
         //   <h2 className="text-lg font-semibold mb-2">Available Plans</h2>
