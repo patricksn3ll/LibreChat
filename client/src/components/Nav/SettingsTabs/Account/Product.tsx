@@ -4,7 +4,7 @@ import { useAuthContext } from '~/hooks';
 import { PRODUCTS } from './products';
 import { useCreateStripeCheckoutSession } from './useCreateStripeCheckoutSession';
 import { useCancelSubscription } from './useCancelSubscription';
-import { Dropdown } from '@librechat/client';
+import { Dropdown, Label } from '@librechat/client';
 
 function Product({ open, onOpenChange }: TDialogProps) {
   const { user, token } = useAuthContext();
