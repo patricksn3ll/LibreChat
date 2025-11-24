@@ -4,6 +4,7 @@ import { useAuthContext } from '~/hooks';
 import { PRODUCTS } from './products';
 import { useCreateStripeCheckoutSession } from './useCreateStripeCheckoutSession';
 import { useCancelSubscription } from './useCancelSubscription';
+import { Dropdown } from '@librechat/client';
 
 function Product({ open, onOpenChange }: TDialogProps) {
   const { user, token } = useAuthContext();
@@ -22,6 +23,13 @@ function Product({ open, onOpenChange }: TDialogProps) {
   const handleCancel = () => {
     setShowConfirm(true);
   };
+
+  async function onChange(value: string) {
+    console.log('Selected product id:', value);
+    // Get the price for the selected product id
+    const price = PRODUCTS.find(product => product.id === value)?.price;
+    await handlePurchaseClick(value, price);
+  }
 
   async function handlePurchaseClick(priceId, amount) {
     try {
@@ -77,10 +85,26 @@ function Product({ open, onOpenChange }: TDialogProps) {
       .finally(() => setBillingLoading(false));
   };
 
+  const productOptions = [
+    { value: PRODUCTS[0].id, label:  PRODUCTS[0].name },
+    { value: PRODUCTS[1].id, label: PRODUCTS[1].name },
+    { value: PRODUCTS[2].id, label: PRODUCTS[2].name },
+    { value: PRODUCTS[3].id, label: PRODUCTS[3].name }
+  ];
+
   return (
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
       <div className="mt-2">
-        {PRODUCTS.map((p) => (
+        <Dropdown
+          value={productOptions[1]}
+          onChange={onChange}
+          options={productOptions}
+          sizeClasses="w-[300px]"
+          testId="theme-selector"
+          className="z-50"
+          aria-labelledby={labelId}
+        />        
+        {/* {PRODUCTS.map((p) => (
           <div
             key={p.id}
             className="flex flex-col md:flex-row px-4 py-2 md:items-center md:gap-4 md:col-span-2"
@@ -95,7 +119,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
               </span>
             </button>
           </div>
-        ))}        
+        ))}         */}
       </div>
       <div className="mt-6 flex gap-4">
         <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-8"/>
