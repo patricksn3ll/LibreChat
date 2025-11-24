@@ -839,6 +839,7 @@ export const configSchema = z.object({
   turnstile: turnstileSchema.optional(),
   fileStrategy: fileSourceSchema.default(FileSources.local),
   fileStrategies: fileStrategiesSchema,
+  codeAnalysisDisabled: z.boolean().default(false),
   actions: z
     .object({
       allowedDomains: z.array(z.string()).optional(),
