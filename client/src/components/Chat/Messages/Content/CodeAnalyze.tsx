@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useProgress, useLocalize } from '~/hooks';
 import ProgressText from './ProgressText';
 import MarkdownLite from './MarkdownLite';
 import store from '~/store';
+import { useGetStartupConfig } from '~/data-provider';
 
 export default function CodeAnalyze({
   initialProgress = 0.1,
@@ -18,6 +19,8 @@ export default function CodeAnalyze({
   const progress = useProgress(initialProgress);
   const showAnalysisCode = useRecoilValue(store.showCode);
   const [showCode, setShowCode] = useState(showAnalysisCode);
+  const [hasInput, setHasInput] = useState(false);
+  const { data: startupConfig } = useGetStartupConfig();
 
   const logs = outputs.reduce((acc, output) => {
     if (output['logs']) {
@@ -25,6 +28,10 @@ export default function CodeAnalyze({
     }
     return acc;
   }, '');
+
+  useEffect(() => {
+    (!!code.length && (!startupConfig?.hideCodeAnalysisOutput)) ? setHasInput(true) : setHasInput(false);
+  }, [showAnalysisCode]);
 
   return (
     <>
@@ -34,7 +41,7 @@ export default function CodeAnalyze({
           onClick={() => setShowCode((prev) => !prev)}
           inProgressText={localize('com_ui_analyzing')}
           finishedText={localize('com_ui_analyzing_finished')}
-          hasInput={!!code.length}
+          hasInput={hasInput}
           isExpanded={showCode}
         />
       </div>
