@@ -128,7 +128,7 @@ const HelpAndFAQ = memo(
                     Real Estate Metrics FAQ
                 </h2>
 
-                <!-- Median Sale Price -->
+                {/* Median Sale Price */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Sale Price
@@ -138,7 +138,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median Sale Price MoM -->
+                {/* Median Sale Price MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Sale Price (Month-over-Month Change)
@@ -148,7 +148,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median Sale Price YoY -->
+                {/* Median Sale Price YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Sale Price (Year-over-Year Change)
@@ -158,7 +158,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median List Price -->
+                {/* Median List Price */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median List Price
@@ -168,7 +168,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median List Price MoM -->
+                {/* Median List Price MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median List Price (Month-over-Month Change)
@@ -178,7 +178,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median List Price YoY -->
+                {/* Median List Price YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median List Price (Year-over-Year Change)
@@ -188,7 +188,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median PPSF -->
+                {/* Median PPSF */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Price per Square Foot
@@ -198,7 +198,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median PPSF MoM -->
+                {/* Median PPSF MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Price per Sq Ft (Month-over-Month Change)
@@ -208,7 +208,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median PPSF YoY -->
+                {/* Median PPSF YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Price per Sq Ft (Year-over-Year Change)
@@ -218,7 +218,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median List PPSF -->
+                {/* Median List PPSF */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median List Price per Square Foot
@@ -228,7 +228,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median List PPSF MoM -->
+                {/* Median List PPSF MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median List Price per Sq Ft (Month-over-Month Change)
@@ -238,7 +238,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median List PPSF YoY -->
+                {/* Median List PPSF YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median List Price per Sq Ft (Year-over-Year Change)
@@ -248,7 +248,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Homes Sold -->
+                {/* Homes Sold */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Homes Sold
@@ -258,7 +258,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Homes Sold MoM -->
+                {/* Homes Sold MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Homes Sold (Month-over-Month Change)
@@ -268,7 +268,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Homes Sold YoY -->
+                {/* Homes Sold YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Homes Sold (Year-over-Year Change)
@@ -278,7 +278,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Pending Sales -->
+                {/* Pending Sales */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Pending Sales
@@ -288,7 +288,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Pending Sales MoM -->
+                {/* Pending Sales MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Pending Sales (Month-over-Month Change)
@@ -298,7 +298,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Pending Sales YoY -->
+                {/* Pending Sales YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Pending Sales (Year-over-Year Change)
@@ -308,7 +308,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- New Listings -->
+                {/* New Listings */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         New Listings
@@ -318,7 +318,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- New Listings MoM -->
+                {/* New Listings MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         New Listings (Month-over-Month Change)
@@ -328,7 +328,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- New Listings YoY -->
+                {/* New Listings YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         New Listings (Year-over-Year Change)
@@ -338,7 +338,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Inventory -->
+                {/* Inventory */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Inventory (Active Listings)
@@ -348,7 +348,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Inventory MoM -->
+                {/* Inventory MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Inventory (Month-over-Month Change)
@@ -358,7 +358,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Inventory YoY -->
+                {/* Inventory YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Inventory (Year-over-Year Change)
@@ -368,7 +368,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Months of Supply -->
+                {/* Months of Supply */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Months of Supply
@@ -378,7 +378,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Months of Supply MoM -->
+                {/* Months of Supply MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Months of Supply (Month-over-Month Change)
@@ -388,7 +388,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Months of Supply YoY -->
+                {/* Months of Supply YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Months of Supply (Year-over-Year Change)
@@ -398,7 +398,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median DOM -->
+                {/* Median DOM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Days on Market
@@ -408,7 +408,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median DOM MoM -->
+                {/* Median DOM MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Days on Market (Month-over-Month Change)
@@ -418,7 +418,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Median DOM YoY -->
+                {/* Median DOM YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Median Days on Market (Year-over-Year Change)
@@ -428,7 +428,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Sale-to-List Ratio -->
+                {/* Sale-to-List Ratio */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Sale-to-List Price Ratio
@@ -438,7 +438,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Sale-to-List Ratio MoM -->
+                {/* Sale-to-List Ratio MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Sale-to-List Ratio (Month-over-Month Change)
@@ -448,7 +448,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Sale-to-List Ratio YoY -->
+                {/* Sale-to-List Ratio YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Sale-to-List Ratio (Year-over-Year Change)
@@ -458,7 +458,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Sold Above List -->
+                {/* Sold Above List */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Homes Sold Above List Price
@@ -468,7 +468,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Sold Above List MoM -->
+                {/* Sold Above List MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Sold Above List (Month-over-Month Change)
@@ -478,7 +478,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Sold Above List YoY -->
+                {/* Sold Above List YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Sold Above List (Year-over-Year Change)
@@ -488,7 +488,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Price Drops -->
+                {/* Price Drops */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Price Drops
@@ -498,7 +498,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Price Drops MoM -->
+                {/* Price Drops MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Price Drops (Month-over-Month Change)
@@ -508,7 +508,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Price Drops YoY -->
+                {/* Price Drops YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Price Drops (Year-over-Year Change)
@@ -518,7 +518,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Off Market in Two Weeks -->
+                {/* Off Market in Two Weeks */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Off Market in Two Weeks
@@ -528,7 +528,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Off Market in Two Weeks MoM -->
+                {/* Off Market in Two Weeks MoM */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Off Market in Two Weeks (Month-over-Month Change)
@@ -538,7 +538,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
 
-                <!-- Off Market in Two Weeks YoY -->
+                {/* Off Market in Two Weeks YoY */}
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
                     <h3 class="font-medium text-gray-900 dark:text-white mb-2">
                         Off Market in Two Weeks (Year-over-Year Change)

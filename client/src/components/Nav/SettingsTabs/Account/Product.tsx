@@ -97,6 +97,9 @@ function Product({ open, onOpenChange }: TDialogProps) {
           </div>
         ))}        
       </div>
+      <div className="mt-6 flex gap-4">
+        <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-8"/>
+      </div>
     </div>        
   );
 }
