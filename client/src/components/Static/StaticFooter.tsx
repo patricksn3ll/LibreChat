@@ -22,7 +22,7 @@ const StaticFooter = memo(
       <footer>
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
           <div><strong style={{ color: 'var(--accent)' }}>{startupConfig?.appTitle.split('|')[0] || 'CribMetrics'}</strong> — {process.env.CUSTOM_TAG_LINE || startupConfig?.tagLine || 'Real Estate Market Insights Made Simple'}</div>
-          <div style={{ color: '#8892A6' }}>Data Sources: Public Real Estate sales | <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a> | <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></div>
+          <div style={{ color: '#8892A6' }}>Data Sources: Public Real Estate Sales | <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a> | <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></div>
         </div>
       </footer>
 

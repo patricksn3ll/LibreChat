@@ -94,15 +94,14 @@ function Product({ open, onOpenChange }: TDialogProps) {
 
   return (
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
+      <p>Purchase additional credits safley and securly. Your credits ever expire.</p>
       <div className="mt-2">
         <Dropdown
           value={productOptions[1]}
           onChange={onChange}
           options={productOptions}
           sizeClasses="w-[300px]"
-          testId="theme-selector"
           className="z-50"
-          aria-labelledby={labelId}
         />        
         {/* {PRODUCTS.map((p) => (
           <div
@@ -121,8 +120,8 @@ function Product({ open, onOpenChange }: TDialogProps) {
           </div>
         ))}         */}
       </div>
-      <div className="mt-6 flex gap-4">
-        <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-8"/>
+      <div className="flex gap-4">
+        <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-30"/>
       </div>
     </div>        
   );
