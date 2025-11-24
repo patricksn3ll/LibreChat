@@ -31,7 +31,6 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0=mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0
       - PORT=8000
     networks:
       - monitoring        
