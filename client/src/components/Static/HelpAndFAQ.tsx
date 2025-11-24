@@ -122,6 +122,7 @@ const HelpAndFAQ = memo(
                     </p>
                 </div>
             </div>
+            
         </div>
 
         <StaticFooter />

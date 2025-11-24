@@ -96,12 +96,12 @@ export default function ProgressText({
       >
         {icon}
         <span className={showShimmer ? 'shimmer' : ''}>{text}</span>
-        {hasInput &&
+        {hasInput && (
           (isExpanded ? (
             <ChevronUp className="size-4 shrink-0 translate-y-[1px]" />
           ) : (
             <ChevronDown className="size-4 shrink-0 translate-y-[1px]" />
-          ))}
+          )))}
       </button>
     </Wrapper>
   );
