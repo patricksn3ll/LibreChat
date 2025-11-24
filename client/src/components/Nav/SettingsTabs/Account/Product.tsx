@@ -28,7 +28,8 @@ function Product({ open, onOpenChange }: TDialogProps) {
     console.log('Selected product id:', value);
     // Get the price for the selected product id
     const price = PRODUCTS.find(product => product.id === value)?.price;
-    await handlePurchaseClick(value, price);
+    console.log(`handlePurchaseClick(value, price) : handlePurchaseClick(${value}, ${price})`)
+    //await handlePurchaseClick(value, price);
   }
 
   async function handlePurchaseClick(priceId, amount) {
@@ -86,18 +87,19 @@ function Product({ open, onOpenChange }: TDialogProps) {
   };
 
   const productOptions = [
-    { value: PRODUCTS[0].id, label:  PRODUCTS[0].name },
+    { value: PRODUCTS[0].id, label: PRODUCTS[0].name },
     { value: PRODUCTS[1].id, label: PRODUCTS[1].name },
     { value: PRODUCTS[2].id, label: PRODUCTS[2].name },
     { value: PRODUCTS[3].id, label: PRODUCTS[3].name }
   ];
 
+  selectedProductId = productOptions[1].id;
   return (
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
       <p>Purchase additional credits safley and securly. Your credits ever expire.</p>
       <div className="mt-2">
         <Dropdown
-          value={productOptions[1].id}
+          value={selectedProductId}
           onChange={onChange}
           options={productOptions}
           sizeClasses="w-[300px]"
