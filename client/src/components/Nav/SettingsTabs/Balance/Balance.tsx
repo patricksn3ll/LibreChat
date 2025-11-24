@@ -4,6 +4,7 @@ import { useAuthContext, useLocalize } from '~/hooks';
 import TokenCreditsItem from './TokenCreditsItem';
 import AutoRefillSettings from './AutoRefillSettings';
 import Product from '../Account/Product'
+import { Label  } from '@librechat/client';
 
 function Balance() {
   const localize = useLocalize();

@@ -103,25 +103,27 @@ function Product({ open, onOpenChange }: TDialogProps) {
   ];
 
   return (
-    <div className="flex items-center justify-between">
-      {/* Left Section: Label */}
-      <div className="flex items-center space-x-2">
-        <Label className="font-light">Purchase additional credits safley and securly. Your credits ever expire.</Label>
+    <>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <Label className="font-light">Purchase additional credits safley and securly. Your credits ever expire.</Label>
+        </div>
+
+        <span className="text-sm font-medium text-gray-800 dark:text-gray-200" role="note">
+          <Dropdown
+            value={selectedProductId}
+            onChange={onChange}
+            options={productOptions}
+            sizeClasses="w-full"
+            className="z-50"
+          />        
+        </span>
+      </div>
+      <div className="flex justify-center mt-4">
+        <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="w-full max-w-xs" />
       </div>
 
-      {/* Right Section: tokenCredits Value */}
-      <span className="text-sm font-medium text-gray-800 dark:text-gray-200" role="note">
-        <Dropdown
-          value={selectedProductId}
-          onChange={onChange}
-          options={productOptions}
-          sizeClasses="w-full"
-          className="z-50"
-        />        
-      </span>
-    </div>
-
-        {/* {PRODUCTS.map((p) => (
+       {/* {PRODUCTS.map((p) => (
           <div
             key={p.id}
             className="flex flex-col md:flex-row px-4 py-2 md:items-center md:gap-4 md:col-span-2"
@@ -138,10 +140,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
           </div>
         ))}         */}
 
-      // <div className="flex justify-center mt-4">
-      //   <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-24" />
-      // </div>
-
+    </>
   );
 }
 
