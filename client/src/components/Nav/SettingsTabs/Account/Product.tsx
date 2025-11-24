@@ -103,9 +103,14 @@ function Product({ open, onOpenChange }: TDialogProps) {
   ];
 
   return (
-    <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
-      <p>Purchase additional credits safley and securly. Your credits ever expire.</p>
-      <div className="mt-2">
+    <div className="flex items-center justify-between">
+      {/* Left Section: Label */}
+      <div className="flex items-center space-x-2">
+        <Label className="font-light">Purchase additional credits safley and securly. Your credits ever expire.</Label>
+      </div>
+
+      {/* Right Section: tokenCredits Value */}
+      <span className="text-sm font-medium text-gray-800 dark:text-gray-200" role="note">
         <Dropdown
           value={selectedProductId}
           onChange={onChange}
@@ -113,6 +118,9 @@ function Product({ open, onOpenChange }: TDialogProps) {
           sizeClasses="w-full"
           className="z-50"
         />        
+      </span>
+    </div>
+
         {/* {PRODUCTS.map((p) => (
           <div
             key={p.id}
@@ -129,11 +137,11 @@ function Product({ open, onOpenChange }: TDialogProps) {
             </button>
           </div>
         ))}         */}
-      </div>
-      <div className="flex justify-center mt-4">
-        <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-24" />
-      </div>
-    </div>        
+
+      // <div className="flex justify-center mt-4">
+      //   <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-24" />
+      // </div>
+
   );
 }
 
