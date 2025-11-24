@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '~/hooks';
 import { PRODUCTS } from './products';
@@ -10,6 +10,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
   const { user, token } = useAuthContext();
   //const { mutate: createCheckoutSession, isLoading: purchasing, variables: subscribingPlan } = useCreateStripeCheckoutSession();
   const [purchasing, setPurchasing] = useState('');
+  const [selectedProductId, setSelectedProductId] = useState(null);
   const [billingLoading, setBillingLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -28,7 +29,9 @@ function Product({ open, onOpenChange }: TDialogProps) {
     if (selectedProductId === value) {
       return;
     }
-  
+
+    setSelectedProductId(productOptions[1].id);
+
     // Get the price for the selected product id
     const price = PRODUCTS.find(product => product.id === value)?.price;
     await handlePurchaseClick(value, price);
@@ -88,6 +91,10 @@ function Product({ open, onOpenChange }: TDialogProps) {
       .finally(() => setBillingLoading(false));
   };
 
+  useEffect(() => {
+    setSelectedProductId(PRODUCTS[1].id);
+  }, []); 
+  
   const productOptions = [
     { value: PRODUCTS[0].id, label: PRODUCTS[0].name },
     { value: PRODUCTS[1].id, label: PRODUCTS[1].name },
@@ -95,7 +102,6 @@ function Product({ open, onOpenChange }: TDialogProps) {
     { value: PRODUCTS[3].id, label: PRODUCTS[3].name }
   ];
 
-  selectedProductId = productOptions[1].id;
   return (
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
       <p>Purchase additional credits safley and securly. Your credits ever expire.</p>
