@@ -97,7 +97,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
       <p>Purchase additional credits safley and securly. Your credits ever expire.</p>
       <div className="mt-2">
         <Dropdown
-          value={productOptions[1]}
+          value={productOptions[1].id}
           onChange={onChange}
           options={productOptions}
           sizeClasses="w-[300px]"
