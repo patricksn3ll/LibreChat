@@ -23,7 +23,7 @@ docker tag $PACKAGE acrcribmetrics.azurecr.io/$PACKAGE
 echo "Pushing Docker image..."
 docker push acrcribmetrics.azurecr.io/$PACKAGE
 
-echo "Updating docker-compose.yml with latest image
+echo "Updating docker-compose.yml with latest image"
 sed -i.bak "s|image: acrcribmetrics.azurecr.io/$IMAGE_NAME:.*|image: acrcribmetrics.azurecr.io/$IMAGE_NAME:$TAG|g" docker-compose.yml
 rm docker-compose.yml.bak
 
@@ -35,7 +35,7 @@ docker compose down
 echo "Bring up new deployment"
 docker compose up -d
 
-echo "Following logs (ctrl-c to exit)..."
+echo "Following logs ctrl-c to exit..."
 docker logs cribmetrics -f
 
 echo "Done."
