@@ -94,7 +94,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
   useEffect(() => {
     setSelectedProductId(PRODUCTS[1].id);
   }, []); 
-  
+
   const productOptions = [
     { value: PRODUCTS[0].id, label: PRODUCTS[0].name },
     { value: PRODUCTS[1].id, label: PRODUCTS[1].name },
@@ -110,7 +110,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
           value={selectedProductId}
           onChange={onChange}
           options={productOptions}
-          sizeClasses="w-[300px]"
+          sizeClasses="w-full"
           className="z-50"
         />        
         {/* {PRODUCTS.map((p) => (
@@ -130,8 +130,8 @@ function Product({ open, onOpenChange }: TDialogProps) {
           </div>
         ))}         */}
       </div>
-      <div className="flex gap-4">
-        <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-30"/>
+      <div className="flex justify-center mt-4">
+        <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="h-24" />
       </div>
     </div>        
   );
