@@ -6,7 +6,14 @@ interface TokenCreditsItemProps {
   tokenCredits?: number;
 }
 
-const TokenCreditsItem: React.FC<TokenCreditsItemProps> = ({ tokenCredits }) => {
+  function formatAbbreviated(num) {
+    if (num >= 1e9) return (num / 1e9).toFixed(1).replace(/\\.0$/, '') + 'B';
+    if (num >= 1e6) return (num / 1e6).toFixed(1).replace(/\\.0$/, '') + 'M';
+    if (num >= 1e3) return (num / 1e3).toFixed(1).replace(/\\.0$/, '') + 'K';
+    return num.toString();
+  }
+
+  const TokenCreditsItem: React.FC<TokenCreditsItemProps> = ({ tokenCredits }) => {
   const localize = useLocalize();
 
   return (
@@ -19,7 +26,7 @@ const TokenCreditsItem: React.FC<TokenCreditsItemProps> = ({ tokenCredits }) => 
 
       {/* Right Section: tokenCredits Value */}
       <span className="text-sm font-medium text-gray-800 dark:text-gray-200" role="note">
-        {tokenCredits !== undefined ? tokenCredits.toFixed(2) : '0.00'}
+        {tokenCredits !== undefined ? {formatAbbreviated(new Intl.NumberFormat().format(Math.round(tokenCredits)))} : '0.00'}
       </span>
     </div>
   );
