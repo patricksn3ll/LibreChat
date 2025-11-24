@@ -6,6 +6,7 @@ set -e
 IMAGE_NAME=${1:-cribmetrics}
 TAG=${2:-latest}
 PACKAGE="$IMAGE_NAME:$TAG"
+ACR=acrcribmetrics
 
 cd ..
 
