@@ -80,18 +80,22 @@ function Product({ open, onOpenChange }: TDialogProps) {
   return (
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
       <p className="mt-2 text-text-secondary">Select a package below to add more to your balance, these credits will never expire. Your transactions are secure and protected.</p>
-      <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="mt-2">
         {PRODUCTS.map((p) => (
-          <button
+          <div
             key={p.id}
-            className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
-            onClick={() => handlePurchaseClick(p.id, p.amount)}
-            disabled={purchasing}
+            className="flex flex-col md:flex-row px-4 py-2 md:items-center md:gap-4 md:col-span-2"
           >
-            <span className="font-semibold text-secondary text-lg">
-              {(purchasing === p.id) ? 'Redirecting...' : `${p.name}` }
-            </span>
-          </button>
+            <button
+              className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
+              onClick={() => handlePurchaseClick(p.id, p.amount)}
+              disabled={purchasing}
+            >
+              <span className="font-semibold text-secondary text-lg">
+                {(purchasing === p.id) ? 'Redirecting...' : `${p.name}` }
+              </span>
+            </button>
+          </div>
         ))}
       </div>
       <div className="mt-4 flex justify-center">
