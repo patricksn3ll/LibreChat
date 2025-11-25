@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '~/hooks';
-import { PRODUCTS } from './products';
+// import { PRODUCTS } from './products';
 import { useCreateStripeCheckoutSession } from './useCreateStripeCheckoutSession';
 import { useCancelSubscription } from './useCancelSubscription';
 
 function Product({ open, onOpenChange }: TDialogProps) {
   const { user, token } = useAuthContext();
-  //const { mutate: createCheckoutSession, isLoading: purchasing, variables: subscribingPlan } = useCreateStripeCheckoutSession();
   const [purchasing, setPurchasing] = useState('');
   const [billingLoading, setBillingLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchProducts() {
+      setLoadingProducts(true);
+      try {
+        const res = await fetch('/api/stripe/products?key=source&value=cribmetrics', {
+          headers: { 'Authorization': `Bearer ${token}` },
+          credentials: 'include',
+        });
+        const data = await res.json();
+        setProducts(data.products || []);
+      } catch (err) {
+        setProducts([]);
+      } finally {
+        setLoadingProducts(false);
+      }
+    }
+    fetchProducts();
+  }, [token]);
 
   const navigateToChat = () => {
     open = false;
@@ -26,7 +46,6 @@ function Product({ open, onOpenChange }: TDialogProps) {
   async function handlePurchaseClick(priceId, amount) {
     try {
       setPurchasing(priceId);
-      // Hardcoded priceId for demo; replace with your actual Stripe Price ID
       const res = await fetch('/api/stripe/purchase', {
         method: 'POST',
         headers: {
@@ -81,9 +100,13 @@ function Product({ open, onOpenChange }: TDialogProps) {
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
       <p className="mt-2 text-text-secondary">Select a package below to add more to your balance, these credits will never expire. Your transactions are secure and protected.</p>
       <div className="mt-2">
-        {PRODUCTS.length % 2 === 0 ? (
+        {loadingProducts ? (
+          <div className="text-center py-4">Loading products...</div>
+        ) : products.length === 0 ? (
+          <div className="text-center py-4">No products found.</div>
+        ) : products.length % 2 === 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {PRODUCTS.map((p) => (
+            {products.map((p) => (
               <button
                 key={p.id}
                 className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
@@ -91,13 +114,13 @@ function Product({ open, onOpenChange }: TDialogProps) {
                 disabled={purchasing}
               >
                 <span className="font-semibold text-secondary text-lg">
-                  {(purchasing === p.id) ? 'Redirecting...' : `${p.name}` }
+                  {(purchasing === p.id) ? 'Redirecting...' : `${p.name || p.id}` }
                 </span>
               </button>
             ))}
           </div>
         ) : (
-          PRODUCTS.map((p) => (
+          products.map((p) => (
             <div
               key={p.id}
               className="flex flex-col md:flex-row px-4 py-2 md:items-center md:gap-4 md:col-span-2"
@@ -108,7 +131,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
                 disabled={purchasing}
               >
                 <span className="font-semibold text-secondary text-lg">
-                  {(purchasing === p.id) ? 'Redirecting...' : `${p.name}` }
+                  {(purchasing === p.id) ? 'Redirecting...' : `${p.name || p.id}` }
                 </span>
               </button>
             </div>
