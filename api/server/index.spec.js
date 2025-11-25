@@ -66,7 +66,7 @@ describe('Server Configuration', () => {
     );
 
     mongoServer = await MongoMemoryServer.create();
-    process.env.mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 = mongoServer.getUri();
+    process.env.MONGO_URI = mongoServer.getUri();
     process.env.PORT = '0'; // Use a random available port
     app = require('~/server');
 

@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0: ${{ secrets.mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 }}
+      MONGO_URI: ${{ secrets.MONGO_URI }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       CREDS_KEY: ${{ secrets.CREDS_KEY }}

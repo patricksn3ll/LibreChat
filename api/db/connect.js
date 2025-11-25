@@ -3,10 +3,10 @@ const { isEnabled } = require('@librechat/api');
 const { logger } = require('@librechat/data-schemas');
 
 const mongoose = require('mongoose');
-const mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 = process.env.mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0;
+const MONGO_URI = process.env.MONGO_URI;
 
-if (!mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0) {
-  throw new Error('Please define the mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 environment variable');
+if (!MONGO_URI) {
+  throw new Error('Please define the MONGO_URI environment variable');
 }
 /** The maximum number of connections in the connection pool. */
 const maxPoolSize = parseInt(process.env.MONGO_MAX_POOL_SIZE) || undefined;
@@ -65,7 +65,7 @@ async function connectDb() {
     logger.info('Mongo Connection options');
     logger.info(JSON.stringify(opts, null, 2));
     mongoose.set('strictQuery', true);
-    cached.promise = mongoose.connect(mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGO_URI, opts).then((mongoose) => {
       return mongoose;
     });
   }

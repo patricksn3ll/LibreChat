@@ -9,8 +9,8 @@ data:
   {{- if and (not (dig "configEnv" "MEILI_HOST" "" .Values.librechat)) .Values.meilisearch.enabled }}
   MEILI_HOST: http://{{ include "meilisearch.fullname" .Subcharts.meilisearch }}.{{ .Release.Namespace | lower }}.svc.cluster.local:7700
   {{- end }}
-  {{- if and (not (dig "configEnv" "mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0" "" .Values.librechat)) .Values.mongodb.enabled }}
-  mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0: mongodb://{{ include "mongodb.service.nameOverride" .Subcharts.mongodb }}.{{ .Release.Namespace | lower }}.svc.cluster.local:27017/LibreChat
+  {{- if and (not (dig "configEnv" "MONGO_URI" "" .Values.librechat)) .Values.mongodb.enabled }}
+  MONGO_URI: mongodb://{{ include "mongodb.service.nameOverride" .Subcharts.mongodb }}.{{ .Release.Namespace | lower }}.svc.cluster.local:27017/LibreChat
   {{- end }}
   {{- if .Values.librechat.configEnv }}
   {{- toYaml .Values.librechat.configEnv | nindent 2 }}

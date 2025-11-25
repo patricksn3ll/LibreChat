@@ -2,10 +2,10 @@
 // scripts/migrate-add-stripe-fields.js
 const mongoose = require('mongoose');
 const { createUserModel } = require('../packages/data-schemas/src/models/user');
-const mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 = process.env.mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 || 'mongodb://localhost:27017/LibreChat';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/LibreChat';
 
 async function migrate() {
-  await mongoose.connect(mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0, { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
   const User = createUserModel(mongoose);
 
   const result = await User.updateMany(

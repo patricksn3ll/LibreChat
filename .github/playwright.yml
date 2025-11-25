@@ -22,7 +22,7 @@
 #       SEARCH: false
 #       BINGAI_TOKEN: user_provided
 #       CHATGPT_TOKEN: user_provided
-#       mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0: ${{ secrets.mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0 }}
+#       MONGO_URI: ${{ secrets.MONGO_URI }}
 #       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 #       E2E_USER_EMAIL: ${{ secrets.E2E_USER_EMAIL }}
 #       E2E_USER_PASSWORD: ${{ secrets.E2E_USER_PASSWORD }}

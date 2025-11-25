@@ -49,7 +49,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
     setShowConfirm(true);
   };
 
-  async function handlePurchaseClick(priceId) {
+  async function handlePurchaseClick(priceId, amount) {
     try {
       setPurchasing(priceId);
       const res = await fetch('/api/stripe/purchase', {
@@ -60,7 +60,8 @@ function Product({ open, onOpenChange }: TDialogProps) {
         },
         body: JSON.stringify({
           priceId: priceId, //
-          quantity: 1
+          quantity: 1,
+          metadata: { tokenAmount: amount}
         }),
         credentials: 'include',
       });
@@ -115,7 +116,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
               <button
                 key={p.id}
                 className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
-                onClick={() => handlePurchaseClick(p.default_price)}
+                onClick={() => handlePurchaseClick(p.default_price, p.metadata.amount)}
                 disabled={purchasing}
               >
                 <span className="font-semibold text-secondary text-lg">
