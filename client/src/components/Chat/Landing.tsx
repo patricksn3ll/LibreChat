@@ -175,7 +175,7 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
         {(() => {
           if (((isAgent || isAssistant) && name) || name) {
             return (
-              <div className="flex flex-col items-center gap-0 p-2">
+              <div className="flex xflex-col items-center gap-0 p-2">
                 <SplitText
                   key={`split-text-${name}`}
                   text={name}
