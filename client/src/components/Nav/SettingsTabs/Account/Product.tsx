@@ -79,23 +79,19 @@ function Product({ open, onOpenChange }: TDialogProps) {
 
   return (
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
-      <div className="mt-2">
+      <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {PRODUCTS.map((p) => (
-          <div
+          <button
             key={p.id}
-            className="flex flex-col md:flex-row px-4 py-2 md:items-center md:gap-4 md:col-span-2"
+            className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
+            onClick={() => handlePurchaseClick(p.id, p.amount)}
+            disabled={purchasing}
           >
-            <button
-              className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
-              onClick={() => handlePurchaseClick(p.id, p.amount)}
-              disabled={purchasing}
-            >
-              <span className="font-semibold text-secondary text-lg">
-                {(purchasing === p.id) ? 'Redirecting...' : `${p.name}` }
-              </span>
-            </button>
-          </div>
-        ))}        
+            <span className="font-semibold text-secondary text-lg">
+              {(purchasing === p.id) ? 'Redirecting...' : `${p.name}` }
+            </span>
+          </button>
+        ))}
       </div>
       <div className="flex justify-center">
         <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="w-full max-w-xs" />
