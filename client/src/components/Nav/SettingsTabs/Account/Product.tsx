@@ -25,14 +25,9 @@ function Product({ open, onOpenChange }: TDialogProps) {
           credentials: 'include',
         });
         const data = await res.json();
-
-        // Sort data.products lexicographical on product name
-        console.log('Sorting products by name');
-        console.log(data.products);
-        data.products.sort((a, b) => a.name.localeCompare(b.name));
-        console.log('Sorted products by name');
-        console.log(data.products);
         
+        // Sort data.products lexicographical on product name
+        data.products.sort((a, b) => Number(a.metadata.amount) - Number(b.metadata.amount));        
         setProducts(data.products || []);
       } catch (err) {
         setProducts([]);
