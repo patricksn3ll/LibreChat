@@ -79,7 +79,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
 
   return (
     <div className="flex flex-col gap-3 p-1 text-sm text-text-primary">  
-      <p className="mt-2 text-text-secondary">Select a package below to add more to your balance, these credits will never expire.</p>
+      <p className="mt-2 text-text-secondary">Select a package below to add more to your balance, these credits will never expire. Your transactions are secure and protected.</p>
       <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {PRODUCTS.map((p) => (
           <button
