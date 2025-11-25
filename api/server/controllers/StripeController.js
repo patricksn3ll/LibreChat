@@ -80,6 +80,37 @@ async function billingPortalController(req, res) {
   }
 }
 
+// GET /api/stripe/products?key=metadataKey&value=metadataValue
+async function getProductsByMetadataController(req, res) {
+  try {
+    const { key, value } = req.query;
+    if (!key || !value) {
+      return res.status(400).json({ error: 'Missing key or value query parameter' });
+    }
+    // Fetch all products from Stripe (paginated)
+    let products = [];
+    let hasMore = true;
+    let startingAfter = undefined;
+    while (hasMore) {
+      const resp = await stripe.products.list({
+        limit: 100,
+        starting_after: startingAfter,
+        active: true,
+      });
+      products = products.concat(resp.data);
+      hasMore = resp.has_more;
+      if (hasMore) {
+        startingAfter = resp.data[resp.data.length - 1].id;
+      }
+    }
+    // Filter by metadata key/value
+    const filtered = products.filter(p => p.metadata && p.metadata[key] === value);
+    res.json({ products: filtered });
+  } catch (err) {
+    console.error('Stripe get products by metadata error:', err);
+    res.status(500).json({ error: err.message });
+  }
+}
 
 // POST /api/stripe/purchase
 // Body: { priceId: string, quantity?: number, successUrl?: string, cancelUrl?: string }
@@ -286,4 +317,5 @@ module.exports = {
   stripeWebhookController,
   billingPortalController,
   productPurchaseController,
+  getProductsByMetadataController,
 };
