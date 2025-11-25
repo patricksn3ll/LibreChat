@@ -187,6 +187,8 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
                 onLineCountChange={handleLineCountChange}
               />
             </div>
+          ) : (!startupConfig?.modelSelect && !startupConfig?.interface?.modelSelect) (
+            <></>
           ) : (
             <SplitText
               key={`split-text-${greetingText}${user?.name ? '-user' : ''}`}
