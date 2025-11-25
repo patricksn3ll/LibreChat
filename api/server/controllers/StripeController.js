@@ -55,17 +55,11 @@ async function subscriptionStatusController(req, res) {
 // POST /api/stripe/billing-portal
 async function billingPortalController(req, res) {
   try {
-    console.log('[billingPortalController] req.user:', req.user);
-    console.log('[billingPortalController] req.headers.cookie:', req.headers.cookie);
-    console.log('[billingPortalController] req.headers.authorization:', req.headers.authorization);
     if (!req.user || !req.user._id) {
-      console.log('[billingPortalController] No user or user._id found');
       return res.status(401).json({ error: 'Unauthorized: User not found' });
     }
     const user = req.user;
-    console.log('[billingPortalController] user.stripeCustomerId:', user.stripeCustomerId);
     if (!user.stripeCustomerId) {
-      console.log('[billingPortalController] No Stripe customer ID found for user');
       return res.status(400).json({ error: 'No Stripe customer ID found for user' });
     }
     const returnUrl = process.env.DOMAIN_CLIENT || 'http://localhost:3080';
@@ -80,7 +74,7 @@ async function billingPortalController(req, res) {
   }
 }
 
-// GET /api/stripe/products?key=metadataKey&value=metadataValue
+// GET /api/stripe/products/by-metadata?key=metadataKey&value=metadataValue
 async function getProductsByMetadataController(req, res) {
   try {
     const { key, value } = req.query;

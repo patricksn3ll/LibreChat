@@ -687,6 +687,7 @@ export type TStartupConfig = {
   >;
   mcpPlaceholder?: string;
   conversationImportMaxFileSize?: number;
+  stripeProductSource?: string;
 };
 
 export enum OCRStrategy {
@@ -882,6 +883,7 @@ export const configSchema = z.object({
       message: 'At least one `endpoints` field must be provided.',
     })
     .optional(),
+  stripeProductSource: z.string().optional(),
 });
 
 /**
