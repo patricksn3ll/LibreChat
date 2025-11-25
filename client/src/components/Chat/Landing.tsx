@@ -171,43 +171,47 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
               </TooltipAnchor>
             )}
           </div>
-          {((isAgent || isAssistant) && name) || name ? (
+
+        {(() => {
+          if (((isAgent || isAssistant) && name) || name) {
+            return (
             <div className="flex flex-col items-center gap-0 p-2">
               <SplitText
-                key={`split-text-${name}`}
-                text={name}
-                className={`${getTextSizeClass(name)} font-medium text-text-primary`}
-                delay={50}
-                textAlign="center"
-                animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-                animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-                easing={easings.easeOutCubic}
-                threshold={0}
-                rootMargin="0px"
-                onLineCountChange={handleLineCountChange}
+              key={`split-text-${name}`}
+              text={name}
+              className={`${getTextSizeClass(name)} font-medium text-text-primary`}
+              delay={50}
+              textAlign="center"
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              easing={easings.easeOutCubic}
+              threshold={0}
+              rootMargin="0px"
+              onLineCountChange={handleLineCountChange}
               />
             </div>
-          ) : (
-
-            {!startupConfig?.skipLandingAnimation ? (
-              <SplitText
-                key={`split-text-${greetingText}${user?.name ? '-user' : ''}`}
-                text={greetingText}
-                className={`${getTextSizeClass(greetingText)} font-medium text-text-primary`}
-                delay={50}
-                textAlign="center"
-                animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-                animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-                easing={easings.easeOutCubic}
-                threshold={0}
-                rootMargin="0px"
-                onLineCountChange={handleLineCountChange}
-              />        
-            ) : (
-              <> </> 
-            )}
-          
-          )}
+            );
+          } else if (!startupConfig?.skipLandingAnimation) {
+            return (
+            <SplitText
+              key={`split-text-${greetingText}${user?.name ? '-user' : ''}`}
+              text={greetingText}
+              className={`${getTextSizeClass(greetingText)} font-medium text-text-primary`}
+              delay={50}
+              textAlign="center"
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              easing={easings.easeOutCubic}
+              threshold={0}
+              rootMargin="0px"
+              onLineCountChange={handleLineCountChange}
+            />
+            );
+          } else {
+            return <></>;
+          }
+        })()}      
+      
         </div>
         {description && (
           <div className="animate-fadeIn mt-4 max-w-md text-center text-sm font-normal text-text-primary">

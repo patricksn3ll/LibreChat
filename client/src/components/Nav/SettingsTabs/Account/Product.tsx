@@ -25,6 +25,10 @@ function Product({ open, onOpenChange }: TDialogProps) {
           credentials: 'include',
         });
         const data = await res.json();
+
+        // Sort data.products lexicographical on product name
+        data.products.sort((a, b) => a.name.localeCompare(b.name));
+
         setProducts(data.products || []);
       } catch (err) {
         setProducts([]);
@@ -117,7 +121,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
                 disabled={purchasing}
               >
                 <span className="font-semibold text-secondary text-lg">
-                  {(purchasing === p.id) ? 'Redirecting...' : `${p.name || p.id}` }
+                  {(purchasing === p.id) ? 'Redirecting...' : `${p.description || p.id}` }
                 </span>
               </button>
             ))}
