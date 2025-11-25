@@ -27,8 +27,12 @@ function Product({ open, onOpenChange }: TDialogProps) {
         const data = await res.json();
 
         // Sort data.products lexicographical on product name
+        console.log('Sorting products by name');
+        console.log(data.products);
         data.products.sort((a, b) => a.name.localeCompare(b.name));
-
+        console.log('Sorted products by name');
+        console.log(data.products);
+        
         setProducts(data.products || []);
       } catch (err) {
         setProducts([]);
@@ -50,7 +54,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
     setShowConfirm(true);
   };
 
-  async function handlePurchaseClick(priceId, amount) {
+  async function handlePurchaseClick(priceId) {
     try {
       setPurchasing(priceId);
       const res = await fetch('/api/stripe/purchase', {
@@ -61,8 +65,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
         },
         body: JSON.stringify({
           priceId: priceId, //
-          quantity: 1,
-          metadata: { tokenAmount: amount}
+          quantity: 1
         }),
         credentials: 'include',
       });
@@ -117,7 +120,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
               <button
                 key={p.id}
                 className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
-                onClick={() => handlePurchaseClick(p.id, p.amount)}
+                onClick={() => handlePurchaseClick(p.default_price)}
                 disabled={purchasing}
               >
                 <span className="font-semibold text-secondary text-lg">
