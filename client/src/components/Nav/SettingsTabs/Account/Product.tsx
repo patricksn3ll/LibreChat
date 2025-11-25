@@ -4,6 +4,7 @@ import { useAuthContext } from '~/hooks';
 // import { PRODUCTS } from './products';
 import { useCreateStripeCheckoutSession } from './useCreateStripeCheckoutSession';
 import { useCancelSubscription } from './useCancelSubscription';
+import { useGetStartupConfig } from '~/data-provider';
 
 function Product({ open, onOpenChange }: TDialogProps) {
   const { user, token } = useAuthContext();
@@ -11,13 +12,15 @@ function Product({ open, onOpenChange }: TDialogProps) {
   const [billingLoading, setBillingLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
+  const { data: startupConfig } = useGetStartupConfig();
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchProducts() {
       setLoadingProducts(true);
       try {
-        const res = await fetch('/api/stripe/products?key=source&value=cribmetrics', {
+        const stripeProductSource = (startupConfig?.stripeProductSource) || 'cribmetrics';
+        const res = await fetch(`/api/stripe/products/by-metadata?key=source&value=${stripeProductSource}`, {
           headers: { 'Authorization': `Bearer ${token}` },
           credentials: 'include',
         });

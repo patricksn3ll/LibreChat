@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '~/hooks';
 import { PLANS } from './plans';
 import { useCreateStripeCheckoutSession } from './useCreateStripeCheckoutSession';
 import { useCancelSubscription } from './useCancelSubscription';
+import { useGetStartupConfig } from '~/data-provider';
 
 function Subscription({ open, onOpenChange }: TDialogProps) {
   const { user, token } = useAuthContext();
@@ -11,12 +12,35 @@ function Subscription({ open, onOpenChange }: TDialogProps) {
   const subscriptionStatus = user?.subscriptionStatus || 'none';
   const { mutate: createCheckoutSession, isLoading: subscribing, variables: subscribingPlan } = useCreateStripeCheckoutSession();
   const { mutate: cancelSubscription, isLoading: canceling } = useCancelSubscription();
+  const [plans, setPlans] = useState([]);
+  const [loadingPlans, setLoadingPlans] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
   const [billingLoading, setBillingLoading] = useState(false);
+  const { data: startupConfig } = useGetStartupConfig();  
   const navigate = useNavigate();
 
+  useEffect(() => {
+    async function fetchProducts() {
+      setLoadingProducts(true);
+      try {
+        const stripeProductSource = (startupConfig?.stripeProductSource) || 'declaray';
+        const res = await fetch(`/api/stripe/products/by-metadata?key=source&value=${stripeProductSource}`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+          credentials: 'include',
+        });
+        const data = await res.json();
+        setPlans(data.products || []);
+      } catch (err) {
+        setPlans([]);
+      } finally {
+        setPlans(false);
+      }
+    }
+    fetchProducts();
+  }, [token]);
+
   const getPlanName = (planId: string) => {
-    const plan = PLANS.find((p) => p.id === planId);
+    const plan = plans.find((p) => p.id === planId);
     return plan ? plan.name : 'None';
   }
 
@@ -154,7 +178,7 @@ function Subscription({ open, onOpenChange }: TDialogProps) {
         <div className="m-auto justify-center p-4 py-2 md:gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <p className="md:col-span-2">The feature you are trying to use requires a subscription, choose a plan that is right for you, cancel any time.</p>
-            {PLANS.map((p) => (
+            {plans.map((p) => (
               <div
                 key={p.id}
                 className="flex flex-col md:flex-row md:items-center md:gap-4 border rounded-lg p-4 bg-surface-secondary md:col-span-2"
@@ -176,44 +200,20 @@ function Subscription({ open, onOpenChange }: TDialogProps) {
               </div>
             ))}
 
-            <div className="flex justify-center mt-4">
-              <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="w-full max-w-xs" />
-            </div>
-
             <button
               className="md:col-span-2 px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
               onClick={() => navigateToChat()}
             >
               Chat for Free
             </button>            
+
+            <div className="flex justify-center mt-4">
+              <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="w-full max-w-xs" />
+            </div>
+
           </div>       
-        </div>        
-        // <div>
-        //   <h2 className="text-lg font-semibold mb-2">Available Plans</h2>
-        //   <p>Choose a plan that is right for you, cancel any time.</p>
-        //   <div className="flex flex-col gap-4">
-        //     {PLANS.map((p) => (
-        //       <div key={p.id} className="flex flex-col md:flex-row md:items-center md:gap-4 border rounded-lg p-4 bg-surface-secondary">
-        //         <div className="flex-1">
-        //           <div className="font-medium text-lg">{p.name}</div>
-        //           <div className="text-text-secondary">{p.description}</div>
-        //         </div>
-        //         <div className="flex items-center gap-4 mt-2 md:mt-0">
-        //           <span className="font-semibold text-primary">{p.price}</span>
-        //           <button
-        //             className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60"
-        //             onClick={() => handleSubscribe(p.id)}
-        //             disabled={subscribing && subscribingPlan === p.id}
-        //           >
-        //             {subscribing && subscribingPlan === p.id ? 'Redirecting...' : 'Subscribe'}
-        //           </button>
-        //         </div>
-        //       </div>
-        //     ))}
-        //   </div>
-        // </div>
+        </div>
       )}
-      {/* TODO: Add plan info and Stripe integration UI */}
     </div>
   );
 }
