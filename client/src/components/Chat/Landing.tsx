@@ -189,7 +189,7 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
             </div>
           ) : (
 
-            {startupConfig?.interface?.modelSelect || startupConfig?.modelSelect ? (
+            {!startupConfig?.skipLandingAnimation ? (
               <SplitText
                 key={`split-text-${greetingText}${user?.name ? '-user' : ''}`}
                 text={greetingText}

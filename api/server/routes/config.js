@@ -103,6 +103,8 @@ router.get('/', async function (req, res) {
       helpAndFaqURL: process.env.HELP_AND_FAQ_URL || '/faq',
       fileAttachRequiresSubscription: isEnabled(process.env.FILE_ATTACH_REQUIRES_SUBSCRIPTION),
       hideUserFiles: isEnabled(process.env.HIDE_USER_FILES),
+      hideCodeAnalysisOutput: isEnabled(process.env.HIDE_CODE_ANALYSIS_OUTPUT),
+      skipLandingAnimation: isEnabled(process.env.SKIP_LANDING_ANIMATION),
       affiliatesEnabled: isEnabled(process.env.AFFILIATES_ENABLED),
       stripeSubscriptionsEnabled: isEnabled(process.env.STRIPE_SUBSCRIPTIONS_ENABLED),
       stripeMetersEnabled: isEnabled(process.env.STRIPE_METERS_ENABLED),
@@ -111,7 +113,6 @@ router.get('/', async function (req, res) {
       settingsPersonalization: isEnabled(process.env.SETTINGS_PERSONALIZATION),
       settingsCommands: isEnabled(process.env.SETTINGS_COMMANDS),
       settingsChat: isEnabled(process.env.SETTINGS_CHAT),
-      homeRoute: process.env.HOME_ROUTE || '/login',
       interface: appConfig?.interfaceConfig,
       turnstile: appConfig?.turnstileConfig,
       modelSpecs: appConfig?.modelSpecs,
@@ -194,6 +195,10 @@ router.get('/', async function (req, res) {
     if (typeof process.env.CUSTOM_FOOTER === 'string') {
       payload.customFooter = process.env.CUSTOM_FOOTER;
     }
+
+    if (typeof process.env.CUSTOM_TAG_LINE === 'string') {
+      payload.customTagLine = process.env.CUSTOM_TAG_LINE;
+    }    
 
     await cache.set(CacheKeys.STARTUP_CONFIG, payload);
     return res.status(200).send(payload);
