@@ -97,7 +97,7 @@ function Product({ open, onOpenChange }: TDialogProps) {
           </div>
         ))}        
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center">
         <img src="assets/stripe-security-badge.png" alt="Stripe Security Badge" className="w-full max-w-xs" />
       </div>
     </div>        
