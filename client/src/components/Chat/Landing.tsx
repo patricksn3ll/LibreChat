@@ -59,6 +59,13 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
     });
   }, [conversation?.endpoint, conversation?.iconURL, endpointsConfig]);
 
+  // If no assistant_id is set, and it's "new", use the first preset from startup config
+  let assistant_id = conversation?.assistant_id;
+  if (assistant_id === "new" && 
+      startupConfig?.modelSpecs?.list[0]?.preset.assistant_id) {
+    assistant_id = startupConfig?.modelSpecs?.list[0]?.preset.assistant_id;
+  }
+  
   const { entity, isAgent, isAssistant } = getEntity({
     endpoint: endpointType,
     agentsMap,

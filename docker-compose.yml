@@ -6,11 +6,11 @@ services:
     container_name: cribmetrics
     ports:
       - "${PORT}:${PORT}"
-    depends_on:
-      - metrics
+    # depends_on:
+      #- metrics
       #- mongodb
       #- rag_api
-    image: acrcribmetrics.azurecr.io/cribmetrics:0.0.2.1
+    image: acrcribmetrics.azurecr.io/cribmetrics:0.0.4.0
     restart: always
     user: "${UID}:${GID}"
     extra_hosts:
@@ -24,41 +24,43 @@ services:
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
       - ./logs:/app/logs
+      - .:/app
+      - /app/node_modules
 
-  metrics:
-    image: ghcr.io/rubentalstra/librechat-prom-exporter:latest
-    container_name: metrics
-    ports:
-      - "8000:8000"
-    environment:
-      - PORT=8000
-    networks:
-      - monitoring        
+  # metrics:
+  #   image: ghcr.io/rubentalstra/librechat-prom-exporter:latest
+  #   container_name: metrics
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - PORT=8000
+  #   networks:
+  #     - monitoring        
       
-  prometheus:
-    image: prom/prometheus:v2.52.0
-    container_name: prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    networks:
-      - monitoring
-    restart: unless-stopped
+  # prometheus:
+  #   image: prom/prometheus:v2.52.0
+  #   container_name: prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #   networks:
+  #     - monitoring
+  #   restart: unless-stopped
 
-  grafana:
-    image: grafana/grafana:10.2.2
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-storage:/var/lib/grafana
-    networks:
-      - monitoring
-    environment: # grafana cli admin reset-admin-password
-      - GF_SECURITY_ADMIN_PASSWORD='#Gr4ph4n4!'
-      - GF_SECURITY_ADMIN_USER='info@cribmetrics.com'
-    restart: unless-stopped
+  # grafana:
+  #   image: grafana/grafana:10.2.2
+  #   container_name: grafana
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - grafana-storage:/var/lib/grafana
+  #   networks:
+  #     - monitoring
+  #   environment: # grafana cli admin reset-admin-password
+  #     - GF_SECURITY_ADMIN_PASSWORD='#Gr4ph4n4!'
+  #     - GF_SECURITY_ADMIN_USER='info@cribmetrics.com'
+  #   restart: unless-stopped
       
   # mongodb:
     # container_name: chat-mongodb

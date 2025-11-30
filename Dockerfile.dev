@@ -84,5 +84,10 @@ EXPOSE 3080
 ENV HOST=0.0.0.0
 ENV NODE_ENV=development
 
+# React HotLaod
+ENV CHOKIDAR_USEPOLLING=true  # Enable polling for file changes
+ENV WATCHPACK_POLLING=true    # Webpack polling fix
+ENV WDS_SOCKET_PORT=3000      # Fix WebSocket port in some setups
+
 # Start the application
 CMD ["npm", "run", "backend"]

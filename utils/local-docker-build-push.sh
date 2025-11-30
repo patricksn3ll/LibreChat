@@ -7,6 +7,7 @@ IMAGE_NAME=${1:-cribmetrics}
 TAG=${2:-latest}
 PACKAGE="$IMAGE_NAME:$TAG"
 ACR=acrcribmetrics
+ISDEV=${ISDEV:-false}
 
 cd ..
 
@@ -16,7 +17,11 @@ source .env
 set +a
 
 echo "Building Docker image..."
-docker build -t $PACKAGE -f Dockerfile.optimized .
+if [ "$ISDEV" = "true" ]; then
+    docker build -t $PACKAGE -f Dockerfile.dev .
+else
+    docker build -t $PACKAGE -f Dockerfile.optimized .
+fi
 
 echo "Tagging Docker image..."
 docker tag $PACKAGE acrcribmetrics.azurecr.io/$PACKAGE
