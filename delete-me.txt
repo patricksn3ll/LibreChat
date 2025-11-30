@@ -1,0 +1,2 @@
+MONGO_URI==>mongodb+srv://info_db_user:DJURZlEOSVVzqJws@cluster0.bm1zura.mongodb.net/?appName=Cluster0
+MONGO_URI==>mongodb+srv://info_db_user:r1kWsziSXxm8lxLY@cluster0.baa3obk.mongodb.net/?appName=Cluster0
