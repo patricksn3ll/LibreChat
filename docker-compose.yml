@@ -10,7 +10,7 @@ services:
       #- metrics
       #- mongodb
       #- rag_api
-    image: acrcribmetrics.azurecr.io/cribmetrics:0.0.4.0
+    image: acrcribmetrics.azurecr.io/cribmetrics:0.0.4.41
     restart: always
     user: "${UID}:${GID}"
     extra_hosts:
@@ -24,8 +24,8 @@ services:
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
       - ./logs:/app/logs
-      - .:/app
-      - /app/node_modules
+      # - .:/app
+      # - /app/node_modules
 
   # metrics:
   #   image: ghcr.io/rubentalstra/librechat-prom-exporter:latest
@@ -58,8 +58,8 @@ services:
   #   networks:
   #     - monitoring
   #   environment: # grafana cli admin reset-admin-password
-  #     - GF_SECURITY_ADMIN_PASSWORD='#Gr4ph4n4!'
-  #     - GF_SECURITY_ADMIN_USER='info@cribmetrics.com'
+  #     - GF_SECURITY_ADMIN_PASSWORD=
+  #     - GF_SECURITY_ADMIN_USER=
   #   restart: unless-stopped
       
   # mongodb:

@@ -33,11 +33,21 @@ function Footer({ startupConfig }: { startupConfig: TStartupConfig | null | unde
 
   return (
     <div className="align-end m-4 flex justify-center gap-2" role="contentinfo">
+      <a href="#" className="text-sm text-green-500" id="contact-link">Contact</a>
+      <div className="border-r-[1px] border-gray-300 dark:border-gray-600" />      
       {privacyPolicyRender}
       {privacyPolicyRender && termsOfServiceRender && (
         <div className="border-r-[1px] border-gray-300 dark:border-gray-600" />
       )}
       {termsOfServiceRender}
+      <script>
+        // Obfuscate the email address
+        const user = "info";
+        const domain = "cribmetrics.com";
+        const link = document.getElementById("contact-link");
+        link.href = "mailto:" + user + "@" + domain;
+        link.textContent = user + "@" + domain;
+      </script>                
     </div>
   );
 }
