@@ -149,6 +149,7 @@ const Error = ({ text }: { text: string }) => {
   if (lastError?.errorKey === 'token_balance') {
     console.log('lastError?.errorKey  === token_balance');
     localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json }) || '{}');
+    console.log('Invoking token_balance error message handler again', errorMessages[lastError.errorKey](lastError.json, localize, buyMore));
     return errorMessages[lastError.errorKey](lastError.json, localize, buyMore);
   }
   localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json  }));
