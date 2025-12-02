@@ -140,38 +140,32 @@ const Error = ({ text }: { text: string }) => {
   const json = JSON.parse(jsonString);
   const errorKey = json.code || json.type;
   const keyExists = errorKey && errorMessages[errorKey];
-  const lastErrorKey = localStorage.getItem('last_error_key');
+  const lastError = JSON.parse(localStorage.getItem('last_error') || '{}');
   
   console.log('Error key:', errorKey);
-  console.log('Last Error key:', lastErrorKey);
+  console.log('Last Error:', lastError);
 
-  if (lastErrorKey === 'token_balance') {
-    console.log('lastErrorKey === token_balance');
-    localStorage.setItem('last_error_key', errorKey || null);    
-    debugger;
-    return errorMessages[errorKey](json, localize, buyMore);
+  if (lastError?.errorKey === 'token_balance') {
+    console.log('lastError?.errorKey  === token_balance');
+    localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json }) || '{}');
+    return errorMessages[lastError.errorKey](lastError.json, localize, buyMore);
   }
-  localStorage.setItem('last_error_key', errorKey || null);
+  localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json  }));
 
   if (keyExists && errorKey === 'token_balance' && typeof errorMessages[errorKey] === 'function') {
-    console.log('Handling token_balance error');
     return errorMessages[errorKey](json, localize, buyMore);
   } else if (keyExists && typeof errorMessages[errorKey] === 'function') {
-    console.log(`Handling ${errorKey} error`);
     return errorMessages[errorKey](json, localize);
   } else if (keyExists && keyExists.startsWith(localizedErrorPrefix)) {
-    console.log(`Handling localized error for ${errorKey}`);
     return localize(errorMessages[errorKey]);
   } else if (keyExists) {
-    console.log(`Handling static error message for ${errorKey}`);
     return errorMessages[errorKey];
   } else {
-    console.log(`Handling unknown error for ${errorKey}`);
     return defaultResponse;
   }
 
   function buyMore() {
-    localStorage.setItem('last_error_key', errorKey || null);
+    localStorage.setItem('last_error', '{}');
     openBalance();
   }
 };

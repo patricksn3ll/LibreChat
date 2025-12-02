@@ -16,18 +16,18 @@ set -a
 source .env
 set +a
 
-echo "Building Docker image..."
-if [ "$ISDEV" = "true" ]; then
-    docker build -t $PACKAGE -f Dockerfile.dev .
-else
-    docker build -t $PACKAGE -f Dockerfile.optimized .
-fi
+# echo "Building Docker image..."
+# if [ "$ISDEV" = "true" ]; then
+#     docker build -t $PACKAGE -f Dockerfile.dev .
+# else
+#     docker build -t $PACKAGE -f Dockerfile.optimized .
+# fi
 
-echo "Tagging Docker image..."
-docker tag $PACKAGE acrcribmetrics.azurecr.io/$PACKAGE
+# echo "Tagging Docker image..."
+# docker tag $PACKAGE acrcribmetrics.azurecr.io/$PACKAGE
 
-echo "Pushing Docker image..."
-docker push acrcribmetrics.azurecr.io/$PACKAGE
+# echo "Pushing Docker image..."
+# docker push acrcribmetrics.azurecr.io/$PACKAGE
 
 echo "Updating docker-compose.yml with latest image"
 sed -i.bak "s|image: acrcribmetrics.azurecr.io/$IMAGE_NAME:.*|image: acrcribmetrics.azurecr.io/$IMAGE_NAME:$TAG|g" docker-compose.yml
