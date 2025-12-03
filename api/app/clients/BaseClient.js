@@ -673,15 +673,12 @@ class BaseClient {
 
     const balanceConfig = getBalanceConfig(appConfig);
 
-    logger.error('[BaseClient] balanceConfig', balanceConfig)
-    logger.error('[BaseClient] this.options.endpointType ', this.options.endpointType )
-    logger.error('[BaseClient] this.options.endpoint', this.options.endpoint)
+    logger.info(`[BaseClient] balanceConfig: ${JSON.stringify(balanceConfig)}`);
 
     if (
       balanceConfig?.enabled &&
       supportsBalanceCheck[this.options.endpointType ?? this.options.endpoint]
     ) {
-      logger.error('[BaseClient] checkBaance')
       await checkBalance({
         req: this.options.req,
         res: this.options.res,
@@ -694,6 +691,8 @@ class BaseClient {
           endpointTokenConfig: this.options.endpointTokenConfig,
         },
       });
+
+      logger.info(`[BaseClient] checkBalance finished:`);
     }
 
     /** @type {string|string[]|undefined} */
@@ -701,6 +700,8 @@ class BaseClient {
     if (this.abortController) {
       this.abortController.requestCompleted = true;
     }
+
+    logger.info(`[BaseClient] completion : ${JSON.stringify(completion)}`);
 
     /** @type {TMessage} */
     const responseMessage = {
@@ -746,16 +747,14 @@ class BaseClient {
       responseMessage.text = completion.join('');
     }
 
+    logger.info(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
+
     // Append Affiliate Links if applicable
     const affiliateConfig = getAffiliateConfig(appConfig);
     if (affiliateConfig?.enableAffiliateLinks) {      
       if (responseMessage.content.length > 0) {
-        logger.info('[OpenAIClient] - responseMessage.content.length > 0')
-        // responseMessage.text = removeParagraphsWithSup(responseMessage.text);
         responseMessage.content[0].text = injectAffiliateLinks(responseMessage.content[0].text);
       } else {
-        logger.info('[OpenAIClient] - responseMessage.content.length <= 0')
-        // responseMessage.text = removeParagraphsWithSup(responseMessage.text);
         responseMessage.text = injectAffiliateLinks(responseMessage.text);
       }
     } else {
@@ -816,6 +815,9 @@ class BaseClient {
       }
     }
 
+    logger.info(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
+    logger.info(`[BaseClient] saveMessageToDatabase called with: ${JSON.stringify(saveOptions)}`);
+    
     responseMessage.databasePromise = this.saveMessageToDatabase(
       responseMessage,
       saveOptions,
