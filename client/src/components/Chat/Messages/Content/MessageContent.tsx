@@ -15,7 +15,7 @@ import { cn } from '~/utils';
 import store from '~/store';
 
 const ERROR_CONNECTION_TEXT = 'Error connecting to server, try refreshing the page.';
-const DELAYED_ERROR_TIMEOUT = 5500;
+const DELAYED_ERROR_TIMEOUT = 120000;
 const UNFINISHED_DELAY = 250;
 
 const parseThinkingContent = (text: string) => {
