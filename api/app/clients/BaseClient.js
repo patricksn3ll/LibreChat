@@ -663,14 +663,10 @@ class BaseClient {
 
     const balanceConfig = getBalanceConfig(appConfig);
 
-    console.log(`[BaseClient] balanceConfig: ${JSON.stringify(balanceConfig)}`);
-
     if (
       balanceConfig?.enabled &&
       supportsBalanceCheck[this.options.endpointType ?? this.options.endpoint]
     ) {
-      console.log(`[BaseClient] checkBalance started:`);
-
       await checkBalance({
         req: this.options.req,
         res: this.options.res,
@@ -683,8 +679,6 @@ class BaseClient {
           endpointTokenConfig: this.options.endpointTokenConfig,
         },
       });
-
-      console.log(`[BaseClient] checkBalance finished:`);
     }
 
     /** @type {string|string[]|undefined} */
@@ -692,8 +686,6 @@ class BaseClient {
     if (this.abortController) {
       this.abortController.requestCompleted = true;
     }
-
-    console.log(`[BaseClient] completion : ${JSON.stringify(completion)}`);
 
     /** @type {TMessage} */
     const responseMessage = {
@@ -738,8 +730,6 @@ class BaseClient {
     } else if (Array.isArray(completion)) {
       responseMessage.text = completion.join('');
     }
-
-    console.log(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
 
     // Append Affiliate Links if applicable
     const affiliateConfig = getAffiliateConfig(appConfig);
@@ -807,9 +797,6 @@ class BaseClient {
       }
     }
 
-    console.log(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
-    console.log(`[BaseClient] saveMessageToDatabase called with: ${JSON.stringify(saveOptions)}`);
-    
     responseMessage.databasePromise = this.saveMessageToDatabase(
       responseMessage,
       saveOptions,
