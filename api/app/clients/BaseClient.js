@@ -572,14 +572,6 @@ class BaseClient {
 
     const promptTokens = this.maxContextTokens - remainingContextTokens;
 
-    logger.debug('[BaseClient] tokenCountMap:', tokenCountMap);
-    logger.debug('[BaseClient]', {
-      promptTokens,
-      remainingContextTokens,
-      payloadSize: payload.length,
-      maxContextTokens: this.maxContextTokens,
-    });
-
     return { payload, tokenCountMap, promptTokens, messages: orderedWithInstructions };
   }
 
@@ -652,10 +644,8 @@ class BaseClient {
     );
 
     if (tokenCountMap) {
-      logger.debug('[BaseClient] tokenCountMap', tokenCountMap);
       if (tokenCountMap[userMessage.messageId]) {
         userMessage.tokenCount = tokenCountMap[userMessage.messageId];
-        logger.debug('[BaseClient] userMessage', userMessage);
       }
 
       this.handleTokenCountMap(tokenCountMap);
@@ -673,7 +663,7 @@ class BaseClient {
 
     const balanceConfig = getBalanceConfig(appConfig);
 
-    logger.info(`[BaseClient] balanceConfig: ${JSON.stringify(balanceConfig)}`);
+    logger.debug(`[BaseClient] balanceConfig: ${JSON.stringify(balanceConfig)}`);
 
     if (
       balanceConfig?.enabled &&
@@ -692,7 +682,7 @@ class BaseClient {
         },
       });
 
-      logger.info(`[BaseClient] checkBalance finished:`);
+      logger.debug(`[BaseClient] checkBalance finished:`);
     }
 
     /** @type {string|string[]|undefined} */
@@ -701,7 +691,7 @@ class BaseClient {
       this.abortController.requestCompleted = true;
     }
 
-    logger.info(`[BaseClient] completion : ${JSON.stringify(completion)}`);
+    logger.debug(`[BaseClient] completion : ${JSON.stringify(completion)}`);
 
     /** @type {TMessage} */
     const responseMessage = {
@@ -747,7 +737,7 @@ class BaseClient {
       responseMessage.text = completion.join('');
     }
 
-    logger.info(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
+    logger.debug(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
 
     // Append Affiliate Links if applicable
     const affiliateConfig = getAffiliateConfig(appConfig);
@@ -815,8 +805,8 @@ class BaseClient {
       }
     }
 
-    logger.info(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
-    logger.info(`[BaseClient] saveMessageToDatabase called with: ${JSON.stringify(saveOptions)}`);
+    logger.debug(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
+    logger.debug(`[BaseClient] saveMessageToDatabase called with: ${JSON.stringify(saveOptions)}`);
     
     responseMessage.databasePromise = this.saveMessageToDatabase(
       responseMessage,

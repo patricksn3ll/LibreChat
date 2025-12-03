@@ -16,7 +16,7 @@ const validateMessageReq = async (req, res, next) => {
 
   if (!conversation) {
     console.log('Conversation not found.');
-    return res.status(404).json({ error: 'Conversation not found' });
+    return res.status(200).json({ error: 'Conversation not found' });
   }
 
   if (conversation.user !== req.user.id) {
