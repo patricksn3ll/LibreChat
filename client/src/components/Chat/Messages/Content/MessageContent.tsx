@@ -15,7 +15,7 @@ import { cn } from '~/utils';
 import store from '~/store';
 
 const ERROR_CONNECTION_TEXT = 'Error connecting to server, try refreshing the page.';
-const DELAYED_ERROR_TIMEOUT = 120000;
+const DELAYED_ERROR_TIMEOUT = 5500;
 const UNFINISHED_DELAY = 250;
 
 const parseThinkingContent = (text: string) => {
@@ -80,6 +80,17 @@ export const ErrorMessage = ({
 }: Pick<TDisplayProps, 'text' | 'className'> & { message?: TMessage }) => {
   if (text === ERROR_CONNECTION_TEXT) {
     return <ConnectionError message={message} />;
+  }
+
+  // Always show token_balance errors (Insufficient Funds) without auto-dismiss
+  if (text && text.toLowerCase().includes('insufficient funds')) {
+    return (
+      <Container message={message}>
+        <ErrorBox className={className}>
+          <Error text={text} />
+        </ErrorBox>
+      </Container>
+    );
   }
 
   return (

@@ -26,6 +26,7 @@ set +a
 # echo "Tagging Docker image..."
 # docker tag $PACKAGE acrcribmetrics.azurecr.io/$PACKAGE
 
+
 # echo "Pushing Docker image..."
 # docker push acrcribmetrics.azurecr.io/$PACKAGE
 
