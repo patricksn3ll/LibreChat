@@ -723,6 +723,7 @@ export default function useEventHandlers({
 
   const abortConversation = useCallback(
     async (conversationId = '', submission: EventSubmission, messages?: TMessage[]) => {
+      console.log('abortConversation called', { conversationId, submission, messages });
       const runAbortKey = `${conversationId}:${messages?.[messages.length - 1]?.messageId ?? ''}`;
       const { endpoint: _endpoint, endpointType } =
         (submission.conversation as TConversation | null) ?? {};
@@ -780,6 +781,8 @@ export default function useEventHandlers({
           }),
         });
 
+        console.log('Abort request response', response);
+
         // Check if the response is JSON
         const contentType = response.headers.get('content-type');
         if (contentType != null && contentType.includes('application/json')) {
@@ -787,18 +790,6 @@ export default function useEventHandlers({
           if (response.status === 404) {
             // Preserve last error message if present
             setIsSubmitting(false);
-            const currentMessages = getMessages();
-            const lastMsg = currentMessages?.[currentMessages.length - 1];
-            if (lastMsg && lastMsg.content) {
-              const lastErrorPart = lastMsg.content.find(
-                (part: any) => part.type === ContentTypes.ERROR && part.error?.toLowerCase().includes('insufficient funds')
-              );
-              if (lastErrorPart) {
-                setMessages([lastMsg]);
-              }
-            }
-
-            console.log('Abort request returned 404, conversation not found');
             return;
           }
           if (data.final === true) {
@@ -816,6 +807,8 @@ export default function useEventHandlers({
               response.statusText,
           );
         }
+
+        console.log('Abort request response', response);
       } catch (error) {
         const errorResponse = createErrorMessage({
           getMessages,
@@ -829,6 +822,7 @@ export default function useEventHandlers({
             preset: tPresetSchema.parse(submission.conversation),
           });
         }
+        console.log('Abort request error', error);
         setIsSubmitting(false);
       }
     },
