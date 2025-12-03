@@ -76,9 +76,6 @@ const createErrorMessage = ({
   submission: EventSubmission;
   error?: Error | unknown;
 }): TMessage => {
-
-  console.log('createErrorMessage called', { errorMetadata, submission, error });
-
   const currentMessages = getMessages();
   const latestMessage = currentMessages?.[currentMessages.length - 1];
   let errorMessage: TMessage;
@@ -96,8 +93,6 @@ const createErrorMessage = ({
       (latestContentPart.type === ContentTypes.TEXT && typeof latestPartValue === 'string')
         ? true
         : latestPartValue?.value !== '';
-    
-    console.log('Latest content part:', latestContentPart, 'isValidContentPart:', isValidContentPart);  
   }
   if (
     latestMessage?.conversationId &&
@@ -123,10 +118,8 @@ const createErrorMessage = ({
     ) {
       errorMessage.parentMessageId = submission.userMessage.messageId;
     }
-    console.log('Returning constructed errorMessage with content:', errorMessage);
     return errorMessage;
   } else if (errorMetadata) {
-    console.log('Returning errorMetadata as TMessage:', errorMetadata);
     return errorMetadata as TMessage;
   } else {
     errorMessage = {
@@ -136,11 +129,7 @@ const createErrorMessage = ({
       unfinished: !!text.length,
       error: true,
     };
-
-    console.log('Generated errorMessage from submission:', errorMessage);
   }
-
-  console.log('Generated errorMessage:', errorMessage);
   return tMessageSchema.parse(errorMessage) as TMessage;
 };
 
@@ -723,7 +712,6 @@ export default function useEventHandlers({
 
   const abortConversation = useCallback(
     async (conversationId = '', submission: EventSubmission, messages?: TMessage[]) => {
-      console.log('abortConversation called', { conversationId, submission, messages });
       const runAbortKey = `${conversationId}:${messages?.[messages.length - 1]?.messageId ?? ''}`;
       const { endpoint: _endpoint, endpointType } =
         (submission.conversation as TConversation | null) ?? {};
@@ -781,14 +769,11 @@ export default function useEventHandlers({
           }),
         });
 
-        console.log('Abort request response', response);
-
         // Check if the response is JSON
         const contentType = response.headers.get('content-type');
         if (contentType != null && contentType.includes('application/json')) {
           const data = await response.json();
           if (response.status === 404) {
-            // Preserve last error message if present
             setIsSubmitting(false);
             return;
           }
@@ -807,8 +792,6 @@ export default function useEventHandlers({
               response.statusText,
           );
         }
-
-        console.log('Abort request response', response);
       } catch (error) {
         const errorResponse = createErrorMessage({
           getMessages,
@@ -822,7 +805,6 @@ export default function useEventHandlers({
             preset: tPresetSchema.parse(submission.conversation),
           });
         }
-        console.log('Abort request error', error);
         setIsSubmitting(false);
       }
     },

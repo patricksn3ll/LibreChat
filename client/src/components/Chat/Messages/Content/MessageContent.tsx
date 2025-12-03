@@ -15,8 +15,8 @@ import { cn } from '~/utils';
 import store from '~/store';
 
 const ERROR_CONNECTION_TEXT = 'Error connecting to server, try refreshing the page.';
-const DELAYED_ERROR_TIMEOUT = 100000;
-const UNFINISHED_DELAY = 250000;
+const DELAYED_ERROR_TIMEOUT = 5500;
+const UNFINISHED_DELAY = 250;
 
 const parseThinkingContent = (text: string) => {
   const thinkingMatch = text.match(/:::thinking([\s\S]*?):::/);
