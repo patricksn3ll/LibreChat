@@ -76,6 +76,9 @@ const createErrorMessage = ({
   submission: EventSubmission;
   error?: Error | unknown;
 }): TMessage => {
+
+  console.log('createErrorMessage called', { errorMetadata, submission, error });
+
   const currentMessages = getMessages();
   const latestMessage = currentMessages?.[currentMessages.length - 1];
   let errorMessage: TMessage;
@@ -93,6 +96,8 @@ const createErrorMessage = ({
       (latestContentPart.type === ContentTypes.TEXT && typeof latestPartValue === 'string')
         ? true
         : latestPartValue?.value !== '';
+    
+    console.log('Latest content part:', latestContentPart, 'isValidContentPart:', isValidContentPart);  
   }
   if (
     latestMessage?.conversationId &&
@@ -118,8 +123,10 @@ const createErrorMessage = ({
     ) {
       errorMessage.parentMessageId = submission.userMessage.messageId;
     }
+    console.log('Returning constructed errorMessage with content:', errorMessage);
     return errorMessage;
   } else if (errorMetadata) {
+    console.log('Returning errorMetadata as TMessage:', errorMetadata);
     return errorMetadata as TMessage;
   } else {
     errorMessage = {
@@ -129,7 +136,11 @@ const createErrorMessage = ({
       unfinished: !!text.length,
       error: true,
     };
+
+    console.log('Generated errorMessage from submission:', errorMessage);
   }
+
+  console.log('Generated errorMessage:', errorMessage);
   return tMessageSchema.parse(errorMessage) as TMessage;
 };
 

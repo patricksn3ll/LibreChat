@@ -102,7 +102,6 @@ const errorMessages = {
     const { balance, tokenCost, promptTokens, generations } = json;
     //const message = `Insufficient Funds! Balance: ${balance}. Prompt tokens: ${promptTokens}.  Cost: ${tokenCost}.`;
     const message = `Insufficient Funds! You have ${new Intl.NumberFormat().format(balance)} credits left, but need ${new Intl.NumberFormat().format(tokenCost)}`;
-    console.log('token_balance balance:', balance);
     return (
       <>
         {message}
@@ -143,13 +142,8 @@ const Error = ({ text }: { text: string }) => {
   const keyExists = errorKey && errorMessages[errorKey];
   const lastError = JSON.parse(localStorage.getItem('last_error') || '{}');
   
-  console.log('Error key:', errorKey);
-  console.log('Last Error:', lastError);
-
   if (lastError?.errorKey === 'token_balance') {
-    console.log('lastError?.errorKey  === token_balance');
     localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json }) || '{}');
-    console.log('Invoking token_balance error message handler again', errorMessages[lastError.errorKey](lastError.json, localize, buyMore));
     return errorMessages[lastError.errorKey](lastError.json, localize, buyMore);
   }
   localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json  }));
