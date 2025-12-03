@@ -133,6 +133,8 @@ const Error = ({ text }: { text: string }) => {
   const errorMessage = text.length > 512 && !jsonString ? text.slice(0, 512) + '...' : text;
   const defaultResponse = `Something went wrong. Here's the specific error message we encountered: ${errorMessage}`;
 
+  console.log('Error component received text:', text);
+
   if (!isJson(jsonString)) {
     return defaultResponse;
   }

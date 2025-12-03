@@ -11,15 +11,10 @@ export const useGetMessagesByConvoId = <TData = t.TMessage[]>(
 ): QueryObserverResult<TData> => {
   const location = useLocation();
   const queryClient = useQueryClient();
-  
-  console.log('useGetMessagesByConvoId called with id:', id, 'at location:', location.pathname);
-
   return useQuery<t.TMessage[], unknown, TData>(
     [QueryKeys.messages, id],
     async () => {
-      console.log('Fetching messages for convo id:', id);
       const result = await dataService.getMessagesByConvoId(id);
-      console.log('Fetched messages:', result);
       if (!location.pathname.includes('/c/new') && result?.length === 1) {
         const currentMessages = queryClient.getQueryData<t.TMessage[]>([QueryKeys.messages, id]);
         if (currentMessages?.length === 1) {
