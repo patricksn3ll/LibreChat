@@ -663,12 +663,14 @@ class BaseClient {
 
     const balanceConfig = getBalanceConfig(appConfig);
 
-    logger.debug(`[BaseClient] balanceConfig: ${JSON.stringify(balanceConfig)}`);
+    console.log(`[BaseClient] balanceConfig: ${JSON.stringify(balanceConfig)}`);
 
     if (
       balanceConfig?.enabled &&
       supportsBalanceCheck[this.options.endpointType ?? this.options.endpoint]
     ) {
+      console.log(`[BaseClient] checkBalance started:`);
+
       await checkBalance({
         req: this.options.req,
         res: this.options.res,
@@ -682,7 +684,7 @@ class BaseClient {
         },
       });
 
-      logger.debug(`[BaseClient] checkBalance finished:`);
+      console.log(`[BaseClient] checkBalance finished:`);
     }
 
     /** @type {string|string[]|undefined} */
@@ -691,7 +693,7 @@ class BaseClient {
       this.abortController.requestCompleted = true;
     }
 
-    logger.debug(`[BaseClient] completion : ${JSON.stringify(completion)}`);
+    console.log(`[BaseClient] completion : ${JSON.stringify(completion)}`);
 
     /** @type {TMessage} */
     const responseMessage = {
@@ -737,7 +739,7 @@ class BaseClient {
       responseMessage.text = completion.join('');
     }
 
-    logger.debug(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
+    console.log(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
 
     // Append Affiliate Links if applicable
     const affiliateConfig = getAffiliateConfig(appConfig);
@@ -748,7 +750,7 @@ class BaseClient {
         responseMessage.text = injectAffiliateLinks(responseMessage.text);
       }
     } else {
-      logger.debug('[BaseClient] Affiliate links not injected due to configuration.');
+      console.log('[BaseClient] Affiliate links not injected due to configuration.');
     }
 
     if (
@@ -805,8 +807,8 @@ class BaseClient {
       }
     }
 
-    logger.debug(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
-    logger.debug(`[BaseClient] saveMessageToDatabase called with: ${JSON.stringify(saveOptions)}`);
+    console.log(`[BaseClient] responseMessage: ${JSON.stringify(responseMessage)}`);
+    console.log(`[BaseClient] saveMessageToDatabase called with: ${JSON.stringify(saveOptions)}`);
     
     responseMessage.databasePromise = this.saveMessageToDatabase(
       responseMessage,
