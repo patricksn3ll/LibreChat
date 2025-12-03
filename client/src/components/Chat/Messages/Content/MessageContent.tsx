@@ -15,8 +15,8 @@ import { cn } from '~/utils';
 import store from '~/store';
 
 const ERROR_CONNECTION_TEXT = 'Error connecting to server, try refreshing the page.';
-const DELAYED_ERROR_TIMEOUT = 5500 * 1000;
-const UNFINISHED_DELAY = 250 * 1000;
+const DELAYED_ERROR_TIMEOUT = 5500;
+const UNFINISHED_DELAY = 250;
 
 const parseThinkingContent = (text: string) => {
   const thinkingMatch = text.match(/:::thinking([\s\S]*?):::/);
@@ -31,7 +31,7 @@ const LoadingFallback = () => (
     <div className="markdown prose dark:prose-invert light w-full break-words dark:text-gray-100">
       <div className="absolute">
         <p className="submitting relative">
-          Testing 1 : <span className="result-thinking" />
+          <span className="result-thinking" />
         </p>
       </div>
     </div>
@@ -53,7 +53,7 @@ const ErrorBox = ({
       className,
     )}
   >
-    Testing 2 : {children}
+    {children}
   </div>
 );
 
@@ -65,7 +65,7 @@ const ConnectionError = ({ message }: { message?: TMessage }) => {
       <DelayedRender delay={DELAYED_ERROR_TIMEOUT}>
         <Container message={message}>
           <div className="mt-2 rounded-xl border border-red-500/20 bg-red-50/50 px-4 py-3 text-sm text-red-700 shadow-sm transition-all dark:bg-red-950/30 dark:text-red-100">
-            Testing 3 : {localize('com_ui_error_connection')}
+            {localize('com_ui_error_connection')}
           </div>
         </Container>
       </DelayedRender>
@@ -85,7 +85,7 @@ export const ErrorMessage = ({
   return (
     <Container message={message}>
       <ErrorBox className={className}>
-        Testing 4 : <Error text={text} />
+        <Error text={text} />
       </ErrorBox>
     </Container>
   );
