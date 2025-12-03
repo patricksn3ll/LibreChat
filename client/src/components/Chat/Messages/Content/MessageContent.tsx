@@ -87,7 +87,7 @@ export const ErrorMessage = ({
     return (
       <Container message={message}>
         <ErrorBox className={className}>
-          <Error text={text} />
+          Test: <Error text={text} />
         </ErrorBox>
       </Container>
     );

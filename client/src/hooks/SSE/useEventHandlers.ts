@@ -797,6 +797,8 @@ export default function useEventHandlers({
                 setMessages([lastMsg]);
               }
             }
+
+            console.log('Abort request returned 404, conversation not found');
             return;
           }
           if (data.final === true) {
