@@ -785,7 +785,18 @@ export default function useEventHandlers({
         if (contentType != null && contentType.includes('application/json')) {
           const data = await response.json();
           if (response.status === 404) {
+            // Preserve last error message if present
             setIsSubmitting(false);
+            const currentMessages = getMessages();
+            const lastMsg = currentMessages?.[currentMessages.length - 1];
+            if (lastMsg && lastMsg.content) {
+              const lastErrorPart = lastMsg.content.find(
+                (part: any) => part.type === ContentTypes.ERROR && part.error?.toLowerCase().includes('insufficient funds')
+              );
+              if (lastErrorPart) {
+                setMessages([lastMsg]);
+              }
+            }
             return;
           }
           if (data.final === true) {
