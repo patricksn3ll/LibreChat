@@ -34,6 +34,20 @@ export default function Footer({ className }: { className?: string }) {
     </a>
   );
 
+  const contactEmail = (
+    <span>
+      <a href="#" className="text-sm text-green-500" id="contact-link">Contact</a>            
+      <script>
+        // Obfuscate the email address
+        const user = config?.emailFrom.split('@')[0] ?? "info";
+        const domain = config?.emailFrom.split('@')[1] ?? "cribmetrics.com";
+        const link = document.getElementById("contact-link");
+        link.href = "mailto:" + user + "@" + domain;
+        link.textContent = user + "@" + domain;
+      </script>         
+    </span>
+  );
+
   const mainContentParts = (
     typeof config?.customFooter === 'string'
       ? config.customFooter
@@ -78,7 +92,7 @@ export default function Footer({ className }: { className?: string }) {
     </React.Fragment>
   ));
 
-  const footerElements = [...mainContentRender, privacyPolicyRender, termsOfServiceRender].filter(
+  const footerElements = [...mainContentRender, contactEmail, privacyPolicyRender, termsOfServiceRender].filter(
     Boolean,
   );
 
