@@ -35,17 +35,7 @@ export default function Footer({ className }: { className?: string }) {
   );
 
   const contactEmail = (
-    <span>
-      <a href="#" className="text-sm text-green-500" id="contact-link">Contact</a>            
-      <script>
-        // Obfuscate the email address
-        const user = config?.emailFrom.split('@')[0] ?? "info";
-        const domain = config?.emailFrom.split('@')[1] ?? "cribmetrics.com";
-        const link = document.getElementById("contact-link");
-        link.href = "mailto:" + user + "@" + domain;
-        link.textContent = user + "@" + domain;
-      </script>         
-    </span>
+      <a href={`mailto:${config?.emailFrom}`} className="text-text-secondary underline" id="contact-link">Contact</a>            
   );
 
   const mainContentParts = (
