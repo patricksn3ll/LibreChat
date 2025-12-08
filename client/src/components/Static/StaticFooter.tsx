@@ -1,5 +1,6 @@
 import { useMemo, useEffect, memo } from 'react';
 import { useGetStartupConfig } from '~/data-provider';
+import TagManager from 'react-gtm-module';
 import '../../custom-theme.css';
 
 interface StaticFooterProps {
@@ -10,14 +11,18 @@ const StaticFooter = memo(
   ({
 
   }: StaticFooterProps) => {
-    const { data: startupConfig } = useGetStartupConfig();
+  const { data: startupConfig } = useGetStartupConfig();
 
-    useEffect(() => {
-
-    }, []);
+  useEffect(() => {
+    if (config?.analyticsGtmId != null && typeof window.google_tag_manager === 'undefined') {
+      const tagManagerArgs = {
+        gtmId: config.analyticsGtmId,
+      };
+      TagManager.initialize(tagManagerArgs);
+    }
+  }, [config?.analyticsGtmId]);
 
     return (
-
       <footer>
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
           <div>
@@ -29,12 +34,7 @@ const StaticFooter = memo(
             <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>&nbsp;|&nbsp;
             <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></div>      
         </div>
-      </footer>
-
-    // <footer>
-    //   © 2025 {startupConfig?.appTitle.split('|')[0] || 'CribMetrics'} | {process.env.CUSTOM_TAG_LINE || startupConfig?.tagLine || 'Real Estate Market Insights Made Simple'}
-    //   <Footer startupConfig={startupConfig} />
-    // </footer>          
+      </footer>     
     );
   },
 );
