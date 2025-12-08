@@ -41,8 +41,8 @@ export async function loadDefaultInterface({
     termsOfService: interfaceConfig?.termsOfService ?? defaults.termsOfService,
     mcpServers: interfaceConfig?.mcpServers ?? defaults.mcpServers,
     customWelcome: interfaceConfig?.customWelcome ?? defaults.customWelcome,
-    tagLine: interfaceConfig?.tagLine ?? defaults.tagLine,
-
+    customTagLine: interfaceConfig?.customTagLine ?? defaults.customTagLine,
+    emailFrom: interfaceConfig?.emailFrom ?? defaults.emailFrom,
     stripeSubscriptionsEnabled: interfaceConfig?.stripeSubscriptionsEnabled ?? defaults.stripeSubscriptionsEnabled,
     stripeMetersEnabled: interfaceConfig?.stripeMetersEnabled ?? defaults.stripeMetersEnabled,
     searchModelsEnabled: interfaceConfig?.searchModelsEnabled ?? defaults.searchModelsEnabled,
