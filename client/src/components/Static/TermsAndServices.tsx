@@ -18,10 +18,10 @@ const TermsAndServices = memo(
     }, []);
 
     return (
-      <>
+      <div className="wrap">
 
         <header>
-            <div className="flex flex-col space-y-6 p-6 max-w-4xl mx-auto">
+            <div className="flex flex-col space-y-6 p-6 max-w-4xl">
                 <div className="prose dark:prose-invert max-w-none">
                     <h1>TERMS OF SERVICE</h1>
                 </div>
@@ -29,7 +29,7 @@ const TermsAndServices = memo(
         </header>
 
         <section>
-            <div className="flex flex-col space-y-6 p-6 max-w-4xl mx-auto">
+            <div className="flex flex-col space-y-6 p-6 max-w-4xl">
                 <div className="prose dark:prose-invert max-w-none">
 
                     <section>
@@ -160,7 +160,7 @@ const TermsAndServices = memo(
         </section>
 
         <StaticFooter />
-      </>
+      </div>
     );
   },
 );

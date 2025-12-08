@@ -9,10 +9,10 @@ export const UIContext = createContext({
 
 export const UIProvider = ({ children }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [activeSettingsTab, setActiveSettingsTab] = useState(null);
+  const [activeSettingsTab, setActiveSettingsTab] = useState<SettingsTabValues | null>(null);
 
   // Call this to open Settings and optionally a specific tab
-  const openSettings = useCallback((tab = null) => {
+  const openSettings = useCallback((tab: SettingsTabValues | null = null) => {
     setSettingsOpen(true);
     if (tab) setActiveSettingsTab(tab);
   }, []);
