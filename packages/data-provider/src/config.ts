@@ -1563,6 +1563,10 @@ export enum SettingsTabValues {
    * Tab for Personalization Settings
    */
   PERSONALIZATION = 'personalization',
+  /**
+   * Tab for Contact/Support
+   */
+  CONTACT = 'contact',
 }
 
 export enum STTProviders {

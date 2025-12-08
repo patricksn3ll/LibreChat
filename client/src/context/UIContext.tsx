@@ -4,6 +4,7 @@ import { SettingsTabValues } from 'librechat-data-provider';
 export const UIContext = createContext({
   openSettings: () => {},
   openBalance: () => {},
+  openContact: () => {},
 });
 
 export const UIProvider = ({ children }) => {
@@ -21,8 +22,13 @@ export const UIProvider = ({ children }) => {
     openSettings(SettingsTabValues.BALANCE);
   }, [openSettings]);
 
+  // Call this to open Settings and focus the Contact tab
+  const openContact = useCallback(() => {
+    openSettings(SettingsTabValues.CONTACT);
+  }, [openSettings]);
+
   return (
-    <UIContext.Provider value={{ openSettings, openBalance, settingsOpen, setSettingsOpen, activeSettingsTab, setActiveSettingsTab }}>
+    <UIContext.Provider value={{ openSettings, openBalance, openContact, settingsOpen, setSettingsOpen, activeSettingsTab, setActiveSettingsTab }}>
       {children}
     </UIContext.Provider>
   );

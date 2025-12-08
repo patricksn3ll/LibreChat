@@ -4,10 +4,13 @@ import TagManager from 'react-gtm-module';
 import { Constants } from 'librechat-data-provider';
 import { useGetStartupConfig } from '~/data-provider';
 import { useLocalize } from '~/hooks';
+import { useUI } from '~/context/UIContext';
 
 export default function Footer({ className }: { className?: string }) {
   const { data: config } = useGetStartupConfig();
   const localize = useLocalize();
+  const { openContact } = useUI();
+  
 
   const privacyPolicy = config?.interface?.privacyPolicy;
   const termsOfService = config?.interface?.termsOfService;
@@ -35,7 +38,7 @@ export default function Footer({ className }: { className?: string }) {
   );
 
   const contactEmail = (
-      <a href={`mailto:${config?.emailFrom}`} className="text-text-secondary underline" id="contact-link">Contact</a>            
+      <a href="#" onClick={e => { e.preventDefault(); openContact(); }} className="text-text-secondary underline" id="contact-link">Contact</a>            
   );
 
   const mainContentParts = (
