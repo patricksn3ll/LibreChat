@@ -34,7 +34,7 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
     const processed = LaTeXParsing ? preprocessLaTeX(content) : content;
 
     // Remove inline citations like ^3^ from processed content
-    let withoutCitations = processed.replace(/^\d+\..*?^.*$/sm, '').replace(/\^\d+\^/g, '');
+    let withoutCitations = processed.replace(/^\d+\..*?^.*$/g, '').replace(/\^\d+\^/g, '');
 
     // Remove citations with filename: e.g., "^1. ...txt"
     withoutCitations = withoutCitations.replace(/\^\d+\.\^\s.*?\.txt/g, '');
