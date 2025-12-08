@@ -841,6 +841,7 @@ export const configSchema = z.object({
   turnstile: turnstileSchema.optional(),
   fileStrategy: fileSourceSchema.default(FileSources.local),
   fileStrategies: fileStrategiesSchema,
+  emailFrom: z.string().default('info@cribmetrics.com'),
   hideCodeAnalysisOutput: z.boolean().default(false),
   helpAndFaqURL: z.string().default('/faq'),
   fileAttachRequiresSubscription: z.boolean().default(false),
