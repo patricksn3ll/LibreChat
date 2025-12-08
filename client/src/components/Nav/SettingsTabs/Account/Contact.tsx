@@ -27,7 +27,7 @@ const Contact = () => {
   };
 
   return (
-    <form className="form-input w-full flex flex-col gap-4 p-4" onSubmit={handleSubmit}>
+    <form className="w-full flex flex-col gap-4 p-4" onSubmit={handleSubmit}>
       <h2 className="text-lg font-semibold">Contact</h2>
 
       {status === 'sent' && <div className="bg-green-100 text-green-700 border border-green-300 rounded p-2">Message sent!</div>}
