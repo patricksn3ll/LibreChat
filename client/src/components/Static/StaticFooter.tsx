@@ -26,18 +26,9 @@ const StaticFooter = memo(
           </div>
           <div style={{ color: '#8892A6' }}>
             Data Sources: Public Real Estate Sales&nbsp;|&nbsp; 
-            <a href="#" id="contact-link" rel="noopener noreferrer">Contact</a>&nbsp;|&nbsp;
+            <a href={`mailto:${startupConfig?.emailFrom}`} id="contact-link" rel="noopener noreferrer">Contact</a>&nbsp;|&nbsp;
             <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>&nbsp;|&nbsp;
-            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></div>
-
-            <script>
-              // Obfuscate the email address
-              const user = "info";
-              const domain = "cribmetrics.com";
-              const link = document.getElementById("contact-link");
-              link.href = "mailto:" + user + "@" + domain;
-              link.textContent = user + "@" + domain;
-            </script>          
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></div>      
         </div>
       </footer>
 

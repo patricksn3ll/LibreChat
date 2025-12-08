@@ -39,15 +39,7 @@ function Footer({ startupConfig }: { startupConfig: TStartupConfig | null | unde
       )}
       {termsOfServiceRender}
       <div className="border-r-[1px] border-gray-300 dark:border-gray-600" />        
-      <a href="#" className="text-sm text-green-500" id="contact-link">Contact</a>            
-      <script>
-        // Obfuscate the email address
-        const user = "info";
-        const domain = "cribmetrics.com";
-        const link = document.getElementById("contact-link");
-        link.href = "mailto:" + user + "@" + domain;
-        link.textContent = user + "@" + domain;
-      </script>                
+      <a href={`mailto:${startupConfig?.emailFrom}`} className="text-sm text-green-500" id="contact-link">Contact</a>            
     </div>
   );
 }
