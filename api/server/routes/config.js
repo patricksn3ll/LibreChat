@@ -96,6 +96,7 @@ router.get('/', async function (req, res) {
         !!process.env.EMAIL_PASSWORD &&
         !!process.env.EMAIL_FROM,
       passwordResetEnabled,
+      emailFrom: process.env.EMAIL_FROM,
       showBirthdayIcon:
         isBirthday() ||
         isEnabled(process.env.SHOW_BIRTHDAY_ICON) ||
@@ -190,6 +191,10 @@ router.get('/', async function (req, res) {
 
     if (ldap) {
       payload.ldap = ldap;
+    }
+
+    if (typeof process.env.EMAIL_FROM === 'string') {
+      payload.emailFrom = process.env.EMAIL_FROM;
     }
 
     if (typeof process.env.CUSTOM_FOOTER === 'string') {
