@@ -1059,11 +1059,20 @@ ${convo}
           useChatCompletion = false;
         }
 
-        title = (
+        const titleResponse = (
           await this.sendPayload(instructionsPayload, { modelOptions, useChatCompletion })
         )
 
-        title = title.replaceAll('"', '');
+        if (typeof(titleResponse) == 'string') {
+          title = titleResponse.replaceAll('"', '');
+        }
+
+        if (titleResponse?.type == "text") {
+          title = titleResponse.text;
+        }
+
+        console.log('[api/server/controllers/agents/client.js #titleConvo] titleResponse:', titleResponse);
+        console.log(`[api/server/controllers/agents/client.js #titleConvo] titleResponse: ${titleResponse}`);
 
         const completionTokens = this.getTokenCount(title);
 

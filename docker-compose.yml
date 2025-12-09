@@ -3,14 +3,14 @@
 
 services:
   api:
-    container_name: cribmetrics
+    container_name: hitstaywin-app
     ports:
       - "${PORT}:${PORT}"
     # depends_on:
       #- metrics
       #- mongodb
       #- rag_api
-    image: acrcribmetrics.azurecr.io/cribmetrics:ff6234c32
+    image: acrcribmetrics.azurecr.io/hitstaywin:8eef352
     restart: always
     user: "${UID}:${GID}"
     extra_hosts:
