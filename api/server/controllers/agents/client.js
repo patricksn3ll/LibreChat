@@ -1067,12 +1067,11 @@ ${convo}
           title = titleResponse.replaceAll('"', '');
         }
 
-        if (titleResponse?.type == "text") {
-          title = titleResponse.text;
+        if (titleResponse[0]?.type == "text") {
+          title = titleResponse[0].text;
         }
 
         console.log('[api/server/controllers/agents/client.js #titleConvo] titleResponse:', titleResponse);
-        console.log(`[api/server/controllers/agents/client.js #titleConvo] titleResponse: ${titleResponse}`);
 
         const completionTokens = this.getTokenCount(title);
 
