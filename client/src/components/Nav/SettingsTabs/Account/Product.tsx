@@ -133,11 +133,11 @@ function Product({ open, onOpenChange }: TDialogProps) {
             >
               <button
                 className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full"
-                onClick={() => handlePurchaseClick(p.id, p.amount)}
+                onClick={() => handlePurchaseClick(p.default_price, p.metadata.amount)}
                 disabled={purchasing}
               >
                 <span className="font-semibold text-secondary text-lg">
-                  {(purchasing === p.id) ? 'Redirecting...' : `${p.name || p.id}` }
+                  {(purchasing === p.id) ? 'Redirecting...' : `${p.description || p.id}` }
                 </span>
               </button>
             </div>

@@ -109,6 +109,7 @@ router.get('/', async function (req, res) {
       affiliatesEnabled: isEnabled(process.env.AFFILIATES_ENABLED),
       stripeSubscriptionsEnabled: isEnabled(process.env.STRIPE_SUBSCRIPTIONS_ENABLED),
       stripeMetersEnabled: isEnabled(process.env.STRIPE_METERS_ENABLED),
+      stripeProductSource: appConfig?.stripeProductSource ?? process.env.STRIPE_PRODUCT_SOURCE,
       searchModelsEnabled: isEnabled(process.env.SEARCH_MODELS_ENABLED),
       settingsDataControls: isEnabled(process.env.SETTINGS_DATA_CONTROLS),
       settingsPersonalization: isEnabled(process.env.SETTINGS_PERSONALIZATION),
@@ -133,7 +134,6 @@ router.get('/', async function (req, res) {
       conversationImportMaxFileSize: process.env.CONVERSATION_IMPORT_MAX_FILE_SIZE_BYTES
         ? parseInt(process.env.CONVERSATION_IMPORT_MAX_FILE_SIZE_BYTES, 10)
         : 0,
-      stripeProductSource: process.env.STRIPE_PRODUCT_SOURCE || '',
     };
 
     const minPasswordLength = parseInt(process.env.MIN_PASSWORD_LENGTH, 10);

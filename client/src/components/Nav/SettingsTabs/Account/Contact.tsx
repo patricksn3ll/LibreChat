@@ -49,7 +49,7 @@ const Contact = () => {
         rows={5}
         required
       />
-      <button type="submit" className="btn btn-primary justify-center w-full" disabled={status === 'sending'}>
+      <button type="submit" className="px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-dark disabled:opacity-60 w-full" disabled={status === 'sending'}>
         {status === 'sending' ? 'Sending...' : 'Send'}
       </button>
     </form>
