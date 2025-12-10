@@ -58,14 +58,6 @@ async function getAppConfig(options = {}) {
 
   // For now, return the base config
   // In the future, this is where we'll apply role-based modifications
-  if (typeof process.env.HIDE_MESSAGE_BUTTONS !== 'undefined') {
-    baseConfig.hideMessageButtons = String(process.env.HIDE_MESSAGE_BUTTONS).toLowerCase() === 'true';
-  } else if (typeof baseConfig.hideMessageButtons === 'undefined') {
-    baseConfig.hideMessageButtons = false;
-  }
-
-  console.log('App Config - hideMessageButtons:', baseConfig.hideMessageButtons);
-
   if (role) {
     // TODO: Apply role-based config modifications
     // const roleConfig = await applyRoleBasedConfig(baseConfig, role);
