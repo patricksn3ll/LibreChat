@@ -8,7 +8,6 @@ import MessageAudio from './MessageAudio';
 import Feedback from './Feedback';
 import { cn } from '~/utils';
 import store from '~/store';
-import { hideMessageButtonsAtom } from '~/store/hideMessageButtons';
 import { useGetStartupConfig } from '~/data-provider';
 
 type THoverButtons = {
@@ -130,8 +129,9 @@ const HoverButtons = ({
   const localize = useLocalize();
   const [isCopied, setIsCopied] = useState(false);
   const [TextToSpeech] = useRecoilState<boolean>(store.textToSpeech);
-  const [startUpConfig] = useGetStartupConfig();
-  const hideMessageButtons = startUpConfig?.hideMessageButton;
+  const { data: startupConfig } = useGetStartupConfig();
+  console.log('startupConfig in HoverButtons:', startupConfig);
+  const hideMessageButtons = startupConfig?.hideMessageButtons;
   console.log('hideMessageButtons:', hideMessageButtons);
 
   const endpoint = useMemo(() => {
