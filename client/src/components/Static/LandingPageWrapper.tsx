@@ -130,11 +130,6 @@ function LandingPageWrapper({
         <aside>
           <div className="card card-club">
             {children}             
-            <h4 style={{marginTop:28}}>Join the newsletter</h4>
-            <div className="newsletter">
-              <input type="email" placeholder="Your email" aria-label="Newsletter email" />
-              <button type="button">Join</button>
-            </div>
             <h4 style={{marginTop:28}}>What players say</h4>
             <div className="testimonials" aria-live="polite">
               <div className="t">"I dropped bad habits fast, win-rate improved."<div style={{color:'var(--muted)',marginTop:8}}>— Alex</div></div>
@@ -145,7 +140,9 @@ function LandingPageWrapper({
 
           <section id="features" className="features-section" style={{ marginTop: 20, gridColumn: '1 / -1' }}>
             <h2 style={{ gridColumn: '1 / -1' }}>Features</h2>
-            <p className="muted" style={{ gridColumn: '1 / -1' }}>Master every aspect of blackjack with structured training modules and simulator-backed lessons.</p>
+            <p className="muted" style={{ gridColumn: '1 / -1' }}>
+              Unlock your full blackjack potential with interactive lessons, real-time feedback, and scenario-based practice. Our platform adapts to your skill level, guiding you through game states, strategy choices, and core concepts so you can play smarter and win more often.
+            </p>
 
             <div className="features-grid" style={{ marginTop: 12, gridColumn: '1 / -1' }}>
               <div className="card">

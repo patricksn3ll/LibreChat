@@ -55,6 +55,12 @@
 
     .fullwidth-btn {
       text-align: center;
+      padding:10px 24px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:bold;
+      background:var(--fg);
+      color:var(--bg);
     }
 
     /* Responsive / Mobile */
@@ -105,78 +111,78 @@
       }
     }    
 
-a.button, button, .fullwidth-btn {
-  transition: opacity 0.15s;
-}
-a.button:hover, button:hover, .fullwidth-btn:hover {
-  opacity: 0.75;
-}    
+    a.button, button, .fullwidth-btn {
+      transition: opacity 0.15s;
+    }
+    a.button:hover, button:hover, .fullwidth-btn:hover {
+      opacity: 0.75;
+    }    
 
-nav {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(248, 248, 248, 0.5),
-    rgba(248, 248, 248, 0.5) 10px,
-    rgba(236, 236, 236, 0.5) 10px,
-    rgba(236, 236, 236, 0.5) 20px
-  );
-}
+    nav {
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(248, 248, 248, 0.5),
+        rgba(248, 248, 248, 0.5) 10px,
+        rgba(236, 236, 236, 0.5) 10px,
+        rgba(236, 236, 236, 0.5) 20px
+      );
+    }
 
-.card {
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(248, 248, 248, 0.5),
-    rgba(248, 248, 248, 0.5) 10px,
-    rgba(236, 236, 236, 0.5) 10px,
-    rgba(236, 236, 236, 0.5) 20px
-  );
-}
+    .card {
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(248, 248, 248, 0.5),
+        rgba(248, 248, 248, 0.5) 10px,
+        rgba(236, 236, 236, 0.5) 10px,
+        rgba(236, 236, 236, 0.5) 20px
+      );
+    }
 
-.card-diamond::after {
-  content: '♦';
-  position: absolute;
-  top: -60px;
-  right: -50px;
-  font-size: 280px;
-  color: rgb(170, 67, 67);
-  opacity: 0.3;
-  pointer-events: none;
-}
+    .card-diamond::after {
+      content: '♦';
+      position: absolute;
+      top: -60px;
+      right: -50px;
+      font-size: 280px;
+      color: rgb(170, 67, 67);
+      opacity: 0.3;
+      pointer-events: none;
+    }
 
-.card-spade::after {
-  content: '♠';
-  position: absolute;
-  bottom: -80px;
-  right: -20px;
-  font-size: 280px;
-  color: #e0e0e0;
-  opacity: 0.5;
-  pointer-events: none;
-}
+    .card-spade::after {
+      content: '♠';
+      position: absolute;
+      bottom: -80px;
+      right: -20px;
+      font-size: 280px;
+      color: #e0e0e0;
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-.card-club::after {
-  content: '♣';
-  rotate: -90deg;
-  position: absolute;
-  top: -120px;
-  right: -10px;
-  font-size: 280px;
-  color: #e0e0e0;
-  opacity: 0.5;
-  pointer-events: none;
-}
+    .card-club::after {
+      content: '♣';
+      rotate: -90deg;
+      position: absolute;
+      top: -120px;
+      right: -10px;
+      font-size: 280px;
+      color: #e0e0e0;
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-.card-heart::after {
-  content: '♥';
-  position: absolute;
-  bottom: -140px;
-  right: -45px;
-  font-size: 280px;
-  color: rgb(170, 67, 67);
-  opacity: 0.3;
-  pointer-events: none;
-}
+    .card-heart::after {
+      content: '♥';
+      position: absolute;
+      bottom: -140px;
+      right: -45px;
+      font-size: 280px;
+      color: rgb(170, 67, 67);
+      opacity: 0.3;
+      pointer-events: none;
+    }
 
-.card {
-  position: relative; /* Ensure positioning works */
-}
+    .card {
+      position: relative; /* Ensure positioning works */
+    }
