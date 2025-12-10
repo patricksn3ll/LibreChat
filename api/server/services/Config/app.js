@@ -64,6 +64,8 @@ async function getAppConfig(options = {}) {
     baseConfig.hideMessageButtons = false;
   }
 
+  console.log('App Config - hideMessageButtons:', baseConfig.hideMessageButtons);
+
   if (role) {
     // TODO: Apply role-based config modifications
     // const roleConfig = await applyRoleBasedConfig(baseConfig, role);

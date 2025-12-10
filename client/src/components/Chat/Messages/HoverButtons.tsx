@@ -131,6 +131,8 @@ const HoverButtons = ({
   const [TextToSpeech] = useRecoilState<boolean>(store.textToSpeech);
   const hideMessageButtons = useRecoilValue(hideMessageButtonsAtom);
 
+  console.log('hideMessageButtons:', hideMessageButtons);
+
   const endpoint = useMemo(() => {
     if (!conversation) {
       return '';

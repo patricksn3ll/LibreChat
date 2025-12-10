@@ -10,6 +10,7 @@ export function useConfigLoader() {
       .then((res) => res.json())
       .then((config) => {
         setHideMessageButtons(!!config.hideMessageButtons);
+        console.log('Loaded config - hideMessageButtons:', config.hideMessageButtons);
       });
   }, [setHideMessageButtons]);
 }
