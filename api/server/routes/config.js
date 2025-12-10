@@ -115,6 +115,7 @@ router.get('/', async function (req, res) {
       settingsCommands: isEnabled(process.env.SETTINGS_COMMANDS),
       settingsChat: isEnabled(process.env.SETTINGS_CHAT),
       interface: appConfig?.interfaceConfig,
+      hideMessageButtons: appConfig?.hideMessageButtons ?? isEnabled(process.env.HIDE_MESSAGE_BUTTONS),
       turnstile: appConfig?.turnstileConfig,
       modelSpecs: appConfig?.modelSpecs,
       balance: balanceConfig,

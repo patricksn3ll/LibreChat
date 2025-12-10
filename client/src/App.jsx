@@ -13,6 +13,7 @@ import { getThemeFromEnv } from './utils/getThemeFromEnv';
 import { initializeFontSize } from '~/store/fontSize';
 import { LiveAnnouncer } from '~/a11y';
 import { router } from './routes';
+import { useConfigLoader } from '~/hooks/useConfigLoader';
 
 const App = () => {
   const { setError } = useApiErrorBoundary();
@@ -33,6 +34,8 @@ const App = () => {
 
   // Load theme from environment variables if available
   const envTheme = getThemeFromEnv();
+
+  useConfigLoader();
 
   return (
     <QueryClientProvider client={queryClient}>

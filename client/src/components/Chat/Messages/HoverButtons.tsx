@@ -1,5 +1,5 @@
 import React, { useState, useMemo, memo } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import type { TConversation, TMessage, TFeedback } from 'librechat-data-provider';
 import { EditIcon, Clipboard, CheckMark, ContinueIcon, RegenerateIcon } from '@librechat/client';
 import { useGenerationsByLatest, useLocalize } from '~/hooks';
@@ -8,6 +8,7 @@ import MessageAudio from './MessageAudio';
 import Feedback from './Feedback';
 import { cn } from '~/utils';
 import store from '~/store';
+import { hideMessageButtonsAtom } from '~/store/hideMessageButtons';
 
 type THoverButtons = {
   isEditing: boolean;
@@ -58,10 +59,10 @@ const extractMessageContent = (message: TMessage): string => {
           return '';
         }
         if ('think' in part) {
-          if (typeof think === 'string') {
-            return think;
+          if (typeof part.think === 'string') {
+            return part.think;
           }
-          return think && 'text' in think ? think.text || '' : '';
+          return part.think && 'text' in part.think ? part.think.text || '' : '';
         }
         return '';
       })
@@ -128,6 +129,7 @@ const HoverButtons = ({
   const localize = useLocalize();
   const [isCopied, setIsCopied] = useState(false);
   const [TextToSpeech] = useRecoilState<boolean>(store.textToSpeech);
+  const hideMessageButtons = useRecoilValue(hideMessageButtonsAtom);
 
   const endpoint = useMemo(() => {
     if (!conversation) {
@@ -219,7 +221,7 @@ const HoverButtons = ({
       />
 
       {/* Edit Button */}
-      {isEditableEndpoint && (
+      {isEditableEndpoint && !hideMessageButtons && (
         <HoverButton
           id={`edit-${message.messageId}`}
           onClick={onEdit}
@@ -234,6 +236,7 @@ const HoverButtons = ({
       )}
 
       {/* Fork Button */}
+      {!hideMessageButtons && (
       <Fork
         messageId={message.messageId}
         conversationId={conversation.conversationId}
@@ -241,14 +244,15 @@ const HoverButtons = ({
         latestMessageId={latestMessage?.messageId}
         isLast={isLast}
       />
+      )}
 
       {/* Feedback Buttons */}
-      {!isCreatedByUser && handleFeedback != null && (
+      {!hideMessageButtons && !isCreatedByUser && handleFeedback != null && (
         <Feedback handleFeedback={handleFeedback} feedback={message.feedback} isLast={isLast} />
       )}
 
       {/* Regenerate Button */}
-      {regenerateEnabled && (
+      {!hideMessageButtons && regenerateEnabled && (
         <HoverButton
           onClick={regenerate}
           title={localize('com_ui_regenerate')}
@@ -259,7 +263,7 @@ const HoverButtons = ({
       )}
 
       {/* Continue Button */}
-      {continueSupported && (
+      {!hideMessageButtons && continueSupported && (
         <HoverButton
           onClick={(e) => e && handleContinue(e)}
           title={localize('com_ui_continue')}
