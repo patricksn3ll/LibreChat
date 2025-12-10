@@ -24,7 +24,7 @@ export default function RetrievalCall({
         progress={progress}
         onClick={() => ({})}
         inProgressText={'Analysing...'}
-        finishedText={'Used Retrieval'}
+        finishedText={'Accessed knowledge base'}
         hasInput={false}
         popover={false}
       />    

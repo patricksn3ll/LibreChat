@@ -24,16 +24,11 @@ const StaticFooter = memo(
 
     return (
       <footer>
-        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <div>
-            <strong style={{ color: 'var(--accent)' }}>{config?.appTitle.split('|')[0] || 'CribMetrics'}</strong> — {process.env.CUSTOM_TAG_LINE || config?.customTagLine || 'Real Estate Market Insights Made Simple'}
-          </div>
-          <div style={{ color: '#8892A6' }}>
-            Data Sources: Public Real Estate Sales&nbsp;|&nbsp; 
-            <a href={`mailto:${config?.emailFrom}`} id="contact-link" rel="noopener noreferrer">Contact</a>&nbsp;|&nbsp;
-            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>&nbsp;|&nbsp;
-            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></div>      
-        </div>
+        <strong>{config?.appTitle.split('|')[0] || 'CribMetrics'}</strong>
+        <p>{process.env.CUSTOM_TAG_LINE || config?.customTagLine || 'Built for practice, designed for results'}</p>
+        <a href={`mailto:${config?.emailFrom}`} id="contact-link" rel="noopener noreferrer">Contact</a>&nbsp;|&nbsp;
+        <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>&nbsp;|&nbsp;
+        <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>   
       </footer>     
     );
   },

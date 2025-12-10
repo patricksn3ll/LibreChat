@@ -6,7 +6,7 @@ import FinishedIcon from './FinishedIcon';
 import { cn } from '~/utils';
 
 const wrapperClass =
-  'progress-text-wrapper text-token-text-secondary relative -mt-[0.75px] h-5 w-full leading-5';
+  'progress-text-wrapper text-token-text-secondary relative mt-2 h-8 w-full leading-5';
 
 const Wrapper = ({ popover, children }: { popover: boolean; children: React.ReactNode }) => {
   if (popover) {
