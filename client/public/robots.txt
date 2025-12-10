@@ -1,3 +1,6 @@
 User-agent: *
-Disallow: /api/
+Disallow: /private/
+Disallow: /tmp/
 Allow: /
+
+Sitemap: https://www.hitstaywin.com/sitemap.xml
