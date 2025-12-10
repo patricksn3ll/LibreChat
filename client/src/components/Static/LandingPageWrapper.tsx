@@ -67,158 +67,112 @@ function LandingPageWrapper({
 
   return (
     <>
+      <div className="wrap">
+        <header>
+          <div className="logo" aria-label="CribMetrics">
+            <div className="mark">
+              <img
+                src="assets/favicon-48x48.png"
+                className=""
+                alt={startupConfig?.appTitle ?? 'Logo'}
+              />              
+            </div>
+            <div>
+              <div style={{ fontWeight: 800, color: 'var(--alt)' }}>CribMetrics</div>
+              <div style={{ fontSize: 12, color: '#9CA3AF' }}>Instant market signals | Zip-to-state</div>
+            </div>
+          </div>
+          <nav>
+            <a href="javascript://" onClick={() => { location.hash = '#features'; }}>Features</a>
+            <a href="/register">Join</a>
+          </nav>
+        </header>
 
-  <nav>
-    <div className="inner">
-      <div className="brand" aria-label="HitStayWin brand">
-        <svg viewBox="0 0 64 64" width="28" height="28" fill="currentColor" aria-hidden="true">
-          <g fill="currentColor">
-            <circle cx="20" cy="28" r="8"/>
-            <circle cx="44" cy="28" r="8"/>
-            <circle cx="32" cy="18" r="8"/>
-            <path d="M28 36 L36 36 L34 52 L30 52 Z"/>
-          </g>
-        </svg>
-        <strong>HitStayWin</strong>
-      </div>
+        <section className="hero">
+          <div className="left">
+            <div style={{ color: 'var(--accent)', fontWeight: 800, fontSize: '1.2rem', letterSpacing: '.6px' }}>Real Estate Market Insights Made Simple</div>
+            <h1 className="h1">Make faster, smarter housing decisions with AI-driven data</h1>
+            <p className="lead">CribMetrics combines AI valuation, neighborhood signals, and the latest public sales data (monthly refresh) so you can move from curiosity to decision in minutes — whether you're buying, investing, or advising clients. All by chatting with our AI Real Estate Market Analyst.</p>
 
-      <div className="links" role="navigation" aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="#strategies">Strategies</a>
-        <a href="#login">Login</a>
-      </div>
-    </div>
-  </nav>
+            <div className="cta">
+              <button className="btn-landing primary" onClick={() => { location.href="/register"}}>Join for FREE</button>
+              <button className="btn-landing ghost" onClick={() => { location.hash = '#features'; }}>See features</button>
+            </div>
 
-  <div className="hero">
-    <div className="wrap">
-
-      <div className="grid">
-
-        <main>
-          <div className="card card-spade" id="overview">
-            <h2>Practice drills that stick</h2>
-            <p className="muted">AI chat sessions focused on common blackjack scenarios: hard/soft totals, doubling, splitting, and dealer reads. Train accuracy and decision speed with instant feedback.</p>
-
-            <h3 style={{ marginTop: 16 }}>How it works</h3>
-            <ol className="muted">
-              <li>Pick rules & deck count.</li>
-              <li>Run hands in the simulator.</li>
-              <li>Receive instant strategy feedback and explanations.</li>
-            </ol>
-
-            <div style={{ marginTop: 24, marginBottom: 10 }}>
-              <a href="#features" style={{ padding: '10px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 'bold', background: 'var(--fg)', color: 'var(--bg)' }}>Features</a>
-              <a href="#strategies" style={{ padding: '10px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 'bold', background: 'var(--fg)', color: 'var(--bg)' }}>Strategies</a>
-              <a href="/signup" style={{ padding: '10px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 'bold', background: 'var(--fg)', color: 'var(--bg)' }}>Start Free Trial</a>
+            <div className="stat-row">
+              <div className="stat">
+                <div className="big">Zip → State</div>
+                <small>Drilldown scales</small>
+              </div>
+              <div className="stat">
+                <div className="big">Monthly</div>
+                <small>Data refresh</small>
+              </div>
+              <div className="stat">
+                <div className="big">Usage Based</div>
+                <small>No recurring fees!</small>
+              </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: 12, marginTop: 14, flexWrap: 'wrap' }}>
-            <div className="card card-diamond" style={{ flex: 1, minWidth: 220 }}>
-              <h4>Mastery</h4>
-              <p className="muted">Help users understand and apply optimal blackjack strategy by explaining reasoning behind strategic decisions.</p>
+          <aside className="panel">
+            <strong style={{ color: 'var(--accent)' }}>Connect Now</strong>
+            <p style={{ margin: '8px 0', color: '#9CA3AF' }}>Chat with your AI Real Estate Market Analyst. .</p>
+
+           {children}          
+
+          </aside>
+        </section>
+
+        <section id="features" style={{ marginTop: 28 }}>
+          <h3 className="h3" style={{ color: 'var(--accent)' }}>Built for quick decisions</h3>
+          <div className="features">
+            <div className="feature">
+              <h4 className="h4">Monthly Updated Market Data</h4>
+              <p className="paper">Get insights you can trust, sourced from Redfin and refreshed every month for accuracy.</p>
             </div>
-            <div className="card card-heart" style={{ flex: 1, minWidth: 220 }}>
-              <h4>Interactive</h4>
-              <p className="muted">Teach and reinforce blackjack techniques by provide interactive practice and quiz sessions.</p>
+            <div className="feature">
+              <h4 className="h4">Location Drilldowns</h4>
+              <p className="paper">Zoom from broad trends down to the hyper-local details that actually matter.</p>
+            </div>
+            <div className="feature">
+              <h4 className="h4">AI-Driven Trend Interpretation</h4>
+              <p className="paper">Your AI analyst highlights price shifts, inventory changes, and meaningful patterns in plain language.</p>
             </div>
           </div>
+        </section>
 
-        </main>
+        <section id="benefit" style={{ marginTop: 28 }}>
+          <h3 className="h3" style={{ color: 'var(--accent)' }}>Who CribMetrics Is For</h3>
+          <div className="benefits">
+            <div className="benefit"><span>✓</span> <div><strong>Investors</strong><br />Identify undervalued areas early and time your entries with confidence.</div></div>
+            <div className="benefit"><span>✓</span> <div><strong>Agents & Brokers</strong><br />Elevate your client conversations with data-backed insights and professional-grade market intelligence.</div></div>
+            <div className="benefit"><span>✓</span> <div><strong>Homeowners & Buyers</strong><br />Understand your neighborhood's direction and make smarter buy-sell decisions.</div></div>
+            <div className="benefit"><span>✓</span> <div><strong>Analysts & Data-Driven Pros</strong><br />Get structured, granular market data without building your own pipelines or dealing with inconsistent sources.</div></div>
+          </div>
+        </section>
 
-        <aside>
-          <div className="card card-club">
-            {children}             
-            <h4 style={{marginTop:28}}>What players say</h4>
-            <div className="testimonials" aria-live="polite">
-              <div className="t">"I dropped bad habits fast, win-rate improved."<div style={{color:'var(--muted)',marginTop:8}}>— Alex</div></div>
-              <div className="t">"Clear, practical, and fun drills."<div style={{color:'var(--muted)',marginTop:8}}>— Jamie</div></div>
+        <section id="trust" style={{ marginTop: 28 }}>
+          <h3 className="h3" style={{ color: 'var(--accent)' }}>Why People Trust CribMetrics</h3>
+          <div className="features">
+            <div className="feature">
+              <h4 className="h4">Reliable Data</h4>
+              <p className="paper">Powered by consistently updated Redfin housing data.</p>
+            </div>
+            <div className="feature">
+              <h4 className="h4">Clear Insights</h4>
+              <p className="paper">No jargon, no guesswork—just straightforward answers you can use.</p>
+            </div>
+            <div className="feature">
+              <h4 className="h4">Privacy-First Approach</h4>
+              <p className="paper">Your data stays yours. No tracking, no selling information.</p>
             </div>
           </div>
-        </aside>
+        </section>
 
-          <section id="features" className="features-section" style={{ marginTop: 20, gridColumn: '1 / -1' }}>
-            <h2 style={{ gridColumn: '1 / -1' }}>Features</h2>
-            <p className="muted" style={{ gridColumn: '1 / -1' }}>
-              Unlock your full blackjack potential with interactive lessons, real-time feedback, and scenario-based practice. Our platform adapts to your skill level, guiding you through game states, strategy choices, and core concepts so you can play smarter and win more often.
-            </p>
-
-            <div className="features-grid" style={{ marginTop: 12, gridColumn: '1 / -1' }}>
-              <div className="card">
-                <h3><span className="icon">♣️</span>Interpret Game States</h3>
-                <p className="muted">Understand the user’s description of the current blackjack hand, dealer upcard, cards played, and optional game conditions such as, decks in shoe, dealer rules, doubling/splitting permissions, etc.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">🧮</span>Provide Strategy Advice</h3>
-                <p className="muted">Give clear, rule-based recommendations for the optimal move — *Hit, Stand, Double, Split, or Surrender* — and explain *why* that move is optimal under the current conditions.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">💰</span>Teach Concepts</h3>
-                <p className="muted">
-                Explain basic strategy logic and underlying probabilities. Demonstrate card counting systems (like Hi-Lo) step-by-step. Include expected value (EV) comparisons when relevant.
-                </p>
-              </div>
-
-            </div>
-          </section>        
-
-          <section id="strategies" className="strategy-section" style={{ marginTop: 20, gridColumn: '1 / -1' }}>
-            <h2 style={{ gridColumn: '1 / -1' }}>Strategies</h2>
-            <p className="muted" style={{ gridColumn: '1 / -1' }}>Master every aspect of blackjack with structured training modules and simulator-backed lessons.</p>
-
-            <div className="strategy-grid" style={{ marginTop: 12, gridColumn: '1 / -1' }}>
-              <div className="card">
-                <h3><span className="icon">♣️</span>Basic Strategy</h3>
-                <p className="muted">Learn the mathematically optimal plays for every player hand and dealer upcard. Covers hit/stand, doubling, splitting, and soft-hand rules.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">🧮</span>Card Counting</h3>
-                <p className="muted">Train the Hi-Lo counting system with automated running and true count tracking. See how counts affect bet sizing and expected advantage (training only).</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">💰</span>Bankroll Management</h3>
-                <p className="muted">Simulated bankroll tracking, goals, stop-loss settings, and recommended responsible-play limits to keep practice disciplined.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">🏳️</span>Surrender Strategy</h3>
-                <p className="muted">Identify hands where surrendering reduces long-term losses. Practice late/early surrender scenarios based on table rules.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">⚡</span>Doubling Down</h3>
-                <p className="muted">Master high-EV doubling opportunities (especially 10/11 scenarios) including soft-hand doubling and dealer-sensitive cases.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">✂️</span>Splitting Pairs</h3>
-                <p className="muted">Train splitting decisions — always split Aces & 8s, never split 10s, and practice borderline splits against dealer upcards and rule variations.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">🎲</span>Dealer Behavior</h3>
-                <p className="muted">Simulate dealer rules (H17 vs S17) and learn how dealer behavior impacts optimal strategy and EV.</p>
-              </div>
-
-              <div className="card">
-                <h3><span className="icon">📘</span>House Rules Variations</h3>
-                <p className="muted">Toggle DAS, RSA, early/late surrender, number of decks, and other house rules to practice for real tables and online games.</p>
-              </div>
-            </div>
-          </section>
-
-          <StaticFooter />
+        <StaticFooter />
 
       </div>
-
-    </div>
-  </div>
-
     </>
 
   );
