@@ -42,8 +42,6 @@ async function saveBufferToAzure({
     return blockBlobClient.url;
   } catch (error) {
     logger.error('[saveBufferToAzure] Error uploading buffer:', error);    
-    logger.error('blobPath: ', blobPath);
-    logger.error('access: ', access);
     throw error;
   }
 }
