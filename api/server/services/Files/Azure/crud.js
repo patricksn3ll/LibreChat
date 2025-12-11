@@ -31,17 +31,15 @@ async function saveBufferToAzure({
 }) {
   try {
     const containerClient = await getAzureContainerClient(containerName);
-    logger.error('const containerClient = await getAzureContainerClient(containerName)', containerName);    
     const access = AZURE_STORAGE_PUBLIC_ACCESS?.toLowerCase() === 'true' ? 'blob' : undefined;
     // Create the container if it doesn't exist. This is done per operation.
     await containerClient.createIfNotExists({ access });
-    logger.error('await containerClient.createIfNotExists({ access });');
     const blobPath = `${basePath}/${userId}/${fileName}`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobPath);
     await blockBlobClient.uploadData(buffer);
     return blockBlobClient.url;
   } catch (error) {
-    logger.error('[saveBufferToAzure] Error uploading buffer:', error);    
+    logger.error('[saveBufferToAzure] Error uploading buffer:', error);
     throw error;
   }
 }
