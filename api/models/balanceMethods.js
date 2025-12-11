@@ -28,7 +28,6 @@ const checkBalanceRecord = async function ({
   // Retrieve the balance record
   let record = await Balance.findOne({ user }).lean();
   if (!record) {
-    logger.debug('[Balance.check] No balance record found for user', { user });
     return {
       canSpend: false,
       balance: 0,
@@ -36,18 +35,6 @@ const checkBalanceRecord = async function ({
     };
   }
   let balance = record.tokenCredits;
-
-  logger.debug('[Balance.check] Initial state', {
-    user,
-    model,
-    endpoint,
-    valueKey,
-    tokenType,
-    amount,
-    balance,
-    multiplier,
-    endpointTokenConfig: !!endpointTokenConfig,
-  });
 
   // Only perform auto-refill if spending would bring the balance to 0 or below
   if (balance - tokenCost <= 0 && record.autoRefillEnabled && record.refillAmount > 0) {

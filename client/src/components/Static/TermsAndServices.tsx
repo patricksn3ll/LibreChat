@@ -1,6 +1,4 @@
 import { useMemo, useEffect, memo } from 'react';
-import { getConfigDefaults } from 'librechat-data-provider';
-import { useGetStartupConfig } from '~/data-provider';
 import { useGetStartupConfig } from '~/data-provider';
 import StaticFooter from './StaticFooter'
 import '../../custom-theme.css';
@@ -9,35 +7,33 @@ interface TermsAndServicesProps {
 
 }
 
-const defaultInterface = getConfigDefaults().interface;
-
 const TermsAndServices = memo(
   ({
 
   }: TermsAndServicesProps) => {
     const { data: startupConfig } = useGetStartupConfig();
-    const interfaceConfig = useMemo(
-      () => startupConfig?.interface ?? defaultInterface,
-      [startupConfig],
-    );
 
     useEffect(() => {
 
     }, []);
 
     return (
-      <>
+      <div className="wrap">
 
         <header>
-            <h1>TERMS OF SERVICE</h1>
+            <div className="flex flex-col space-y-6 p-6 max-w-4xl">
+                <div className="prose dark:prose-invert max-w-none">
+                    <h1>TERMS OF SERVICE</h1>
+                </div>
+            </div>
         </header>
 
         <section>
-            <div className="flex flex-col space-y-6 p-6 max-w-4xl mx-auto">
+            <div className="flex flex-col space-y-6 p-6 max-w-4xl">
                 <div className="prose dark:prose-invert max-w-none">
 
                     <section>
-                        <p><strong>Effective Date:</strong> December 11, 2024</p>
+                        <p><strong>Effective Date:</strong> November 11, 2025</p>
                         <p>Thank you for choosing our platform. These Terms of Service (“Terms”) govern your use of our website, applications, and related services (“Services”). By accessing or using our Services, you agree to be bound by these Terms. Please read them carefully.</p>
                     </section>
 
@@ -164,7 +160,7 @@ const TermsAndServices = memo(
         </section>
 
         <StaticFooter />
-      </>
+      </div>
     );
   },
 );

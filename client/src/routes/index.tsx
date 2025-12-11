@@ -15,13 +15,20 @@ import { AuthContextProvider } from '~/hooks/AuthContext';
 import RouteErrorBoundary from './RouteErrorBoundary';
 import StartupLayout from './Layouts/Startup';
 import LoginLayout from './Layouts/Login';
+import LandingLayout from './Layouts/LandingLayout';
 import StaticFilesLayout from './Layouts/StaticFiles'
 import dashboardRoutes from './Dashboard';
 import ShareRoute from './ShareRoute';
 import ChatRoute from './ChatRoute';
 import Search from './Search';
 import Root from './Root';
-import { HelpAndFAQ, PrivacyPolicy, TermsAndServices, Plans, Landing } from '~/components/Static';
+import { 
+  HelpAndFAQ, 
+  PrivacyPolicy, 
+  TermsAndServices, 
+  Plans, 
+  LandingPageWrapper 
+} from '~/components/Static';
 import SubscriptionSuccess from '~/components/Subscription/Success';
 import SubscriptionCancel from '~/components/Subscription/Cancel';
 import Subscription from '~/components/Nav/SettingsTabs/Account/Subscription';
@@ -108,14 +115,23 @@ export const router = createBrowserRouter(
       ],
       errorElement: <RouteErrorBoundary />,
     },    
-    {
-      path: 'landing',
-      element: <StaticFilesLayout />,
-      children: [
-        { path: '', element:  <Landing /> },
-      ],
-      errorElement: <RouteErrorBoundary />,
-    },   
+    // {
+    //   path: 'landing',
+    //   element: <LandingPageWrapper />,
+    //   errorElement: <RouteErrorBoundary />,      
+    //   children: [
+    //     { 
+    //       path: 'landing', 
+    //       element:  <LandingLayout />,
+    //       children: [
+    //         {
+    //           path: 'landing',
+    //           element: <Login />,             
+    //         }
+    //       ] 
+    //     },
+    //   ],
+    // },   
     {
       path: 'plans',
       element: <StaticFilesLayout />,
@@ -130,7 +146,7 @@ export const router = createBrowserRouter(
       children: [
         {
           path: '/',
-          element: <LoginLayout />,
+          element: <LandingLayout />,
           children: [
             {
               path: 'login',

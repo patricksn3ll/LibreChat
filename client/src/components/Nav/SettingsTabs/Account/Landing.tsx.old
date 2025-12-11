@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StaticFooter from './StaticFooter'
-import '../../custom-theme.css';
+//import '../../custom-theme.css';
 
 export default function  Landing() {
   const navigate = useNavigate();

@@ -27,7 +27,7 @@ const SpecIcon: React.FC<SpecIconProps> = ({ currentSpec, endpointsConfig }) => 
         iconURL={iconURL}
         altName={currentSpec.name}
         containerStyle={{ width: 20, height: 20 }}
-        className="icon-md shrink-0 overflow-hidden rounded-full"
+        className="icon-md shrink-0 overflow-hidden rounded-full icon-logo"
         endpoint={endpoint || undefined}
       />
     );

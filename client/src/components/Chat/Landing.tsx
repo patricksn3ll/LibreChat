@@ -59,6 +59,13 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
     });
   }, [conversation?.endpoint, conversation?.iconURL, endpointsConfig]);
 
+  // If no assistant_id is set, and it's "new", use the first preset from startup config
+  let assistant_id = conversation?.assistant_id;
+  if (assistant_id === "new" && 
+      startupConfig?.modelSpecs?.list[0]?.preset.assistant_id) {
+    assistant_id = startupConfig?.modelSpecs?.list[0]?.preset.assistant_id;
+  }
+  
   const { entity, isAgent, isAssistant } = getEntity({
     endpoint: endpointType,
     agentsMap,
@@ -171,12 +178,32 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
               </TooltipAnchor>
             )}
           </div>
-          {((isAgent || isAssistant) && name) || name ? (
-            <div className="flex flex-col items-center gap-0 p-2">
+
+        {(() => {
+          if (((isAgent || isAssistant) && name) || name) {
+            return (
+              <div className="flex xflex-col items-center gap-0 p-2">
+                <SplitText
+                  key={`split-text-${name}`}
+                  text={name}
+                  className={`${getTextSizeClass(name)} font-medium text-text-primary`}
+                  delay={50}
+                  textAlign="center"
+                  animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                  animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                  easing={easings.easeOutCubic}
+                  threshold={0}
+                  rootMargin="0px"
+                  onLineCountChange={handleLineCountChange}
+                />
+              </div>
+            );
+          } else if (!startupConfig?.skipLandingAnimation) {
+            return (
               <SplitText
-                key={`split-text-${name}`}
-                text={name}
-                className={`${getTextSizeClass(name)} font-medium text-text-primary`}
+                key={`split-text-${greetingText}${user?.name ? '-user' : ''}`}
+                text={greetingText}
+                className={`${getTextSizeClass(greetingText)} font-medium text-text-primary`}
                 delay={50}
                 textAlign="center"
                 animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
@@ -186,22 +213,12 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
                 rootMargin="0px"
                 onLineCountChange={handleLineCountChange}
               />
-            </div>
-          ) : (
-            <SplitText
-              key={`split-text-${greetingText}${user?.name ? '-user' : ''}`}
-              text={greetingText}
-              className={`${getTextSizeClass(greetingText)} font-medium text-text-primary`}
-              delay={50}
-              textAlign="center"
-              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-              easing={easings.easeOutCubic}
-              threshold={0}
-              rootMargin="0px"
-              onLineCountChange={handleLineCountChange}
-            />
-          )}
+            );
+          } else {
+            return <></>;
+          }
+        })()}      
+      
         </div>
         {description && (
           <div className="animate-fadeIn mt-4 max-w-md text-center text-sm font-normal text-text-primary">

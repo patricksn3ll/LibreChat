@@ -65,8 +65,8 @@ router.get('/', async function (req, res) {
 
     const balanceConfig = getBalanceConfig(appConfig);
 
-    /** @type {TStartupConfig} */
-    const payload = {
+  /** @type {TStartupConfig} */
+  const payload = {
       appTitle: process.env.APP_TITLE || '',
       socialLogins: appConfig?.registration?.socialLogins ?? defaultSocialLogins,
       discordLoginEnabled: !!process.env.DISCORD_CLIENT_ID && !!process.env.DISCORD_CLIENT_SECRET,
@@ -96,6 +96,7 @@ router.get('/', async function (req, res) {
         !!process.env.EMAIL_PASSWORD &&
         !!process.env.EMAIL_FROM,
       passwordResetEnabled,
+      emailFrom: process.env.EMAIL_FROM,
       showBirthdayIcon:
         isBirthday() ||
         isEnabled(process.env.SHOW_BIRTHDAY_ICON) ||
@@ -103,16 +104,19 @@ router.get('/', async function (req, res) {
       helpAndFaqURL: process.env.HELP_AND_FAQ_URL || '/faq',
       fileAttachRequiresSubscription: isEnabled(process.env.FILE_ATTACH_REQUIRES_SUBSCRIPTION),
       hideUserFiles: isEnabled(process.env.HIDE_USER_FILES),
+      hideCodeAnalysisOutput: isEnabled(process.env.HIDE_CODE_ANALYSIS_OUTPUT),
+      skipLandingAnimation: isEnabled(process.env.SKIP_LANDING_ANIMATION),
       affiliatesEnabled: isEnabled(process.env.AFFILIATES_ENABLED),
       stripeSubscriptionsEnabled: isEnabled(process.env.STRIPE_SUBSCRIPTIONS_ENABLED),
       stripeMetersEnabled: isEnabled(process.env.STRIPE_METERS_ENABLED),
+      stripeProductSource: appConfig?.stripeProductSource ?? process.env.STRIPE_PRODUCT_SOURCE,
       searchModelsEnabled: isEnabled(process.env.SEARCH_MODELS_ENABLED),
       settingsDataControls: isEnabled(process.env.SETTINGS_DATA_CONTROLS),
       settingsPersonalization: isEnabled(process.env.SETTINGS_PERSONALIZATION),
       settingsCommands: isEnabled(process.env.SETTINGS_COMMANDS),
       settingsChat: isEnabled(process.env.SETTINGS_CHAT),
-      homeRoute: process.env.HOME_ROUTE || '/login',
       interface: appConfig?.interfaceConfig,
+      hideMessageButtons: appConfig?.hideMessageButtons ?? isEnabled(process.env.HIDE_MESSAGE_BUTTONS),
       turnstile: appConfig?.turnstileConfig,
       modelSpecs: appConfig?.modelSpecs,
       balance: balanceConfig,
@@ -190,9 +194,17 @@ router.get('/', async function (req, res) {
       payload.ldap = ldap;
     }
 
+    if (typeof process.env.EMAIL_FROM === 'string') {
+      payload.emailFrom = process.env.EMAIL_FROM;
+    }
+
     if (typeof process.env.CUSTOM_FOOTER === 'string') {
       payload.customFooter = process.env.CUSTOM_FOOTER;
     }
+
+    if (typeof process.env.CUSTOM_TAG_LINE === 'string') {
+      payload.customTagLine = process.env.CUSTOM_TAG_LINE;
+    }    
 
     await cache.set(CacheKeys.STARTUP_CONFIG, payload);
     return res.status(200).send(payload);

@@ -30,7 +30,16 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
     if (isInitializing) {
       return '';
     }
-    return LaTeXParsing ? preprocessLaTeX(content) : content;
+
+    const processed = LaTeXParsing ? preprocessLaTeX(content) : content;
+
+    // Remove inline citations like ^3^ from processed content
+    let withoutCitations = processed.replace(/^\d+\..*?^.*$/g, '').replace(/\^\d+\^/g, '');
+
+    // Remove citations with filename: e.g., "^1. ...txt"
+    withoutCitations = withoutCitations.replace(/\^\d+\.\^\s.*?\.txt/g, '');
+
+    return withoutCitations;
   }, [content, LaTeXParsing, isInitializing]);
 
   const rehypePlugins = useMemo(
@@ -76,19 +85,17 @@ const Markdown = memo(({ content = '', isLatestMessage }: TContentProps) => {
             remarkPlugins={remarkPlugins}
             /* @ts-ignore */
             rehypePlugins={rehypePlugins}
-            components={
-              {
-                code,
-                a,
-                p,
-                artifact: Artifact,
-                citation: Citation,
-                'highlighted-text': HighlightedText,
-                'composite-citation': CompositeCitation,
-              } as {
-                [nodeType: string]: React.ElementType;
-              }
-            }
+            components={{
+              code,
+              a,
+              p,
+              artifact: Artifact,
+              citation: Citation,
+              'highlighted-text': HighlightedText,
+              'composite-citation': CompositeCitation,
+            } as {
+              [nodeType: string]: React.ElementType;
+            }}
           >
             {currentContent}
           </ReactMarkdown>

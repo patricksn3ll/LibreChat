@@ -5,7 +5,7 @@ import { BrowserTTS, ExternalTTS } from '~/components/Audio/TTS';
 import { TTSEndpoints } from '~/common';
 import store from '~/store';
 
-function MessageAudio(props: TMessageAudio) {
+function MessageAudio(props: TMessageAudio) {  
   const engineTTS = useRecoilValue<string>(store.engineTTS);
 
   const TTSComponents = {

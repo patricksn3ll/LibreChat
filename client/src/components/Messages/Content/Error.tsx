@@ -98,15 +98,15 @@ const errorMessages = {
       windowInMinutes > 1 ? `${windowInMinutes} minutes` : 'minute'
     }.`;
   },
-  token_balance: (json: TTokenBalance, _localize: LocalizeFunction, openBalance: () => void) => {
+  token_balance: (json: TTokenBalance, _localize: LocalizeFunction, buyMore: () => void) => {
     const { balance, tokenCost, promptTokens, generations } = json;
     //const message = `Insufficient Funds! Balance: ${balance}. Prompt tokens: ${promptTokens}.  Cost: ${tokenCost}.`;
-        const message = `Insufficient Funds! You have ${new Intl.NumberFormat().format(balance)} credits left, but need ${new Intl.NumberFormat().format(tokenCost)}`;
+    const message = `Insufficient Funds! You have ${new Intl.NumberFormat().format(balance)} credits left, but need ${new Intl.NumberFormat().format(tokenCost)}`;
     return (
       <>
         {message}
         <div className="text-center">
-          <button className="btn-secondary mt-6" onClick={openBalance}>Buy More</button>
+          <button className="btn btn-secondary mt-6" onClick={buyMore}>Buy More</button>
         </div>
         {generations && (
           <>
@@ -133,6 +133,8 @@ const Error = ({ text }: { text: string }) => {
   const errorMessage = text.length > 512 && !jsonString ? text.slice(0, 512) + '...' : text;
   const defaultResponse = `Something went wrong. Here's the specific error message we encountered: ${errorMessage}`;
 
+  console.log('Error component received text:', text);
+
   if (!isJson(jsonString)) {
     return defaultResponse;
   }
@@ -140,9 +142,16 @@ const Error = ({ text }: { text: string }) => {
   const json = JSON.parse(jsonString);
   const errorKey = json.code || json.type;
   const keyExists = errorKey && errorMessages[errorKey];
+  const lastError = JSON.parse(localStorage.getItem('last_error') || '{}');
+  
+  if (lastError?.errorKey === 'token_balance') {
+    localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json }) || '{}');
+    return errorMessages[lastError.errorKey](lastError.json, localize, buyMore);
+  }
+  localStorage.setItem('last_error', JSON.stringify({ errorKey: errorKey, json: json  }));
 
   if (keyExists && errorKey === 'token_balance' && typeof errorMessages[errorKey] === 'function') {
-    return errorMessages[errorKey](json, localize, openBalance);
+    return errorMessages[errorKey](json, localize, buyMore);
   } else if (keyExists && typeof errorMessages[errorKey] === 'function') {
     return errorMessages[errorKey](json, localize);
   } else if (keyExists && keyExists.startsWith(localizedErrorPrefix)) {
@@ -151,6 +160,11 @@ const Error = ({ text }: { text: string }) => {
     return errorMessages[errorKey];
   } else {
     return defaultResponse;
+  }
+
+  function buyMore() {
+    localStorage.setItem('last_error', '{}');
+    openBalance();
   }
 };
 

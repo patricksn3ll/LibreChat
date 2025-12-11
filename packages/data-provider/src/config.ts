@@ -651,6 +651,7 @@ export type TStartupConfig = {
   showBirthdayIcon: boolean;
   helpAndFaqURL: string;
   customFooter?: string;
+  customTagLine?: string;
   modelSpecs?: TSpecsConfig;
   modelDescriptions?: Record<string, Record<string, string>>;
   sharedLinksEnabled: boolean;
@@ -687,6 +688,7 @@ export type TStartupConfig = {
   >;
   mcpPlaceholder?: string;
   conversationImportMaxFileSize?: number;
+  stripeProductSource?: string;
 };
 
 export enum OCRStrategy {
@@ -839,6 +841,20 @@ export const configSchema = z.object({
   turnstile: turnstileSchema.optional(),
   fileStrategy: fileSourceSchema.default(FileSources.local),
   fileStrategies: fileStrategiesSchema,
+  emailFrom: z.string().default('info@cribmetrics.com'),
+  hideCodeAnalysisOutput: z.boolean().default(false),
+  helpAndFaqURL: z.string().default('/faq'),
+  fileAttachRequiresSubscription: z.boolean().default(false),
+  hideUserFiles: z.boolean().default(false),  
+  skipLandingAnimation: z.boolean().default(false),
+  affiliatesEnabled: z.boolean().default(false),
+  stripeSubscriptionsEnabled: z.boolean().default(false),
+  stripeMetersEnabled: z.boolean().default(false),
+  searchModelsEnabled: z.boolean().default(false),
+  settingsDataControls: z.boolean().default(false),
+  settingsPersonalization: z.boolean().default(false),
+  settingsCommands: z.boolean().default(false),
+  settingsChat: z.boolean().default(false),
   actions: z
     .object({
       allowedDomains: z.array(z.string()).optional(),
@@ -881,6 +897,7 @@ export const configSchema = z.object({
       message: 'At least one `endpoints` field must be provided.',
     })
     .optional(),
+  stripeProductSource: z.string().optional(),
 });
 
 /**
@@ -1546,6 +1563,10 @@ export enum SettingsTabValues {
    * Tab for Personalization Settings
    */
   PERSONALIZATION = 'personalization',
+  /**
+   * Tab for Contact/Support
+   */
+  CONTACT = 'contact',
 }
 
 export enum STTProviders {

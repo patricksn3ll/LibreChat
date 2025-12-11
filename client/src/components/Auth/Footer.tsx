@@ -32,12 +32,14 @@ function Footer({ startupConfig }: { startupConfig: TStartupConfig | null | unde
   );
 
   return (
-    <div className="align-end m-4 flex justify-center gap-2" role="contentinfo">
+    <div className="align-end m-4 flex justify-center gap-2" role="contentinfo">    
       {privacyPolicyRender}
       {privacyPolicyRender && termsOfServiceRender && (
         <div className="border-r-[1px] border-gray-300 dark:border-gray-600" />
       )}
       {termsOfServiceRender}
+      <div className="border-r-[1px] border-gray-300 dark:border-gray-600" />        
+      <a href={`mailto:${startupConfig?.emailFrom}`} className="text-sm text-green-500" id="contact-link">Contact</a>            
     </div>
   );
 }

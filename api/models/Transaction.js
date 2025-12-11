@@ -191,7 +191,6 @@ async function createAutoRefillTransaction(txData) {
 async function createTransaction(_txData) {
   const { balance, transactions, ...txData } = _txData;
   if (txData.rawAmount != null && isNaN(txData.rawAmount)) {
-    logger.debug('[createTransaction] Invalid rawAmount:', txData.rawAmount);
     return;
   }
 
@@ -206,9 +205,7 @@ async function createTransaction(_txData) {
 
   await transaction.save();
   if (!balance?.enabled) {
-    logger.debug('[createTransaction] !balance?.enabled');
-    logger.debug('[createTransaction]', ' testing ...');
-    logger.debug('[createTransaction]', balance);
+    logger.debug('[createTransaction] balance is not enabled', balance?.enabled);
     //return;
   }
 
@@ -217,8 +214,6 @@ async function createTransaction(_txData) {
     user: transaction.user,
     incrementValue,
   });
-
-  logger.debug('[createTransaction] updateBalance');
 
   return {
     rate: transaction.rate,

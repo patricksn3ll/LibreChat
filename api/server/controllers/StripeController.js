@@ -55,17 +55,11 @@ async function subscriptionStatusController(req, res) {
 // POST /api/stripe/billing-portal
 async function billingPortalController(req, res) {
   try {
-    console.log('[billingPortalController] req.user:', req.user);
-    console.log('[billingPortalController] req.headers.cookie:', req.headers.cookie);
-    console.log('[billingPortalController] req.headers.authorization:', req.headers.authorization);
     if (!req.user || !req.user._id) {
-      console.log('[billingPortalController] No user or user._id found');
       return res.status(401).json({ error: 'Unauthorized: User not found' });
     }
     const user = req.user;
-    console.log('[billingPortalController] user.stripeCustomerId:', user.stripeCustomerId);
     if (!user.stripeCustomerId) {
-      console.log('[billingPortalController] No Stripe customer ID found for user');
       return res.status(400).json({ error: 'No Stripe customer ID found for user' });
     }
     const returnUrl = process.env.DOMAIN_CLIENT || 'http://localhost:3080';
@@ -80,6 +74,37 @@ async function billingPortalController(req, res) {
   }
 }
 
+// GET /api/stripe/products/by-metadata?key=metadataKey&value=metadataValue
+async function getProductsByMetadataController(req, res) {
+  try {
+    const { key, value } = req.query;
+    if (!key || !value) {
+      return res.status(400).json({ error: 'Missing key or value query parameter' });
+    }
+    // Fetch all products from Stripe (paginated)
+    let products = [];
+    let hasMore = true;
+    let startingAfter = undefined;
+    while (hasMore) {
+      const resp = await stripe.products.list({
+        limit: 100,
+        starting_after: startingAfter,
+        active: true,
+      });
+      products = products.concat(resp.data);
+      hasMore = resp.has_more;
+      if (hasMore) {
+        startingAfter = resp.data[resp.data.length - 1].id;
+      }
+    }
+    // Filter by metadata key/value
+    const filtered = products.filter(p => p.metadata && p.metadata[key] === value);
+    res.json({ products: filtered });
+  } catch (err) {
+    console.error('Stripe get products by metadata error:', err);
+    res.status(500).json({ error: err.message });
+  }
+}
 
 // POST /api/stripe/purchase
 // Body: { priceId: string, quantity?: number, successUrl?: string, cancelUrl?: string }
@@ -115,8 +140,8 @@ async function productPurchaseController(req, res) {
       metadata: metadata,
       customer: customerId,
       allow_promotion_codes: true,
-      success_url: successUrl ||  'http://localhost:3080' + '/purchase/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: cancelUrl || 'http://localhost:3080' + '/purchase/canceled',
+      success_url: successUrl ||  'https://www.cribmetrics.com' + '/purchase/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: cancelUrl || 'https://www.cribmetrics.com' + '/purchase/canceled',
     });
     res.json({ url: session.url });
   } catch (err) {
@@ -286,4 +311,5 @@ module.exports = {
   stripeWebhookController,
   billingPortalController,
   productPurchaseController,
+  getProductsByMetadataController,
 };

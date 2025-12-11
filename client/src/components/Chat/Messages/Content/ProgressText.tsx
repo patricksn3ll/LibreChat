@@ -6,7 +6,7 @@ import FinishedIcon from './FinishedIcon';
 import { cn } from '~/utils';
 
 const wrapperClass =
-  'progress-text-wrapper text-token-text-secondary relative -mt-[0.75px] h-5 w-full leading-5';
+  'progress-text-wrapper text-token-text-secondary relative mt-2 h-8 w-full leading-5';
 
 const Wrapper = ({ popover, children }: { popover: boolean; children: React.ReactNode }) => {
   if (popover) {
@@ -66,7 +66,7 @@ export default function ProgressText({
     if (progress < 1) {
       return authText ?? inProgressText;
     }
-    return ""; //finishedText;
+    return finishedText;
   };
 
   const getIcon = () => {
@@ -76,7 +76,7 @@ export default function ProgressText({
     if (progress < 1) {
       return <Spinner />;
     }
-    return <></>; //<FinishedIcon />;
+    return <FinishedIcon />;
   };
 
   const text = getText();
@@ -96,12 +96,12 @@ export default function ProgressText({
       >
         {icon}
         <span className={showShimmer ? 'shimmer' : ''}>{text}</span>
-        {hasInput &&
+        {hasInput && (
           (isExpanded ? (
             <ChevronUp className="size-4 shrink-0 translate-y-[1px]" />
           ) : (
             <ChevronDown className="size-4 shrink-0 translate-y-[1px]" />
-          ))}
+          )))}
       </button>
     </Wrapper>
   );

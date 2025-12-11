@@ -2,18 +2,15 @@ import { useEffect, useState } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import type { TStartupConfig } from 'librechat-data-provider';
 import { useGetStartupConfig } from '~/data-provider';
-import StaticLayout from '~/components/Static/StaticLayout';
+import AuthLayout from '~/components/Auth/AuthLayout';
 import { TranslationKeys, useLocalize } from '~/hooks';
+import LandingPageWrapper from '../../components/Static/LandingPageWrapper';
 
 const headerMap: Record<string, TranslationKeys> = {
-  '/login': 'com_auth_welcome_back',
-  '/register': 'com_auth_create_account',
-  '/forgot-password': 'com_auth_reset_password',
-  '/reset-password': 'com_auth_reset_password',
-  '/login/2fa': 'com_auth_verify_your_identity',
+  '/landing': 'com_auth_welcome_back',
 };
 
-export default function StaticFilesLayout({ isAuthenticated }: { isAuthenticated?: boolean }) {
+export default function LandingWrapper({ isAuthenticated }: { isAuthenticated?: boolean }) {
   const [error, setError] = useState<TranslationKeys | null>(null);
   const [headerText, setHeaderText] = useState<TranslationKeys | null>(null);
   const [startupConfig, setStartupConfig] = useState<TStartupConfig | null>(null);
@@ -31,9 +28,8 @@ export default function StaticFilesLayout({ isAuthenticated }: { isAuthenticated
   useEffect(() => {
     if (data) {
       setStartupConfig(data);
-      console.log('startupConfig set in StaticFiles', data);
     }
-  }, [navigate, data]);
+  }, [isAuthenticated, navigate, data]);
 
   useEffect(() => {
     document.title = startupConfig?.appTitle || '';
@@ -55,7 +51,7 @@ export default function StaticFilesLayout({ isAuthenticated }: { isAuthenticated
   };
 
   return (
-    <StaticLayout
+    <LandingPageWrapper
       header={headerText ? localize(headerText) : localize(headerMap[location.pathname])}
       isFetching={isFetching}
       startupConfig={startupConfig}
@@ -64,6 +60,6 @@ export default function StaticFilesLayout({ isAuthenticated }: { isAuthenticated
       error={error}
     >
       <Outlet context={contextValue} />
-    </StaticLayout>
+    </LandingPageWrapper>
   );
 }

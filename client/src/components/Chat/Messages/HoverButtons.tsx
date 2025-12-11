@@ -1,5 +1,5 @@
 import React, { useState, useMemo, memo } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import type { TConversation, TMessage, TFeedback } from 'librechat-data-provider';
 import { EditIcon, Clipboard, CheckMark, ContinueIcon, RegenerateIcon } from '@librechat/client';
 import { useGenerationsByLatest, useLocalize } from '~/hooks';
@@ -8,6 +8,7 @@ import MessageAudio from './MessageAudio';
 import Feedback from './Feedback';
 import { cn } from '~/utils';
 import store from '~/store';
+import { useGetStartupConfig } from '~/data-provider';
 
 type THoverButtons = {
   isEditing: boolean;
@@ -38,40 +39,35 @@ type HoverButtonProps = {
 };
 
 const extractMessageContent = (message: TMessage): string => {
-  console.warn('typeof message.content: ' + typeof message.content)
   if (typeof message.content === 'string') {
     return message.content;
   }
 
-  console.warn('Array.isArray(message.content): ' + Array.isArray(message.content))
   if (Array.isArray(message.content)) {
     return message.content
       .map((part) => {
         if (typeof part === 'string') {
-          console.warn('part: ', part)
           return part;
         }
         if ('text' in part) {
-          console.warn('part.text: ', part.text)          
-          return part.text || '';
+          if (typeof part.text === 'string') {
+            return part.text;
+          }
+          if (part.text && typeof part.text === 'object' && typeof part.text.value === 'string') {
+            return part.text.value;
+          }          
+          return '';
         }
         if ('think' in part) {
-          const think = part.think;
-          if (typeof think === 'string') {
-            console.warn('typeof think === string')
-            return think;
+          if (typeof part.think === 'string') {
+            return part.think;
           }
-          console.warn('typeof think !== string: ', think)
-          return think && 'text' in think ? think.text || '' : '';
+          return part.think && 'text' in part.think ? part.think.text || '' : '';
         }
-
-        console.warn('part has no text or think field: ', part)
         return '';
       })
       .join('');
   }
-
-  console.warn('message.text: ', message.text);
 
   return message.text || '';
 };
@@ -133,6 +129,10 @@ const HoverButtons = ({
   const localize = useLocalize();
   const [isCopied, setIsCopied] = useState(false);
   const [TextToSpeech] = useRecoilState<boolean>(store.textToSpeech);
+  const { data: startupConfig } = useGetStartupConfig();
+  console.log('startupConfig in HoverButtons:', startupConfig);
+  const hideMessageButtons = startupConfig?.hideMessageButtons;
+  console.log('hideMessageButtons:', hideMessageButtons);
 
   const endpoint = useMemo(() => {
     if (!conversation) {
@@ -224,7 +224,7 @@ const HoverButtons = ({
       />
 
       {/* Edit Button */}
-      {isEditableEndpoint && (
+      {isEditableEndpoint && !hideMessageButtons && (
         <HoverButton
           id={`edit-${message.messageId}`}
           onClick={onEdit}
@@ -239,6 +239,7 @@ const HoverButtons = ({
       )}
 
       {/* Fork Button */}
+      {!hideMessageButtons && (
       <Fork
         messageId={message.messageId}
         conversationId={conversation.conversationId}
@@ -246,14 +247,15 @@ const HoverButtons = ({
         latestMessageId={latestMessage?.messageId}
         isLast={isLast}
       />
+      )}
 
       {/* Feedback Buttons */}
-      {!isCreatedByUser && handleFeedback != null && (
+      {!hideMessageButtons && !isCreatedByUser && handleFeedback != null && (
         <Feedback handleFeedback={handleFeedback} feedback={message.feedback} isLast={isLast} />
       )}
 
       {/* Regenerate Button */}
-      {regenerateEnabled && (
+      {!hideMessageButtons && regenerateEnabled && (
         <HoverButton
           onClick={regenerate}
           title={localize('com_ui_regenerate')}
@@ -264,7 +266,7 @@ const HoverButtons = ({
       )}
 
       {/* Continue Button */}
-      {continueSupported && (
+      {!hideMessageButtons && continueSupported && (
         <HoverButton
           onClick={(e) => e && handleContinue(e)}
           title={localize('com_ui_continue')}

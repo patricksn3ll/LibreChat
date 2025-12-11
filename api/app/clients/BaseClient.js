@@ -572,14 +572,6 @@ class BaseClient {
 
     const promptTokens = this.maxContextTokens - remainingContextTokens;
 
-    logger.debug('[BaseClient] tokenCountMap:', tokenCountMap);
-    logger.debug('[BaseClient]', {
-      promptTokens,
-      remainingContextTokens,
-      payloadSize: payload.length,
-      maxContextTokens: this.maxContextTokens,
-    });
-
     return { payload, tokenCountMap, promptTokens, messages: orderedWithInstructions };
   }
 
@@ -652,10 +644,8 @@ class BaseClient {
     );
 
     if (tokenCountMap) {
-      logger.debug('[BaseClient] tokenCountMap', tokenCountMap);
       if (tokenCountMap[userMessage.messageId]) {
         userMessage.tokenCount = tokenCountMap[userMessage.messageId];
-        logger.debug('[BaseClient] userMessage', userMessage);
       }
 
       this.handleTokenCountMap(tokenCountMap);
@@ -673,15 +663,10 @@ class BaseClient {
 
     const balanceConfig = getBalanceConfig(appConfig);
 
-    logger.error('[BaseClient] balanceConfig', balanceConfig)
-    logger.error('[BaseClient] this.options.endpointType ', this.options.endpointType )
-    logger.error('[BaseClient] this.options.endpoint', this.options.endpoint)
-
     if (
       balanceConfig?.enabled &&
       supportsBalanceCheck[this.options.endpointType ?? this.options.endpoint]
     ) {
-      logger.error('[BaseClient] checkBaance')
       await checkBalance({
         req: this.options.req,
         res: this.options.res,
@@ -750,16 +735,12 @@ class BaseClient {
     const affiliateConfig = getAffiliateConfig(appConfig);
     if (affiliateConfig?.enableAffiliateLinks) {      
       if (responseMessage.content.length > 0) {
-        logger.info('[OpenAIClient] - responseMessage.content.length > 0')
-        // responseMessage.text = removeParagraphsWithSup(responseMessage.text);
         responseMessage.content[0].text = injectAffiliateLinks(responseMessage.content[0].text);
       } else {
-        logger.info('[OpenAIClient] - responseMessage.content.length <= 0')
-        // responseMessage.text = removeParagraphsWithSup(responseMessage.text);
         responseMessage.text = injectAffiliateLinks(responseMessage.text);
       }
     } else {
-      logger.debug('[BaseClient] Affiliate links not injected due to configuration.');
+      console.log('[BaseClient] Affiliate links not injected due to configuration.');
     }
 
     if (

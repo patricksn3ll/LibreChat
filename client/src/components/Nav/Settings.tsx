@@ -23,6 +23,7 @@ import {
   Balance,
   Account,
   Subscription,
+  Contact,
 } from './SettingsTabs';
 import usePersonalizationAccess from '~/hooks/usePersonalizationAccess';
 import { useLocalize, TranslationKeys } from '~/hooks';
@@ -58,6 +59,7 @@ export default function Settings() {
       SettingsTabValues.DATA,
       ...(startupConfig?.balance?.enabled ? [SettingsTabValues.BALANCE] : []),
       SettingsTabValues.ACCOUNT,
+      SettingsTabValues.CONTACT,
     ];
     const currentIndex = tabs.indexOf(activeTab);
 
@@ -154,7 +156,12 @@ export default function Settings() {
             label: 'com_nav_setting_subscription', // You may want to localize this
           }
         ] : []
-      )
+      ),
+    {
+      value: SettingsTabValues.CONTACT,
+      icon: <UserIcon />, // You can use a mail or support icon if available
+      label: 'com_nav_setting_contact',
+    },
   ];
 
   const handleTabChange = (value: string) => {
@@ -300,6 +307,9 @@ export default function Settings() {
                       <Subscription />
                     </Tabs.Content>
                     )}
+                    <Tabs.Content value={SettingsTabValues.CONTACT} tabIndex={-1}>
+                      <Contact />
+                    </Tabs.Content>
                   </div>
                 </Tabs.Root>
               </div>

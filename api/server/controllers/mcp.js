@@ -40,7 +40,9 @@ const getMCPTools = async (req, res) => {
     const serverToolsMap = new Map();
     for (const { serverName, tools } of cacheResults) {
       if (tools) {
+        logger.debug(`[getMCPTools] Cached tools found for server ${serverName}`);
         serverToolsMap.set(serverName, tools);
+        logger.debug(`[getMCPTools] Cached `, tools);
         continue;
       }
 
@@ -49,7 +51,9 @@ const getMCPTools = async (req, res) => {
         logger.debug(`[getMCPTools] No tools found for server ${serverName}`);
         continue;
       }
+      logger.debug(`[getMCPTools] Tools found for server ${serverName}`);
       serverToolsMap.set(serverName, serverTools);
+      logger.debug(`[getMCPTools] `, tools);
 
       if (Object.keys(serverTools).length > 0) {
         // Cache asynchronously without blocking
@@ -77,6 +81,8 @@ const getMCPTools = async (req, res) => {
           tools: [],
         };
 
+        logger.debug(`[getMCPTools] server`, server);
+        
         // Set authentication config once for the server
         if (serverConfig?.customUserVars) {
           const customVarKeys = Object.keys(serverConfig.customUserVars);

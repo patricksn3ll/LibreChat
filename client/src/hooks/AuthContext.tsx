@@ -148,9 +148,8 @@ const AuthContextProvider = ({
             return;
           }
 
-          // If the request url is '/' navigate to '/landing'
-          if (window.location.pathname === '/') {
-            navigate('/landing');
+          // If the request has a #fragment stay here
+          if (window.location.hash) {
             return;
           }
 

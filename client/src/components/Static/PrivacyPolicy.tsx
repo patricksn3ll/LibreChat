@@ -26,13 +26,18 @@ const PrivacyPolicy = memo(
     }, []);
 
     return (
-    <>
+    <div className="wrap">
         <header>
-            <h1>PRIVACY POLICY</h1>
-            <p>Last updated: 11/11/2025</p>
+        <div className="flex flex-col space-y-6 p-6 max-w-4xl">
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+                <h1>PRIVACY POLICY</h1>
+                <p>Last updated: 11/11/2025</p>
+            </div>
+        </div>
+
         </header>
 
-        <div className="flex flex-col space-y-6 p-6 max-w-4xl mx-auto">
+        <div className="flex flex-col space-y-6 p-6 max-w-4xl">
             <div className="prose prose-lg dark:prose-invert max-w-none">
             <section className="mb-8">
                 <p>
@@ -172,7 +177,7 @@ const PrivacyPolicy = memo(
         </div>
 
         <StaticFooter />
-    </>
+    </div>
     );
   },
 );

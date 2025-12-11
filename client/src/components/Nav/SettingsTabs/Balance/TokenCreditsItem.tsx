@@ -7,7 +7,16 @@ interface TokenCreditsItemProps {
 }
 
 const TokenCreditsItem: React.FC<TokenCreditsItemProps> = ({ tokenCredits }) => {
+
   const localize = useLocalize();
+
+  function formatAbbreviated(num) {
+    num = new Intl.NumberFormat().format(Math.round(tokenCredits));
+    if (num >= 1e9) return (num / 1e9).toFixed(1).replace(/\\.0$/, '') + 'B';
+    if (num >= 1e6) return (num / 1e6).toFixed(1).replace(/\\.0$/, '') + 'M';
+    if (num >= 1e3) return (num / 1e3).toFixed(1).replace(/\\.0$/, '') + 'K';
+    return num.toString();
+  }
 
   return (
     <div className="flex items-center justify-between">
@@ -19,7 +28,7 @@ const TokenCreditsItem: React.FC<TokenCreditsItemProps> = ({ tokenCredits }) => 
 
       {/* Right Section: tokenCredits Value */}
       <span className="text-sm font-medium text-gray-800 dark:text-gray-200" role="note">
-        {tokenCredits !== undefined ? tokenCredits.toFixed(2) : '0.00'}
+        {tokenCredits !== undefined ? formatAbbreviated(tokenCredits) : '0.00'}
       </span>
     </div>
   );
