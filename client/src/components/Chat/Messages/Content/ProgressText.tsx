@@ -79,16 +79,28 @@ export default function ProgressText({
     return <FinishedIcon />;
   };
 
+  const getDataLabel = () => {
+    if (error) {
+      return "chat-feedback-error";
+    }
+    if (progress < 1) {
+      return "chat-feedback-progress";
+    }
+    return "chat-feedback-finished";
+  };
+
   const text = getText();
   const icon = getIcon();
+  const dataLabel = getDataLabel();
   const showShimmer = progress < 1 && !error;
 
   return (
     <Wrapper popover={popover}>
       <button
         type="button"
+        data-label={dataLabel}
         className={cn(
-          'inline-flex w-full items-center gap-2',
+          'chat-feedback inline-flex w-full items-center gap-2',
           hasInput ? '' : 'pointer-events-none',
         )}
         disabled={!hasInput}
