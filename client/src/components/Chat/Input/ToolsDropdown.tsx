@@ -36,6 +36,7 @@ const ToolsDropdown = ({ disabled }: ToolsDropdownProps) => {
     searchApiKeyForm,
   } = useBadgeRowContext();
   const { data: startupConfig } = useGetStartupConfig();
+  const hideMessageButtons = startupConfig?.hideMessageButtons;
 
   const { codeEnabled, webSearchEnabled, artifactsEnabled, fileSearchEnabled } =
     useAgentCapabilities(agentsConfig?.capabilities ?? defaultAgentCapabilities);
@@ -269,7 +270,7 @@ const ToolsDropdown = ({ disabled }: ToolsDropdownProps) => {
     });
   }
 
-  if (artifactsEnabled) {
+  if (artifactsEnabled && !hideMessageButtons) {
     dropdownItems.push({
       hideOnClick: false,
       render: (props) => (
