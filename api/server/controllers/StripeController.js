@@ -8,7 +8,7 @@ const { getAppConfig } = require('~/server/services/Config/app');
 const { createTransaction } = require('~/models/Transaction');
 const { getBalanceConfig } = require('@librechat/api');
 const { Balance } = require('~/db/models');
-const { appInsights } = require('applicationinsights');
+const appInsights = require('applicationinsights');
 appInsights.setup(process.env.APPLICATION_INSIGHTS_CONNECTION_STRING).start();
 const client = appInsights.defaultClient;
 
