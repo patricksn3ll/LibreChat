@@ -34,6 +34,7 @@ async function subscribeController(req, res) {
     const subscription = await createSubscription(user, priceId);
     res.json({ subscription });
   } catch (err) {
+    client.trackException({ message: 'Stripe subscribe error', exception: err });
     console.error('Stripe subscribe error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -49,6 +50,7 @@ async function subscriptionStatusController(req, res) {
     const status = await getSubscriptionStatus(user);
     res.json({ status });
   } catch (err) {
+    client.trackException({ message: 'Stripe status error', exception: err });
     console.error('Stripe status error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -72,6 +74,7 @@ async function billingPortalController(req, res) {
     });
     res.json({ url: session.url });
   } catch (err) {
+    client.trackException({ message: 'Stripe billing portal error', exception: err });
     console.error('Stripe billing portal error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -104,6 +107,7 @@ async function getProductsByMetadataController(req, res) {
     const filtered = products.filter(p => p.metadata && p.metadata[key] === value);
     res.json({ products: filtered });
   } catch (err) {
+    client.trackException({ message: 'Stripe get products by metadata error', exception: err });
     console.error('Stripe get products by metadata error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -148,6 +152,7 @@ async function productPurchaseController(req, res) {
     });
     res.json({ url: session.url });
   } catch (err) {
+    client.trackException({ message: 'Stripe product purchase error', exception: err });
     console.error('Stripe product purchase error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -167,6 +172,7 @@ async function stripeWebhookController(req, res) {
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
+    client.trackException({ exception: err });
     console.error('Stripe webhook signature verification failed:', err);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
@@ -272,6 +278,12 @@ async function stripeWebhookController(req, res) {
     }
     res.json({ received: true });
   } catch (err) {
+    client.trackException({ 
+      message: 'Stripe webhook event handling error:', 
+      eventType: event?.type,
+      eventId: event?.id,      
+      exception: err ,
+    });
     logger.error('Stripe webhook event handling error:', err, {
       eventType: event?.type,
       eventId: event?.id,
