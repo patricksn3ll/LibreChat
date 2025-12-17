@@ -9,7 +9,7 @@ const { createTransaction } = require('~/models/Transaction');
 const { getBalanceConfig } = require('@librechat/api');
 const { Balance } = require('~/db/models');
 const appInsights = require('applicationinsights');
-appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
+appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start();
 const client = appInsights.defaultClient;
 
 /**

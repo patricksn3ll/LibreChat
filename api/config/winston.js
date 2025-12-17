@@ -8,7 +8,7 @@ let appInsights, AppInsightsTransport;
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   appInsights = require('applicationinsights');
   AppInsightsTransport = require('winston-azure-application-insights').AzureApplicationInsightsLogger;
-  appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
+  appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start();
 }
 
 const logDir = path.join(__dirname, '..', 'logs');
