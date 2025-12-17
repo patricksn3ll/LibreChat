@@ -171,6 +171,7 @@
     "mongodb": "^5.9.2",
     "openai-chat-tokens": "^0.2.8",
     "smithy": "^0.6.3",
-    "stripe": "^19.3.0"
+    "stripe": "^19.3.0",
+    "winston-azure-application-insights": "^4.0.0"
   }
 }

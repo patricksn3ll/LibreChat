@@ -3,6 +3,14 @@ const winston = require('winston');
 require('winston-daily-rotate-file');
 const { redactFormat, redactMessage, debugTraverse, jsonTruncateFormat } = require('./parsers');
 
+// Application Insights integration
+let appInsights, AppInsightsTransport;
+if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
+  appInsights = require('applicationinsights');
+  AppInsightsTransport = require('winston-azure-application-insights').AzureApplicationInsightsLogger;
+  appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
+}
+
 const logDir = path.join(__dirname, '..', 'logs');
 
 const { NODE_ENV, DEBUG_LOGGING = true, CONSOLE_JSON = false, DEBUG_CONSOLE = false } = process.env;
@@ -51,6 +59,7 @@ const fileFormat = winston.format.combine(
   // redactErrors(),
 );
 
+
 const transports = [
   new winston.transports.DailyRotateFile({
     level: 'error',
@@ -62,6 +71,16 @@ const transports = [
     format: fileFormat,
   }),
 ];
+
+// Add Application Insights transport if configured
+if (appInsights && AppInsightsTransport) {
+  transports.push(
+    new AppInsightsTransport({
+      client: appInsights.defaultClient,
+      level: 'info', // Change to desired log level
+    })
+  );
+}
 
 if (useDebugLogging) {
   transports.push(
