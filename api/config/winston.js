@@ -77,7 +77,7 @@ if (appInsights && AppInsightsTransport) {
   transports.push(
     new AppInsightsTransport({
       client: appInsights.defaultClient,
-      level: 'info', // Change to desired log level
+      level: level()
     })
   );
 }
