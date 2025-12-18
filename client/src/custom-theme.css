@@ -306,3 +306,7 @@ select {
 .code-analyze-block {
   display: none;
 }
+
+.chat-feedback[data-label="chat-feedback-finished"] {
+  display: none;
+}

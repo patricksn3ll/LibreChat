@@ -3,4 +3,4 @@ Disallow: /private/
 Disallow: /tmp/
 Allow: /
 
-Sitemap: https://www.hitstaywin.com/sitemap.xml
+Sitemap: https://www.cribmetrics.com/sitemap.xml

@@ -59,9 +59,11 @@ function Product({ open, onOpenChange }: TDialogProps) {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          priceId: priceId, //
+          priceId: priceId,
           quantity: 1,
-          metadata: { tokenAmount: amount}
+          successUrl: `${window.location.origin}/purchase/success`,
+          cancelUrl: `${window.location.origin}/purchase/canceled`,
+          metadata: { tokenAmount: amount }
         }),
         credentials: 'include',
       });
