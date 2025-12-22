@@ -47,14 +47,14 @@ function SharedView() {
               />
               <h1 className="text-4xl font-bold">{data.title}</h1>
             </div> */}
-            <div class="flex flex-col items-center gap-0 p-2">
-              <div class="flex flex-col md:flex-row items-center justify-center gap-2">
-                <div class="relative size-10 justify-center ">
-                  <div class="icon-xl icon-logo relative flex h-full overflow-hidden rounded-full" style="width: 100%; height: 100%;">
-                    <img src="https://www.cribmetrics.com/assets/apple-touch-icon-180x180.png" alt="" class="object-cover" loading="lazy" decoding="async" width="20" height="20" style="width: 100%; height: 100%;">
+            <div className="flex flex-col items-center gap-0 p-2">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-2">
+                <div className="relative size-10 justify-center ">
+                  <div className="icon-xl icon-logo relative flex h-full overflow-hidden rounded-full" style={{ width: '100%', height: '100%' }}>
+                    <img src="/assets/apple-touch-icon-180x180.png" alt="" className="object-cover" loading="lazy" decoding="async" width="20" height="20" style={{ width: '100%', height: '100%' }} />
                   </div>
                 </div>
-                <div class="flex flex-col items-center gap-0 p-2">
+                <div className="flex flex-col items-center gap-0 p-2">
                   <h1 className="text-4xl font-bold">{data.title}</h1>
                 </div>
               </div>
