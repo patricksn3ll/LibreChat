@@ -39,26 +39,36 @@ function SharedView() {
       <>
         <div className="final-completion group mx-auto flex min-w-[40rem] flex-col gap-3 pl-2 pr-2 pb-6 pt-4 md:max-w-[47rem] md:px-5 lg:px-1 xl:max-w-[55rem] xl:px-5">
           <div className="relative flex w-11/12 flex-col">
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <img
                 src="/assets/apple-touch-icon-180x180.png"
                 alt="Logo"
                 className="h-10 w-10 object-contain"
               />
               <h1 className="text-4xl font-bold">{data.title}</h1>
-            </div>
+            </div> */}
+            <div class="flex flex-col items-center gap-0 p-2">
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2">
+                <div class="relative size-10 justify-center ">
+                  <div class="icon-xl icon-logo relative flex h-full overflow-hidden rounded-full" style="width: 100%; height: 100%;">
+                    <img src="https://www.cribmetrics.com/assets/apple-touch-icon-180x180.png" alt="" class="object-cover" loading="lazy" decoding="async" width="20" height="20" style="width: 100%; height: 100%;">
+                  </div>
+                </div>
+                <div class="flex flex-col items-center gap-0 p-2">
+                  <h1 className="text-4xl font-bold">{data.title}</h1>
+                </div>
+              </div>
+            </div>            
             <div className="border-b border-border-medium pb-6 text-base text-text-secondary">
-              {new Date(data.createdAt).toLocaleDateString('en-US', {
+              <a href="/" className="underline hover:text-primary">
+                {config?.appTitle} - {config?.interface?.customWelcome || 'Home'}
+              </a>              
+              {/* {new Date(data.createdAt).toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',
                 year: 'numeric',
-              })}
+              })} */}
             </div>
-            <p>
-              <a href="/" className="underline hover:text-primary">
-                {config?.interface?.customWelcome || config?.appTitle || 'Home'}
-              </a>
-            </p>
           </div>
         </div>
 
