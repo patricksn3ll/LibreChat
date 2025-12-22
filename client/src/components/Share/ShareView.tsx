@@ -37,16 +37,8 @@ function SharedView() {
   } else if (data && messagesTree && messagesTree.length !== 0) {
     content = (
       <>
-        <div className="final-completion group mx-auto flex min-w-[40rem] flex-col gap-3 pl-2 pr-2 pb-6 pt-4 md:max-w-[47rem] md:px-5 lg:px-1 xl:max-w-[55rem] xl:px-5">
+        <div className="final-completion group mx-auto flex flex-col gap-3 pl-2 pr-2 pb-6 pt-4 md:max-w-[47rem] md:px-5 lg:px-1 xl:max-w-[55rem] xl:px-5">
           <div className="relative flex w-11/12 flex-col">
-            {/* <div className="flex items-center gap-3">
-              <img
-                src="/assets/apple-touch-icon-180x180.png"
-                alt="Logo"
-                className="h-10 w-10 object-contain"
-              />
-              <h1 className="text-4xl font-bold">{data.title}</h1>
-            </div> */}
             <div className="flex flex-col items-center gap-0 p-2">
               <div className="flex flex-col md:flex-row items-center justify-center gap-2">
                 <div className="relative size-10 justify-center ">
@@ -55,13 +47,13 @@ function SharedView() {
                   </div>
                 </div>
                 <div className="flex flex-col items-center gap-0 p-2">
-                  <h1 className="text-4xl font-bold">{data.title}</h1>
+                  <h1 className="text-4xl font-bold break-words whitespace-normal w-full text-center">{data.title}</h1>
                 </div>
               </div>
             </div>            
             <div className="border-b border-border-medium pb-6 text-base text-text-secondary">
-              <a href="/" className="underline hover:text-primary">
-                {config?.appTitle} - {config?.interface?.customWelcome || 'Home'}
+              <a href="/login" className="underline hover:text-primary">
+                Chat for Free
               </a>              
               {/* {new Date(data.createdAt).toLocaleDateString('en-US', {
                 month: 'long',
@@ -92,13 +84,6 @@ function SharedView() {
         <div className="transition-width relative flex h-full w-full flex-1 flex-col items-stretch overflow-hidden pt-0 dark:bg-surface-secondary">
           <div className="flex h-full flex-col text-text-primary" role="presentation">
             {content}
-            <div className="w-full border-t-0 pl-0 pt-2 md:w-[calc(100%-.5rem)] md:border-t-0 md:border-transparent md:pl-0 md:pt-0 md:dark:border-transparent">
-              <div className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2 bg-gradient-to-t from-surface-secondary to-transparent px-2 pb-2 pt-8 text-xs text-text-secondary md:px-[60px]">
-                <a href="/login" target="_blank" rel="noreferrer">
-                  Chat for Free
-                </a>
-              </div>
-            </div>
             <div className="w-full border-t-0 pl-0 pt-2 md:w-[calc(100%-.5rem)] md:border-t-0 md:border-transparent md:pl-0 md:pt-0 md:dark:border-transparent">
               <Footer className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2 bg-gradient-to-t from-surface-secondary to-transparent px-2 pb-2 pt-8 text-xs text-text-secondary md:px-[60px]" />
             </div>
