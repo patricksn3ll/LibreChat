@@ -43,7 +43,9 @@ function SharedView() {
               <div className="flex flex-col md:flex-row items-center justify-center gap-2">
                 <div className="relative size-10 justify-center ">
                   <div className="icon-xl icon-logo relative flex h-full overflow-hidden rounded-full" style={{ width: '100%', height: '100%' }}>
-                    <img src="/assets/apple-touch-icon-180x180.png" alt="" className="object-cover" loading="lazy" decoding="async" width="20" height="20" style={{ width: '100%', height: '100%' }} />
+                    <a href="/">
+                      <img src="/assets/apple-touch-icon-180x180.png" alt="Home" className="object-cover" loading="lazy" decoding="async" width="20" height="20" style={{ width: '100%', height: '100%' }} />
+                    </a>
                   </div>
                 </div>
                 <div className="flex flex-col items-center gap-0 p-2">
@@ -51,15 +53,10 @@ function SharedView() {
                 </div>
               </div>
             </div>            
-            <div className="border-b border-border-medium pb-6 text-base text-text-secondary">
-              <a href="/login" className="underline hover:text-primary">
+            <div className="flex flex-col items-center gap-0 p-2 border-b border-border-medium pb-6 text-base text-text-secondary">
+              <a href="/register" className="underline hover:text-primary">
                 Chat for Free
               </a>              
-              {/* {new Date(data.createdAt).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })} */}
             </div>
           </div>
         </div>
