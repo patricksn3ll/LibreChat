@@ -33,10 +33,15 @@ async function createCheckoutSessionController(req, res) {
           quantity: 1,
         },
       ],
-      mode: 'subscription',
-      success_url: `${process.env.STRIPE_SUCCESS_URL}` || 'http://localhost:3000/account/subscription/success',
-      cancel_url: `${process.env.STRIPE_CANCEL_URL}` || 'http://localhost:3000/account/subscription/canceled',
+      mode: (process.env.STRIPE_SUBSCRIPTIONS_ENABLED) ? 'subscription' : 'payment',
+      success_url: `${process.env.STRIPE_SUCCESS_URL}` || `${process.env.DOMAIN_CLIENT}/account/subscription/success`,
+      cancel_url: `${process.env.STRIPE_CANCEL_URL}` || `${process.env.DOMAIN_CLIENT}/account/subscription/canceled`,
       allow_promotion_codes: true,
+      branding_settings: {
+        logo: `${process.env.DOMAIN_CLIENT}/assets/icon-192x192.png`,
+        icon: `${process.env.DOMAIN_CLIENT}/assets/icon-192x192.png`,
+        display_name: process.env.appTitle?.split('|')[0],
+      },
       subscription_data: {
         metadata: { userId: user._id.toString() },
       },

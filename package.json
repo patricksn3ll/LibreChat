@@ -101,6 +101,7 @@
     "@eslint/js": "^9.20.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@playwright/test": "^1.56.1",
+    "@types/applicationinsights": "^0.20.0",
     "@types/react-virtualized": "^9.22.0",
     "caniuse-lite": "^1.0.30001741",
     "cross-env": "^7.0.3",
@@ -162,6 +163,7 @@
     "@smithy/protocol-http": "^3.3.0",
     "@smithy/signature-v4": "^2.3.0",
     "@smithy/util-utf8": "^2.3.0",
+    "applicationinsights": "^3.12.1",
     "cohere-ai": "^7.19.0",
     "gcp-metadata": "^5.3.0",
     "keyv": "^5.5.3",
@@ -169,6 +171,7 @@
     "mongodb": "^5.9.2",
     "openai-chat-tokens": "^0.2.8",
     "smithy": "^0.6.3",
-    "stripe": "^19.3.0"
+    "stripe": "^19.3.0",
+    "winston-azure-application-insights": "^4.0.0"
   }
 }

@@ -8,6 +8,9 @@ const { getAppConfig } = require('~/server/services/Config/app');
 const { createTransaction } = require('~/models/Transaction');
 const { getBalanceConfig } = require('@librechat/api');
 const { Balance } = require('~/db/models');
+const appInsights = require('applicationinsights');
+appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start();
+const client = appInsights.defaultClient;
 
 /**
  * Security Best Practices for Stripe Integration:
@@ -31,6 +34,7 @@ async function subscribeController(req, res) {
     const subscription = await createSubscription(user, priceId);
     res.json({ subscription });
   } catch (err) {
+    client.trackException({ message: 'Stripe subscribe error', exception: err });
     console.error('Stripe subscribe error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -46,6 +50,7 @@ async function subscriptionStatusController(req, res) {
     const status = await getSubscriptionStatus(user);
     res.json({ status });
   } catch (err) {
+    client.trackException({ message: 'Stripe status error', exception: err });
     console.error('Stripe status error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -69,6 +74,7 @@ async function billingPortalController(req, res) {
     });
     res.json({ url: session.url });
   } catch (err) {
+    client.trackException({ message: 'Stripe billing portal error', exception: err });
     console.error('Stripe billing portal error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -101,6 +107,7 @@ async function getProductsByMetadataController(req, res) {
     const filtered = products.filter(p => p.metadata && p.metadata[key] === value);
     res.json({ products: filtered });
   } catch (err) {
+    client.trackException({ message: 'Stripe get products by metadata error', exception: err });
     console.error('Stripe get products by metadata error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -145,6 +152,7 @@ async function productPurchaseController(req, res) {
     });
     res.json({ url: session.url });
   } catch (err) {
+    client.trackException({ message: 'Stripe product purchase error', exception: err });
     console.error('Stripe product purchase error:', err);
     res.status(500).json({ error: err.message });
   }
@@ -164,6 +172,7 @@ async function stripeWebhookController(req, res) {
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
+    client.trackException({ exception: err });
     console.error('Stripe webhook signature verification failed:', err);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
@@ -178,6 +187,16 @@ async function stripeWebhookController(req, res) {
     request: event.data,
   });
 
+  client.trackEvent({ name: 'Stripe Webhook Received', properties: {
+      id: event.id,
+      type: event.type,
+      created: event.created,
+      livemode: event.livemode,
+      request: event.request,
+      request: event.data,
+    }
+   });
+
   try {
     switch (event.type) {
       case 'customer.subscription.created':
@@ -187,13 +206,6 @@ async function stripeWebhookController(req, res) {
         const customerId = subscription.customer;
         const status = subscription.status;
         const plan = subscription.items.data[0]?.price?.id || null;
-        console.error(`[Stripe Webhook] Subscription event:`, {
-          event: event.type,
-          customerId,
-          subscriptionId: subscription.id,
-          status,
-          plan,
-        });
         await User.findOneAndUpdate(
           { stripeCustomerId: customerId },
           {
@@ -207,12 +219,6 @@ async function stripeWebhookController(req, res) {
       case 'invoice.payment_failed': {
         const invoice = event.data.object;
         const customerId = invoice.customer;
-        console.error(`[Stripe Webhook] Invoice payment failed:`, {
-          event: event.type,
-          customerId,
-          invoiceId: invoice.id,
-          amount_due: invoice.amount_due,
-        });
         await User.findOneAndUpdate(
           { stripeCustomerId: customerId },
           { subscriptionStatus: 'payment_failed' }
@@ -223,13 +229,7 @@ async function stripeWebhookController(req, res) {
         const subscription = event.data.object;
         const customerId = subscription.customer;
         const trial_end = subscription.trial_end;
-        console.error(`[Stripe Webhook] Trial will end:`, {
-          event: event.type,
-          customerId,
-          subscriptionId: subscription.id,
-          trial_end,
-        });
-        // Optionally notify user their trial is ending
+        // Optionally notify user their trial is ending  
         break;
       }
       case 'checkout.session.completed': {
@@ -246,7 +246,6 @@ async function stripeWebhookController(req, res) {
           // Assuming you have the user object or user._id
           const balanceRecord = await Balance.findOne({ user: user._id }, 'tokenCredits').lean();
           const currentBalance = balanceRecord ? (balanceRecord.tokenCredits + product.metadata?.amount) : product.metadata?.amount;
-
           await createTransaction({
             user: user._id, // MongoDB ObjectId or string
             tokenType: 'credits',
@@ -254,38 +253,20 @@ async function stripeWebhookController(req, res) {
             rawAmount: product.metadata?.tokenAmount, 
             balance: balanceConfig,
           });
-          console.error(`[Stripe Webhook] PaymentIntent event:`, {
-            event: event.type,
-            customerId,
-            rawAmount: product.metadata?.tokenAmount,
-            balance: balanceConfig,
-          });        
           break;
         } else {
           const session = event.data.object;
           const customerId = session.customer;
-          console.error(`[Stripe Webhook] Checkout session completed:`, {
-            event: event.type,
-            customerId,
-            sessionId: session.id,
-            amount_total: session.amount_total,
-          });
           await User.findOneAndUpdate(
             { stripeCustomerId: customerId },
             { subscriptionStatus: 'active' }
           );
         }
-
         break;
       }
       case 'checkout.session.expired': {
         const session = event.data.object;
         const customerId = session.customer;
-        console.error(`[Stripe Webhook] Checkout session expired:`, {
-          event: event.type,
-          customerId,
-          sessionId: session.id,
-        });
         await User.findOneAndUpdate(
           { stripeCustomerId: customerId },
           { subscriptionStatus: 'none', subscriptionPlan: null, stripeSubscriptionId: null }
@@ -297,6 +278,12 @@ async function stripeWebhookController(req, res) {
     }
     res.json({ received: true });
   } catch (err) {
+    client.trackException({ 
+      message: 'Stripe webhook event handling error:', 
+      eventType: event?.type,
+      eventId: event?.id,      
+      exception: err ,
+    });
     logger.error('Stripe webhook event handling error:', err, {
       eventType: event?.type,
       eventId: event?.id,

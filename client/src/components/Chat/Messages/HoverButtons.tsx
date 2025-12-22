@@ -130,9 +130,7 @@ const HoverButtons = ({
   const [isCopied, setIsCopied] = useState(false);
   const [TextToSpeech] = useRecoilState<boolean>(store.textToSpeech);
   const { data: startupConfig } = useGetStartupConfig();
-  console.log('startupConfig in HoverButtons:', startupConfig);
   const hideMessageButtons = startupConfig?.hideMessageButtons;
-  console.log('hideMessageButtons:', hideMessageButtons);
 
   const endpoint = useMemo(() => {
     if (!conversation) {
